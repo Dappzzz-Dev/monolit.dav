@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-08-26 — Security hardening (minify, CSP, 404, robots.txt)
+
+Peningkatan keamanan ringan tanpa menyulitkan debugging:
+- **Minify JS:** terser compress+mangle → 8 file .min.js (original tetap ada untuk debugging)
+- **Minify CSS:** manual strip whitespace → 2 file .min.css
+- **HTML:** index.html + admin.html sekarang load file .min
+- **CSP meta tag:** batasi script/style/font/img/connect source hanya ke domain yang diperlukan
+- **X-Frame-Options: DENY** → cegah clickjacking
+- **X-Content-Type-Options: nosniff** → cegah MIME sniffing
+- **Referrer-Policy: strict-origin-when-cross-origin** → batasi referrer info
+- **Custom 404.html:** halaman error custom monochrome, tidak bocorkan struktur situs
+- **robots.txt:** block crawler ke /admin.html, /js/, /css/, /data/, /assets/projects/
+- Admin tidak ditautkan dari halaman publik (sudah sejak awal)
+
+**File:** `index.html`, `admin.html`, `404.html`, `robots.txt`, `js/*.min.js`, `css/*.min.css`
+
+---
+
 ## 2026-08-26 — Fix ghost bubble overflow + disable right-click
 
 Bug fix & hardening:
