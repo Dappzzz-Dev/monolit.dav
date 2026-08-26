@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-08-26 — README: hapus struktur folder & jejak admin (keamanan)
+
+Permintaan user: pohon folder di README berisiko keamanan. Dihapus:
+- Section "anatomi folder" (tree lengkap termasuk posisi admin.html).
+- Instruksi eksplisit membuka `admin.html` + penjelasan login PAT (lebih bocor daripada tree-nya) → diganti kalimat netral "detail internal tidak dipublikasikan".
+- Ganti nama section jadi "anatomi kode" dengan ajakan tetap belajar dari kode yang terbuka.
+
+**File:** `README.md`
+
+---
+
 ## 2026-08-26 — GitHub: repo monolit.dav + README baru
 
 - Repo lokal di-init, `.gitignore` menyaring semua folder tool + `node_modules` + `package.json` (sisa langchain, tak dipakai situs) — hanya file inti yang ter-track.
