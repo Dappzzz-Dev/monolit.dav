@@ -41,7 +41,7 @@ Karena isinya bukan template pasaran:
 | **Carousel proyek** | Drag pakai physics, gambar dikompres otomatis dari dashboard rahasia |
 | **4 bahasa, deteksi sendiri** | Browser kamu bahasa Indonesia? Situsnya ikut. Jepang? Ikut juga |
 | **Live GitHub stats** | Grafik kontribusi & total commit diambil langsung, bukan screenshot |
-| **Dashboard admin** | Ada panel kelola proyek tersembunyi — login pakai GitHub PAT |
+| **Dashboard internal** | Ada, tapi detailnya tidak dipublikasikan — hanya sang pemilik yang tahu pintunya |
 | **Ghost maskot** | Yang joget di halaman About. Ia tidak pernah berhenti. Jangan ditanya kenapa |
 
 Semua di atas jalan dari file statis. Nol server, nol database, nol bundle.
@@ -57,33 +57,11 @@ Lalu buka foldernya di editor dan nyalakan Live Server
 (`fetch` butuh HTTP — kalau cuma klik dua kali `index.html`
 beberapa fitur mogok kerja).
 
-Mau kelola isi proyek tanpa sentuh kode? Itu tugas si dashboard:
+## anatomi kode
 
-```txt
-$ open admin.html
-$ masukkan GitHub PAT → login → tambah/edit/hapus project → publish
-```
-
-## anatomi folder
-
-```txt
-monolit.dav/
-├── index.html        # satu-satunya panggung
-├── admin.html        # pintu belakang sang pemilik
-├── css/
-│   ├── style.css     # tema monokrom + semua animasi
-│   └── admin.css     # kulit dashboard
-├── js/
-│   ├── globe.js      # bumi yang bisa dipelintir
-│   ├── carousel.js   # deretan karya
-│   ├── sections.js   # navigasi yang nempel
-│   ├── i18n.js       # penerjemah dadakan
-│   ├── admin.js      # mesin dashboard
-│   └── ...           # sisanya pembantu
-├── data/
-│   └── projects.json # sumber kebenaran daftar proyek
-└── assets/           # globe data & seed thumbnail
-```
+Struktur file sengaja tidak dipajang di sini — tapi tenang,
+kode di repo ini tetap terbuka kalau kamu penasaran dan mau belajar
+dari isinya.
 
 ## ngobrol sama pembuatnya
 
