@@ -4,9 +4,11 @@
 
 **Satu blok solid. Hitam, putih, dan kode.**
 
-Ini bukan sekadar portfolio — ini rumah digitalnya **Daffa**
-alias **Dappzzz-Dev**. *Monolit* karena satu kesatuan utuh,
-*.dav* karena itu plesetan namanya.
+Ini rumah digitalnya **Daffa**
+alias **Dappzzz-Dev**. Bukan sekadar portfolio biasa.
+
+Namanya *Monolit* karena satu blok yang utuh.
+Ekstensi *.dav* adalah plesetan namanya.
 
 ![vanilla JS](https://img.shields.io/badge/vanilla-JS-111214?style=flat-square)
 ![Three.js](https://img.shields.io/badge/Three.js-globe-111214?style=flat-square)
@@ -23,7 +25,7 @@ alias **Dappzzz-Dev**. *Monolit* karena satu kesatuan utuh,
 ```txt
 > Halo, saya Daffa.
 > Front-end developer dari Sukoharjo, Indonesia.
-> Mulai ngoding 2023 cuma buat iseng — eh, ternyata nagih.
+> Mulai ngoding 2023 cuma buat iseng. Eh, ternyata nagih.
 ```
 
 Situs ini prinsip saya dijadikan bentuk: **web bisa cepat, ringan,
@@ -37,11 +39,11 @@ Karena isinya bukan template pasaran:
 
 | | |
 |---|---|
-| **Globe 3D interaktif** | Bisa diputar, di-zoom — Three.js murni, tanpa React |
+| **Globe 3D interaktif** | Bisa diputar dan di-zoom pakai Three.js murni, tanpa React |
 | **Carousel proyek** | Drag pakai physics, gambar dikompres otomatis dari dashboard rahasia |
 | **4 bahasa, deteksi sendiri** | Browser kamu bahasa Indonesia? Situsnya ikut. Jepang? Ikut juga |
 | **Live GitHub stats** | Grafik kontribusi & total commit diambil langsung, bukan screenshot |
-| **Dashboard internal** | Ada, tapi detailnya tidak dipublikasikan — hanya sang pemilik yang tahu pintunya |
+| **Dashboard internal** | Ada, tapi detailnya tidak dipublikasikan. Hanya sang pemilik yang tahu pintunya |
 | **Ghost maskot** | Yang joget di halaman About. Ia tidak pernah berhenti. Jangan ditanya kenapa |
 
 Semua di atas jalan dari file statis. Nol server, nol database, nol bundle.
@@ -54,14 +56,13 @@ cd monolit.dav
 ```
 
 Lalu buka foldernya di editor dan nyalakan Live Server
-(`fetch` butuh HTTP — kalau cuma klik dua kali `index.html`
-beberapa fitur mogok kerja).
+(`fetch` butuh HTTP, jadi kalau cuma klik dua kali `index.html`
+ada fitur yang mogok kerja).
 
 ## anatomi kode
 
-Struktur file sengaja tidak dipajang di sini — tapi tenang,
-kode di repo ini tetap terbuka kalau kamu penasaran dan mau belajar
-dari isinya.
+Struktur file sengaja tidak dipajang di sini. Tenang, kode di repo ini
+tetap terbuka kalau kamu penasaran dan mau belajar dari isinya.
 
 ## ngobrol sama pembuatnya
 
@@ -73,7 +74,7 @@ Punya ide proyek, mau diskusi web/AI, atau cuma mau bilang ghost-nya lucu?
 
 <div align="center">
 
-*— dibangun pelan-pelan, disempurnakan terus.*
+*Dibangun pelan-pelan, disempurnakan terus.*
 
 ***MONOLIT.DAV*** © 2026 Daffa
 
