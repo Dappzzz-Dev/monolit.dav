@@ -413,8 +413,9 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   letter-spacing: .03em;
   padding: 8px 12px 10px;
   border-radius: 14px 14px 14px 4px;
-  white-space: nowrap;
-  max-width: 260px;
+  width: max-content;
+  max-width: 220px;
+  word-break: break-word;
   pointer-events: none;
   z-index: 2;
   animation: bubblePop .4s cubic-bezier(.34,1.56,.64,1) forwards,
@@ -446,7 +447,7 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .about-ghost{padding-top:8px}
   #ghost{scale:.65}
   .ghost-speech{
-    font-size:10px;padding:6px 10px 8px;white-space:normal;width:max-content;max-width:200px;
+    font-size:10px;padding:6px 10px 8px;max-width:180px;
   }
 }
 

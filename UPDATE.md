@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-08-26 — Fix ghost bubble overflow + disable right-click
+
+Bug fix & hardening:
+- **Ghost bubble overflow:** hapus `white-space: nowrap` → text wrap natural; ganti `max-width:260px` → `220px` + `width:max-content` + `word-break:break-word`. Responsive ≤900px: `max-width:180px`.
+- **Disable right-click:** tambah `document.addEventListener('contextmenu', e => e.preventDefault())` di `<head>` index.html. Klik kanan tidak memunculkan menu browser.
+- Scan seluruh JS (8 file) → semua lolos syntax check. Tidak ada bug lain ditemukan.
+
+**File:** `css/style.css`, `index.html`, `UPDATE.md`
+
+---
+
 ## 2026-08-26 — Ghost: tambah speech bubble (i18n ×4)
 
 Ghost di About section mendapat gelembung percakapan ("stop!! sini deh liat dulu apa yang ada di sampingku"). 
