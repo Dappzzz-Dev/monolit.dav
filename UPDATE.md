@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-08-26 — Bersih-bersih em-dash di seluruh teks situs
+
+Lanjutan kebijakan "jangan pakai — sebagai penyambung kata": seluruh copy user-facing dibersihkan di 4 bahasa sekaligus.
+- Pemisah gaya judul (role line, title tab, subjek email) kini pakai `·` (middot).
+- Penyambung kalimat diganti titik/koma/kata sambung natural per bahasa (id/en/ja/es).
+- Rentang angka (1–2 hari) tetap memakai en-dash — itu tipografi yang benar, bukan kebiasaan AI.
+- Fallback statis index.html + deskripsi Pamer.co di projects.json ikut disinkronkan.
+- Verifikasi: node --check lolos; 26 key utuh di 4 kamus; grep em-dash = 0.
+
+**File:** `js/i18n.js`, `index.html`, `data/projects.json`
+
+---
+
 ## 2026-08-26 — README: bersihkan em-dash (gaya tulis manusiawi)
 
 User: tanda "—" sebagai penyambung kata terasa kaku/terlihat AI. Ketujuh kemunculan di README diganti penghubung alami (kalimat pendek, kata sambung "jadi/tapi", titik). Cerita asal-usul nama Monolit.dav dipertahankan tanpa dash. Sisa em-dash: 0.

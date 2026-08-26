@@ -5,7 +5,7 @@
     {
       "id": "pamer-co",
       "title": "Pamer.co",
-      "description": "Project showcase pribadi — galeri proyek, profil singkat, dan status ketersediaan kerja.",
+      "description": "Project showcase pribadi berisi galeri proyek, profil singkat, dan status ketersediaan kerja.",
       "image": "assets/seed1.svg",
       "demoUrl": "https://pamer-co.vercel.app/",
       "repoUrl": "https://github.com/Dappzzz-Dev/Pamer.co"
