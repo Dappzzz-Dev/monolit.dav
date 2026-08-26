@@ -36,27 +36,9 @@ Karena isinya bukan template pasaran:
 | **Live GitHub stats** | Grafik kontribusi & total commit diambil langsung, bukan screenshot |
 | **Ghost maskot** | Yang joget di halaman About. Ia tidak pernah berhenti. Jangan ditanya kenapa |
 
-Semua di atas jalan dari file statis. Nol server, nol database, nol bundle.
-
-## jalankan di komputermu
-
-```bash
-git clone https://github.com/Dappzzz-Dev/monolit.dav.git
-cd monolit.dav
-```
-
-Lalu buka foldernya di editor dan nyalakan Live Server
-(`fetch` butuh HTTP, jadi kalau cuma klik dua kali `index.html`
-ada fitur yang mogok kerja).
-
-## anatomi kode
-
-Struktur file sengaja tidak dipajang di sini. Tenang, kode di repo ini
-tetap terbuka kalau kamu penasaran dan mau belajar dari isinya.
-
 ## ngobrol sama pembuatnya
 
-Punya ide proyek, mau diskusi web/AI, atau cuma mau bilang ghost-nya lucu?
+Punya ide proyek, mau diskusi web/AI, atau cuma mau bilang web nya lucu?
 
 [GitHub](https://github.com/Dappzzz-Dev) · [LinkedIn](https://www.linkedin.com/in/dappdev-dafara) · [Instagram](https://www.instagram.com/dafara__) · [TikTok](https://www.tiktok.com/@dafaraaaa) · [Email](mailto:daffafarash@gmail.com)
 
