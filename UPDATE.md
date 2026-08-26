@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-08-26 — Ghost: tambah speech bubble (i18n ×4)
+
+Ghost di About section mendapat gelembung percakapan ("stop!! sini deh liat dulu apa yang ada di sampingku"). 
+- Desain: bubble putih semi-transparan, rounded corners, tail pointer ke bawah, tilt -2deg biar playful.
+- Animasi: `bubblePop` (scale 0→1 + fade) saat load, lalu `bubbleWobble` (tilt naik-turun 2.8s loop).
+- I18n: `ghost.speech` ×4 bahasa (id/en/ja/es).
+- Mobile ≤900px: font kecil, white-space wrap, max-width ketat.
+- `#ghost` overflow:visible agar bubble tidak terpotong.
+
+**File:** `index.html`, `css/style.css`, `js/i18n.js`
+
+---
+
 ## 2026-08-26 — README: hapus tagline intro (user ganti nanti)
 
 Paragraf pembuka "Satu blok solid..." + asal-usul nama Monolit.dav dihapus dari README atas permintaan user. Judul `M O N O L I T . D A V` + badge tetap ada. User akan isi tulisannya sendiri nanti.
