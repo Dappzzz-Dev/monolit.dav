@@ -1,0 +1,17 @@
+# ===== Tool & skill folders (bukan bagian situs) =====
+.*/
+# Kalau nanti pakai GitHub Actions, batalkan penyembunyiannya dengan:
+# !/.github/workflows/
+
+# ===== Dependensi & config npm (situs ini murni CDN, tidak butuh) =====
+node_modules/
+package.json
+package-lock.json
+
+# ===== File tool lainnya =====
+skills-lock.json
+
+# ===== Arsip & sampah OS =====
+*.zip
+Thumbs.db
+Desktop.ini

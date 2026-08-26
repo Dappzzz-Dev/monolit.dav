@@ -1,0 +1,319 @@
+# UPDATE.md — Riwayat Update
+
+> Catatan perubahan untuk manusia & AI. Setiap update: tambah entri baru di atas,
+> format: tanggal, judul, apa yang berubah, kenapa, file yang disentuh.
+
+---
+
+## 2026-08-24 — Admin dashboard baru (gaya Pamer.co, fitur sesuai pesanan)
+
+**Permintaan:** halaman admin meniru struktur dashboard Pamer.co milik user — tapi hanya fitur: tambah gambar project, link Live Demo, link GitHub, deskripsi. Tanpa kategori/tahun/tech-stack.
+
+**Diadopsi dari Pamer.co** (`Pamer.co/app/dashboard/*`): layout sidebar kiri (brand + nav ikon + user/logout di bawah), page-head bergaris bawah, Overview berupa grid kartu (gambar atas, deskripsi clamp-3, tombol GitHub/Demo, Edit/Hapus), search bar, stats bar "N project ditampilkan".
+
+**Dibangun lokal (tetap tema monokrom gelap):**
+- **Login gate** full-screen: PAT sebagai kunci (validasi live ke GitHub API; token hanya di sessionStorage). Berhasil → shell muncul; keluar/gagal → kembali ke gate.
+- **Overview:** grid kartu responsif + pencarian judul/deskripsi + stats bar; kartu = pratinjau situs user.
+- **Projects:** list terurut (↑↓ = urutan carousel) + Export/Import JSON + Publish ke GitHub (Contents API — mekanisme sinkron ke situs publik, tidak berubah).
+- **Editor modal** sama seperti sebelumnya (judul, deskripsi, gambar terkompres, demo, repo).
+- Sidebar melipat jadi top bar horizontal di ≤900px.
+- Verifikasi: `node --check` lolos; audit otomatis — 41 id elemen yang dirujuk JS semuanya ada di HTML; tidak ada handler ganda (login via submit form saja).
+
+**Rencana lanjut:** bila pindah ke Supabase — ganti lapisan simpan (draf localStorage + publish Contents API → tabel `projects` + Storage untuk gambar); UI tidak perlu berubah besar.
+
+**File:** `admin.html`, `css/admin.css`, `js/admin.js`
+
+---
+
+## 2026-08-24 — Rewrite copy: hero & About tidak saling mengulang
+
+**Masalah:** bio hero dan kartu About memuat 3 fakta yang sama (mulai ngoding/2023, fokus front-end, Indonesia) dengan kalimat berbeda — pemborosan.
+
+**Prinsip baru:** hero = hook (apa), About = cerita (siapa & bagaimana).
+- **Hero bio** dipangkas jadi satu kalimat: fokus pada apa yang dibuat + sisi ngulik AI.
+- **About bio** kini berisi cerita yang belum ada di mana pun: mulai iseng 2023 → nagih → sekarang perdalamin React/JS + eksplorasi AI.
+- Nada bahasa di-*humanize*: santai kekinian ("cuma buat iseng — eh, ternyata nagih", "ngulik") tapi tetap enak dibaca semua kalangan; disesuaikan natural di EN/JA/ES (bukan terjemahan kaku).
+- Fallback statis HTML ikut disamakan.
+
+**File:** `js/i18n.js`, `index.html`
+
+---
+
+## 2026-08-24 — Chart kontribusi kembali hijau + tahun realtime
+
+**Laporan user:** kotak aktif vs kosong tak terbedakan, dan minta label tahun dekat sumbu chart.
+
+**Perubahan:**
+- **Warna chart:** `/ffffff/` (monokrom — penyebab semua kotak terlihat sama) diganti **hijau GitHub `40c463`**, menyatu dengan badge dashed hijau kartu; hari aktif kini jelas kontras dengan hari kosong di panel `#0d1117`.
+- **Tahun realtime:** chip `#gh-year` diposisikan absolut di sudut kiri-atas chart — tepat di perpotongan label bulan (atas) dan label hari (kiri). Di-update tiap detik oleh `js/app.js` (guard: hanya menulis saat berubah), sehingga berganti tahun otomatis tepat malam tahun baru tanpa reload. Fallback statis "2026" untuk no-JS.
+- Struktur HTML: img dibungkus `.gh-chart-wrap` (anchor posisi chip); margin-top pindah ke wrapper.
+
+**File:** `index.html`, `css/style.css`, `js/app.js`
+
+---
+
+## 2026-08-24 — Judul kartu GitHub: "My GitHub Contributions"
+
+Judul kartu grafik kontribusi kini memuat kata "Contributions" dan diterjemahkan di keempat bahasa (ID: Kontribusi GitHub Saya · EN: My GitHub Contributions · JA: 私のGitHubコントリビューション · ES: Mis contribuciones de GitHub). Fallback statis HTML ikut disamakan; `.dev-head` sudah `flex-wrap` sehingga judul panjang aman di layar sempit.
+
+**File:** `js/i18n.js`, `index.html`
+
+---
+
+## 2026-08-24 — Fix lanjutan i18n: posisi nav & kartu About
+
+**Laporan user:** (1) menu Home dkk. jadi aneh penempatannya, (2) teks About masih Inggris padahal bahasa Indonesia.
+
+**Perbaikan:**
+- **Posisi nav:** topbar punya 3 anak (brand, nav, globe) sehingga `justify-content:space-between` mendorong nav ke tengah. Diubah: `flex-start` + `margin-left:auto` pada `.radio-input` → brand kiri, nav+globe bergrup di kanan seperti semula; mode mobile tetap tersusun rapi.
+- **Kartu About diterjemahkan** ("About Me", paragraf bio, "My GitHub") ke 4 bahasa.
+- **Mekanisme baru:** `data-i18n-html` (teks ber-markup `<strong>` — string dari kamus sendiri, bukan input user) dan `data-i18n-title` (tooltip badge kontribusi).
+- Audit menyeluruh: 26 key terverifikasi ada di keempat kamus; sisa teks tanpa terjemahan memang disengaja universal (chip skill, simbol ×/↑, label "Email").
+
+**File:** `css/style.css`, `index.html`, `js/i18n.js`
+
+---
+
+## 2026-08-24 — Fitur multi-bahasa: deteksi otomatis + picker manual
+
+**Permintaan:** Web mendeteksi bahasa user (Indonesia → ID, negara lain → bahasanya), plus tombol pilihan bahasa.
+
+**Implementasi (`js/i18n.js` baru):**
+- **Deteksi:** pilihan tersimpan (localStorage `dafara.lang`) > `navigator.language` (id→ID, ja→JA, es→ES, lainnya→EN) > default EN. Tanpa API eksternal — bahasa browser mencerminkan negara user.
+- **4 bahasa penuh:** Indonesia, English, 日本語, Español — semua string UI diterjemahkan (nav, hero, projects, contact, footer, modal aria, mailto subject, judul dokumen).
+- **Picker:** pill glass di ujung kanan topbar (ikon globe + kode bahasa) → dropdown gelap blur senada tema; klik luar/Esc menutup; fokus keyboard ditangani.
+- Mekanisme: atribut `data-i18n` / `data-i18n-aria` / `data-i18n-mailto`; event `langchange` -> `sections.js` re-measure lebar pill indikator nav.
+- Teks statis di HTML = fallback ID; i18n apply berjalan sinkron saat load agar tidak ada kilat bahasa salah.
+- Verifikasi otomatis: 22 key yang dipakai HTML ada di keempat kamus; node --check lolos.
+
+**Catatan:** Kartu About ("Hello world!…") sengaja tetap Inggris di semua bahasa — itu identitas visual kartu dev. Deskripsi proyek dari `data/projects.json` mengikuti isi admin (konten, bukan UI).
+
+**File:** `js/i18n.js`, `index.html`, `css/style.css`, `js/sections.js`
+
+---
+
+## 2026-08-24 — Fix: animasi ghost berhenti (terlihat seperti PNG statis)
+
+**Gejala:** Karakter ghost di About tidak beranimasi sama sekali.
+
+**Penyebab:** Bukan kode ghost-nya (verbatim & utuh) — melainkan blok aksesibilitas tambahan `@media (prefers-reduced-motion: reduce){ ... animation:none }` yang dipasang saat redesain About. Saat OS/browser melaporkan "reduce motion" (mis. Windows: Animation Effects OFF), SEMUA animasi ghost dibekukan.
+
+**Perubahan:** Blok freeze dihapus dari `css/style.css` — mascot kini selalu beranimasi sesuai permintaan owner. Kode verbatim Uiverse tidak disentuh.
+
+**File:** `css/style.css`
+
+---
+
+## 2026-08-24 — GitHub card: total kontribusi LIVE + chart jadi monokrom
+
+**Pertanyaan user:** Apakah kotak-kotak & total sinkron dengan GitHub asli?
+
+**Jawaban & perubahan:**
+- Kotak-kotak (ghchart) memang sudah live sejak awal — data diambil ulang tiap load halaman.
+- Warna chart hijau default → **monokrom putih** via `ghchart.rshah.org/ffffff/Dappzzz-Dev`.
+- Badge "Total: 1,787" tadinya DUMMY → kini **live**: `js/app.js` fetch `github-contributions-api.jogruber.de/v4/Dappzzz-Dev` (publik, tanpa token), ambil total tahun berjalan, cache localStorage 30 menit, fallback teks statis bila gagal. Terverifikasi: total 2026 = 40.
+- Badge diberi atribut `data-gh-total`; angka statis tinggal sebagai fallback no-JS.
+
+**File:** `index.html`, `js/app.js`
+
+---
+
+## 2026-08-24 — Redesain section About (tema hacker/dev + ghost) menimpa yang lama
+
+**Klarifikasi:** Permintaan About Me sebelumnya ternyata untuk MENIMPA section About di `index.html`, bukan halaman standalone. File `about.html` + `css/about.css` dihapus (menganggur, tidak tertaut).
+
+**Perubahan:**
+- Section `#about` kini: dua kartu dev monospace liquid-glass — "About Me" (teks spec verbatim + baris `$ ls skills/` chips stack nyata) dan "My GitHub" (badge dashed hijau "Total: 1,787" + chart live `ghchart.rshah.org/Dappzzz-Dev`).
+- Ghost piksel animasi dipindah utuh ke kolom kanan section (HTML+CSS verbatim, animasi disentuh; reduced-motion tetap dibekukan).
+- CSS lama `.skills` dihapus karena tidak terpakai. Responsif <900px satu kolom.
+- Sisa halaman tetap tema monokrom glass — hanya About yang bergaya baru.
+
+**File:** `index.html`, `css/style.css` (hapus `about.html`, `css/about.css`)
+
+---
+
+## 2026-08-24 — Halaman About Me standalone (tema hacker/dev + ghost animasi) — SUPERSEDED
+
+> Dibatalkan: ternyata dimaksudkan menimpa section About di `index.html` (lihat entri di atas). File `about.html` & `css/about.css` sudah dihapus; desainnya kini hidup di section About.
+
+**Permintaan:** Halaman "About Me" tunggal dark mode monospace: card About, card GitHub dengan badge total kontribusi + chart live, karakter ghost animasi di kanan.
+
+**Perubahan:**
+- `about.html` — grid dua kolom (konten kiri, ghost kanan); ghost dipaste persis dari spec (animasi tidak disentuh).
+- `css/about.css` — bg #000 murni; Space Mono/Fira Code; kartu liquid-glass (#2d2d2d alpha + blur); judul italic bold dengan prefix komentar `//`; badge kapsul dashed GitHub-green "Total: 1,787"; chart `ghchart.rshah.org/Dappzzz-Dev` (username akun asli agar sinkron — bukan DaffaFarash) dalam panel #0d1117 pixelated.
+- Shadow ghost diberi glow halus agar terlihat di atas hitam murni; `prefers-reduced-motion` membekukan animasi mascot (a11y).
+- Responsif <900px: satu kolom, ghost pindah ke bawah dengan scale .65.
+
+**File:** `about.html`, `css/about.css`
+
+---
+
+## 2026-08-24 — De-slop pass: kurangi ciri khas AI (tema monokrom tetap)
+
+**Permintaan:** Kurangi kesan "AI slop" tanpa keluar dari tema.
+
+**Perubahan:**
+1. **Font berkarakter:** Instrument Serif untuk display (.name hero 58px, .section h2 30px, brand topbar, judul kartu CTA & modal-ready) — Inter tetap untuk body. Bukan lagi satu font di semua tempat.
+2. **Copy spesifik, bukan template:** role → "Frontend Developer — Sukoharjo, Indonesia"; bio hero cerita mulai 2023; lead Contact spesifik ("Punya ide proyek, butuh bantuan frontend…"); CTA card "Ceritakan proyekmu".
+3. **Kurangi panel kaca:** info kontak kiri jadi hairline rows polos (`.contact-list`, sengaja flat) — hanya kartu CTA kanan yang berglass. Row "Status ● Terbuka…" yang template banget diganti "Fokus saat ini → Frontend web apps & eksperimen AI".
+
+**File:** `index.html`, `css/style.css`
+
+---
+
+## 2026-08-24 — Bangun ulang footer
+
+**Permintaan:** Footer copyright dibuat lebih menarik.
+
+**Perubahan:** Footer sebelumnya tanpa CSS sama sekali (teks polos). Sekarang dua baris bergaya glass hairline senada topbar:
+- Baris atas: brand "Daffa • Frontend" + tag stack (Vanilla JS · Three.js · GSAP) di kiri, quick links About/Projects/Contact di kanan.
+- Baris bawah: © tahun otomatis + link "Kembali ke atas".
+- Quick links pakai atribut `data-goto` — delegasi klik ke radio nav header di `js/app.js`, jadi dapat scroll halus + indikator menu yang sama seperti klik menu. Responsif: kolom di layar sempit.
+
+**File:** `index.html`, `css/style.css`, `js/app.js`
+
+---
+
+## 2026-08-24 — Personalisasi info dari sumber asli (GitHub, LinkedIn, IG, TikTok, Pamer.co)
+
+**Sumber:** github.com/Dappzzz-Dev · pamer-co.vercel.app · link sosial milik sendiri · daffafarash@gmail.com
+
+**Diperbaiki (yang keliru):**
+- Nama "Dafara" → **Daffa** (title halaman, brand topbar, hero h1, About)
+- Email placeholder `dafara@example.com` → **daffafarash@gmail.com** (baris kontak + tombol mailto dengan subject)
+- Lokasi Yogyakarta → **Sukoharjo, Jawa Tengah, Indonesia (WIB)** — koordinat marker globe ternyata sudah benar
+- Deskripsi Pamer.co disesuaikan kenyataan ("project showcase pribadi"); repoUrl → `github.com/Dappzzz-Dev/Pamer.co`
+- Bio & skill list About dicocokkan profil nyata: mulai 2023, frontend web apps + AI, HTML/CSS, JS/TS, React/Vite, PHP/MySQL, Node.js
+
+**Ditambah:**
+- Instagram (`@dafara__`) & TikTok (`@dafaraaaa`) di social hero dan Contact
+
+**File:** `index.html`, `data/projects.json`, `CONTEXT.md`
+
+---
+
+## 2026-08-24 — Rapikan & bangun ulang halaman Contact
+
+**Permintaan:** Perbagus desain Contact, hapus yang tidak perlu, tambah yang diperlukan.
+
+**Hapus:**
+- Form demo palsu (`alert('Terima kasih — form demo')` — tidak mengirim apa pun, menyesatkan) beserta CSS `.contact-form` dan handler demo di `js/app.js`.
+
+**Tambah/ubah (tetap tema monochrome + glass):**
+- Panel kiri `.contact-panel`: baris info terstruktur dengan label kecil kapital — Email (link mailto), Lokasi (Sukoharjo, WIB), Status "Terbuka untuk proyek baru" dengan dot indikator.
+- Panel kanan `.contact-panel--cta`: kartu ajakan + tombol `Kirim Email` mailto sungguhan dengan subject otomatis (tanpa backend) + social pill GitHub/LinkedIn/Instagram/TikTok.
+- Grid 1fr/380px, tinggi sejajar (`align-items:stretch` + `margin-top:auto` pada CTA), hover/focus-visible jelas, responsif 1 kolom di bawah 900px.
+
+**File:** `index.html`, `css/style.css`, `js/app.js`
+
+---
+
+## 2026-08-24 — Fix: menu tidak ikut pindah ke Contact di dasar halaman
+
+**Gejala:** Sampai di halaman Contact, radio nav tetap menunjuk Projects.
+
+**Penyebab:** Garis aktivasi menu = 140px dari atas layar, tapi halaman mentok max-scroll sebelum top Contact (section pendek) sempat melewati garis itu → section terakhir yang terhitung selalu Projects.
+
+**Perubahan:** Di `syncSelectionToPosition()`, saat `scrollY >= maxScroll - 2` section TERAKHIR langsung dianggap aktif.
+
+**File:** `js/sections.js`
+
+---
+
+## 2026-08-24 — Fix: section Contact menghilang saat scroll
+
+**Gejala:** Saat scroll manual, section Kontak tampak kosong; tapi lewat menu nav selalu muncul.
+
+**Penyebab:** Pemunculan section (`.is-visible` / opacity) digabung dengan pelacak "section aktif" di `js/sections.js`. Klik menu menghapus status tampil semua section lain, dan scroll hanya menyalakan section yang top-nya sudah melewati garis 140px dari atas layar — section yang baru sebagian terlihat dari bawah layar tetap opacity:0. Lewat menu, class dipaksa langsung → selalu muncul.
+
+**Perubahan (v3):** Reveal kini lewat IntersectionObserver terpisah — setiap `.section` yang masuk viewport langsung tampil **permanen** (unobserve setelah reveal). Nav click tidak lagi menghapus `.is-visible` section lain; sinkronisasi menu hanya mengurus radio aktif.
+
+**File:** `js/sections.js`
+
+---
+
+## 2026-08-24 — Fade tipis di tepi carousel (pengganti efek grain)
+
+**Permintaan:** Sisi kiri-kanan carousel jadi fade halus tipis, bukan partikel.
+
+**Perubahan:** CSS mask gradient di `.carousel-stage.grainy-host` (lebar fade `min(64px, 7%)` per sisi). Grain WebGL tetap off (`grainWidth: 0`) — fade murni CSS alpha mask.
+
+**File:** `css/style.css`
+
+---
+
+## 2026-08-24 — Matikan efek grain/partikel di tepi carousel (mode pure)
+
+**Permintaan:** Efek partikel/noise di samping-samping carousel dianggap mengganggu.
+
+**Perubahan:** `grainWidth` default 0 → pass WebGL fbm dilewati sepenuhnya (`hasGL` dimatikan saat init bila grain off); strip ditampilkan lewat canvas 2D polos. Carousel kini murni gambar berjalan. Ingin efek grain lagi? Set `grainWidth: 0.5` di DEFAULTS `js/carousel.js`.
+
+**File:** `js/carousel.js`
+
+---
+
+## 2026-08-24 — Perbaikan tampilan carousel (kegedean + gambar tidak jelas)
+
+**Gejala:** Carousel tampak terlalu besar; gambar sulit dilihat jelas.
+
+**Penyebab & perbaikan:**
+1. Kartu maksimal 711px → diturunkan ke **560px** (`maxWidth` di `js/carousel.js`), stage 480→420px (mobile 340px).
+2. Band grain tepi = lebar 1 kartu penuh → menutupi sebagian besar gambar dengan noise/gelap. Diubah jadi **0.5 kartu** (opsi baru `grainWidth`) — tengah gambar kini bersih, efek dissolve tetap ada di pinggir.
+3. Gambar seed masih thumbnail SVG 96×72 yang di-stretch → blur. Diganti **SVG vektor monokrom 1280×720** (`assets/seed1-3.svg`, tajam di ukuran apa pun, sesuai tema).
+
+**File:** `js/carousel.js`, `css/style.css`, `data/projects.json`, `assets/seed1-3.svg`(baru)
+
+---
+
+## 2026-08-24 — Grainy Carousel menggantikan grid project + halaman Admin
+
+**Gejala/kebutuhan:** Kartu project statis diganti carousel interaktif; admin bisa menambah project tanpa menyentuh kode; pengunjung klik gambar → muncul kartu detail (deskripsi + tombol Live Demo & GitHub).
+
+### Perubahan
+
+1. **GrainyCarousel di-port React → vanilla JS** (`js/carousel.js`)
+   - Endless strip gambar di 2D canvas → satu pass WebGL (fbm/simplex warp + darken di dua band tepi, shader identik dengan referensi Originkit).
+   - Interaksi: drag (gain 0.5–2.5, default 1:1), flick, klik kiri/kanan untuk geser, auto-advance tiap ±5s mode snap, zoom halus antar kartu.
+   - Fallback 2D saat WebGL tidak ada; backing store DPR-capped 2; hormati `prefers-reduced-motion` (auto-advance & zoom mati).
+   - Klik gambar yang tepat di tengah → callback `onOpen(index)` membuka detail; klik samping → geser seperti referensi.
+2. **Modal detail project** (`index.html` + `css/style.css` + `js/projects.js`)
+   - Gambar 16:9, judul, deskripsi, tombol Live Demo (primary) & GitHub (ghost) — tombol hanya tampil bila link diisi admin.
+   - Tutup via ×, backdrop, atau ESC; fokus dikembalikan; scroll body dikunci; carousel pause saat modal terbuka.
+3. **Data project dipindah ke `data/projects.json`** — seed berisi 3 project lama (Pamer-co, Personal Portfolio, UI Component Library).
+4. **Halaman Admin** (`admin.html` + `css/admin.css` + `js/admin.js`)
+   - CRUD project: judul, deskripsi, upload gambar (kompres otomatis ≤1600px JPEG q0.82; SVG <300KB lewat apa adanya), link demo/repo; urutkan naik/turun; hapus.
+   - Draf tersimpan otomatis di localStorage; Export/Import JSON.
+   - **Model keamanan (anti-bobol tanpa backend):** tidak ada password di kode. Publish memakai *fine-grained PAT GitHub* (Contents: Read+Write, repo ini saja) yang hanya hidup di sessionStorage tab — bisa dicabut kapan saja di GitHub. CSP ketat + `noindex`. Tanpa token: mode draf lokal murni.
+   - Publish = commit `data/projects.json` + upload gambar ke `assets/projects/<id>.<ext>` via Contents API → Pages redeploy otomatis.
+5. **CSS dirapikan:** blok `.projects-grid/.project-card/.proj-*` dihapus, ditambah `.carousel-stage`, `.modal-*`; guard `[hidden]` global (bug fix: `display:flex` pada kelas menimpa atribut hidden sehingga modal tampak terbuka saat load).
+
+**File:** `js/carousel.js`(baru), `js/projects.js`(baru), `data/projects.json`(baru), `admin.html`(baru), `css/admin.css`(baru), `js/admin.js`(baru), `index.html`, `css/style.css`
+
+**Catatan:**
+- honey: hapus project tidak menghapus file gambarnya dari repo (orphan) — bersihkan manual bila perlu.
+- honey: draf lokal hanya ada di browser tempat mengetik — gunakan Publish/Export agar tidak hilang.
+- Buka situs via server lokal (Live Server); `fetch(data/projects.json)` diblokir di protokol `file://`.
+
+---
+
+## 2026-08-24 — Fix bug navigasi menu (salah section saat klik About/Projects/Contact)
+
+**Gejala:** Klik About kadang terlempar ke Projects, klik Projects ke Contact, dst — intermittent.
+
+**Akar masalah** (`js/sections.js` versi lama):
+1. Deteksi "scroll sampai" pakai polling ±4px + timer buta 1600ms. Gagal saat:
+   - klik **Contact** (posisi target tak terjangkau karena batas scroll bawah → selalu menunggu fallback penuh),
+   - smooth scroll > 1,6s di jarak jauh → timer mati di tengah penerbangan,
+   - user menggerakkan wheel/touch saat animasi jalan → scroll dibatalkan browser tapi state "navigasi" masih menggantung.
+2. Setelah gagal, `syncSelectionToPosition()` **menimpa pilihan menu** mengikuti posisi hasil kegagalan — UI ikut salah, bukan lokasinya yang dikoreksi.
+
+**Perbaikan** (`js/sections.js` v2):
+- Sampai = event `scrollend` (+ timeout pengaman), bukan polling ±4px.
+- Tujuan scroll di-clamp ke `maxScroll` → section bawah dianggap sampai.
+- Setelah sampai: verifikasi + snap koreksi instan kalau meleset >48px (layout drift font/globe).
+- Wheel/touchstart user saat animasi → state navigasi dibatalkan seketika, sinkronisasi posisi jujur lagi.
+- Hormati `prefers-reduced-motion`.
+
+**File:** `js/sections.js`
+
+---

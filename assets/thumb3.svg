@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="12" fill="#7ee787"/>
+  <g opacity="0.95">
+    <rect x="16" y="18" width="368" height="60" rx="8" fill="rgba(0,0,0,0.04)"/>
+    <text x="30" y="58" fill="#032" font-family="Inter, Arial" font-size="18">UI Components</text>
+  </g>
+  <g transform="translate(16,100)">
+    <rect width="368" height="170" rx="8" fill="rgba(255,255,255,0.02)"/>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-24T12:00:00.000Z",
+  "projects": [
+    {
+      "id": "pamer-co",
+      "title": "Pamer.co",
+      "description": "Project showcase pribadi — galeri proyek, profil singkat, dan status ketersediaan kerja.",
+      "image": "assets/seed1.svg",
+      "demoUrl": "https://pamer-co.vercel.app/",
+      "repoUrl": "https://github.com/Dappzzz-Dev/Pamer.co"
+    },
+    {
+      "id": "personal-portfolio",
+      "title": "Personal Portfolio",
+      "description": "Landing page minimal dengan animasi halus dan 3D ringan.",
+      "image": "assets/seed2.svg",
+      "demoUrl": "",
+      "repoUrl": "https://github.com/Dappzzz-Dev"
+    },
+    {
+      "id": "ui-component-library",
+      "title": "UI Component Library",
+      "description": "Kumpulan komponen yang konsisten untuk UI bersih dan dapat diakses.",
+      "image": "assets/seed3.svg",
+      "demoUrl": "",
+      "repoUrl": "https://github.com/Dappzzz-Dev"
+    }
+  ]
+}

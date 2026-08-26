@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <!-- TAG: Metadata - admin is unlisted (noindex); auth = GitHub PAT validated live -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; base-uri 'none'; form-action 'none'" />
+  <title>Daffa — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- TAG: Login gate - full-screen, shown until a PAT validates against the repo -->
+  <section class="gate" id="gate">
+    <form class="gate-card" id="gate-form">
+      <div class="brand">Daffa <span class="dot">•</span> Admin</div>
+      <p class="mono-sub">Dashboard — akses terbatas</p>
+      <label class="token-label">Personal Access Token
+        <input id="cfg-token" type="password" placeholder="github_pat_…" autocomplete="new-password">
+      </label>
+      <button class="cta wide" type="submit" id="btn-connect">Masuk sebagai Admin</button>
+      <p class="conn-msg center" id="conn-msg"></p>
+      <details class="hint-box">
+        <summary>Cara dapat token?</summary>
+        <p>Buat <b>fine-grained Personal Access Token</b> (GitHub → Settings → Developer access tokens) dengan akses <b>Contents: Read and write</b> untuk <b>repo portfolio ini saja</b>. Token hanya hidup selama tab terbuka — tidak pernah disimpan.</p>
+      </details>
+      <div class="gate-foot">
+        <label class="inline-cfg"><span>owner/repo@branch</span>
+          <span class="cfg-row">
+            <input id="cfg-owner" type="text" placeholder="Dappzzz-Dev" autocomplete="off">
+            <input id="cfg-repo" type="text" placeholder="nama-repo" autocomplete="off">
+            <input id="cfg-branch" type="text" value="main" autocomplete="off">
+          </span>
+        </label>
+        <a class="ghost" href="index.html">&larr; Lihat Situs</a>
+      </div>
+    </form>
+  </section>
+
+  <!-- TAG: App shell - sidebar (Pamer.co style) + main views -->
+  <div class="shell" id="app" hidden>
+
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="brand">Daffa <span class="dot">•</span> Admin</div>
+        <p class="mono-sub">Dashboard</p>
+      </div>
+
+      <nav class="side-nav">
+        <button type="button" class="nav-item active" data-view="overview">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          Overview
+        </button>
+        <button type="button" class="nav-item" data-view="projects">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+          Projects
+        </button>
+        <button type="button" class="nav-item accent" id="btn-add-side">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Add Project
+        </button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="status-group">
+          <span class="chip" id="chip-publish" hidden>belum dipublish</span>
+          <span class="chip" id="chip-conn">…</span>
+        </div>
+        <div class="side-user">
+          <span class="mono-sub truncate" id="user-label">—</span>
+          <button class="ghost sm" id="btn-disconnect" type="button">Keluar</button>
+        </div>
+        <a class="ghost sm wide" href="index.html">Lihat Situs &nearr;</a>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <!-- TAG: Overview - Pamer-style card grid + search + stats -->
+      <section class="view" id="view-overview">
+        <header class="page-head">
+          <h1>Overview</h1>
+          <p class="mono-sub">Semua projects dalam tampilan kartu</p>
+        </header>
+
+        <div class="ov-controls">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="ov-search" type="text" placeholder="Cari judul atau deskripsi…" autocomplete="off">
+          </div>
+          <button class="cta" id="btn-add" type="button">+ Tambah Project</button>
+        </div>
+
+        <div class="grid-cards" id="ov-grid"></div>
+        <p class="empty" id="ov-empty" hidden>Belum ada project yang cocok.</p>
+
+        <div class="stat-bar"><p><b id="ov-count">0</b> project ditampilkan</p></div>
+      </section>
+
+      <!-- TAG: Projects - ordered list (carousel order) + draft/publish tools -->
+      <section class="view" id="view-projects" hidden>
+        <header class="page-head">
+          <h1>Projects</h1>
+          <p class="mono-sub">Urutan di sini = urutan carousel di situs</p>
+        </header>
+
+        <div class="card">
+          <div class="toolbar">
+            <span class="chip warn" id="chip-dirty-hint" hidden>ada perubahan belum dipublish</span>
+            <span class="spacer"></span>
+            <button class="ghost sm" id="btn-export" type="button">Export JSON</button>
+            <button class="ghost sm" id="btn-import" type="button">Import JSON</button>
+            <input type="file" id="import-file" accept="application/json,.json" hidden>
+            <button class="cta sm" id="btn-publish" type="button" disabled>Publish ke GitHub</button>
+          </div>
+
+          <ul class="proj-list" id="proj-list"></ul>
+          <p class="empty" id="list-empty" hidden>Belum ada project. Klik “Tambah Project”.</p>
+          <p class="foot-note">Perubahan tersimpan otomatis sebagai draf di browser ini. “Publish” menulis langsung ke repo — situs publik ikut berubah setelah redeploy (±1 menit).</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- TAG: Editor dialog - one form for add and edit -->
+  <div class="modal-backdrop" id="editor" hidden>
+    <form class="modal-card" id="editor-form" novalidate>
+      <button class="modal-close" type="button" id="editor-close" aria-label="Tutup">&times;</button>
+      <h2 id="editor-title">Tambah Project</h2>
+
+      <label>Judul<input id="f-title" type="text" required maxlength="80"></label>
+      <label>Deskripsi<textarea id="f-desc" rows="4" required maxlength="600"></textarea></label>
+
+      <label>Gambar Project <small>(otomatis dikompres ±maks 1600px)</small>
+        <input id="f-image" type="file" accept="image/*">
+      </label>
+      <img class="img-preview" id="f-preview" alt="" hidden>
+
+      <div class="grid2">
+        <label>Link Live Demo <small>(opsional)</small><input id="f-demo" type="url" placeholder="https://…"></label>
+        <label>Link GitHub Repo <small>(opsional)</small><input id="f-repo" type="url" placeholder="https://github.com/…"></label>
+      </div>
+
+      <p class="form-error" id="form-error" hidden></p>
+      <div class="btn-row end">
+        <button class="ghost" type="button" id="editor-cancel">Batal</button>
+        <button class="cta" type="submit" id="editor-save">Simpan ke Draf</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

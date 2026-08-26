@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- TAG: Metadata - basic meta, title, and font -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daffa — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- TAG: Topbar - brand + nav + theme toggle -->
+  <header class="topbar">
+    <div class="brand">Daffa • Frontend</div>
+    <!-- TAG: Section navigation - adapted from radio-input template (controls which section is visible) -->
+    <div class="radio-input" data-role="section-nav" aria-label="Main sections">
+      <label>
+        <input value="home" name="site-section" type="radio" checked />
+        <span data-i18n="nav.home">Home</span>
+      </label>
+      <label>
+        <input value="about" name="site-section" type="radio" />
+        <span data-i18n="nav.about">About</span>
+      </label>
+      <label>
+        <input value="projects" name="site-section" type="radio" />
+        <span data-i18n="nav.projects">Projects</span>
+      </label>
+      <label>
+        <input value="contact" name="site-section" type="radio" />
+        <span data-i18n="nav.contact">Contact</span>
+      </label>
+      <span class="selection"></span>
+    </div>
+    <!-- TAG: Language picker - auto-detected on first visit (browser country), manual override here -->
+    <div class="lang">
+      <button type="button" class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.7 2.6 4 5.6 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.6-4-9s1.3-6.4 4-9z"/>
+        </svg>
+        <span id="lang-code">ID</span>
+      </button>
+      <div class="lang-menu" id="lang-menu" role="listbox" aria-label="Language" hidden>
+        <button type="button" data-lang="id">Bahasa Indonesia</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="ja">日本語</button>
+        <button type="button" data-lang="es">Español</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TAG: Home - hero with left content and right 3D stage -->
+  <main class="container" id="home">
+    <section class="hero">
+      <div class="hero-inner">
+        <h1 class="name">Daffa</h1>
+        <p class="role" data-i18n="hero.role">Frontend Developer — Sukoharjo, Indonesia</p>
+        <p class="bio" data-i18n="hero.bio">Bikin website &amp; web app yang rapi, cepat, dan enak dipakai — di sela waktunya, biasanya lagi ngulik AI.</p>
+
+
+        <div class="hero-ctas">
+          <a class="cta" href="#projects" data-i18n="hero.cta_projects">Lihat Proyek</a>
+          <a class="ghost" href="#contact" data-i18n="hero.cta_contact">Kontak</a>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/Dappzzz-Dev" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/dappdev-dafara" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/dafara__/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@dafaraaaa" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" aria-hidden="false">
+      <!-- TAG: 3D Stage - interactive Three.js globe -->
+      <div class="globe-wrap">
+        <!-- TAG: Globe canvas container (Three.js) -->
+        <div id="globe-container"></div>
+      </div>
+      <!-- Globe renderer -->
+      <script type="module" src="js/globe.js"></script>
+    </section>
+  </main>
+
+  <!-- TAG: About section - redesigned: dark mono cards (about + GitHub live chart) + pixel ghost -->
+  <section class="section" id="about">
+    <div class="section-inner about-grid">
+      <div class="about-cards">
+
+        <!-- TAG: About card - liquid-glass dark, code-editor flavor -->
+        <article class="dev-card">
+          <h3 class="dev-title" data-i18n="about.title">About Me</h3>
+          <p class="dev-text" data-i18n-html="about.body">
+            Hello world! Saya <strong>Daffa Farash</strong> dari Sukoharjo.
+            Mulai ngoding tahun 2023 cuma buat iseng — eh, ternyata nagih.
+            Sekarang fokus ke front-end, memperdalam React &amp; JavaScript,
+            sambil ngulik AI biar webnya makin seru.
+          </p>
+          <p class="dev-skills">
+            <span>$</span> ls skills/
+            <em>HTML·CSS</em><em>JavaScript·TypeScript</em><em>React·Vite</em><em>PHP·MySQL</em><em>Node.js</em>
+          </p>
+        </article>
+
+        <!-- TAG: GitHub activity card - live contribution chart via ghchart.rshah.org -->
+        <article class="dev-card">
+          <div class="dev-head">
+            <h3 class="dev-title" data-i18n="about.github_title">My GitHub Contributions</h3>
+            <!-- TAG: total is LIVE - js/app.js fills [data-gh-total] from a public
+                 contributions API; the static number below is only the no-JS/fallback -->
+            <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: 1,787</span>
+          </div>
+          <!-- TAG: /40c463/ = GitHub green - filled squares stand out from empty ones;
+               the year chip is positioned over the chart's axis corner (left of month
+               labels, above day labels) and kept REALTIME by js/app.js -->
+          <div class="gh-chart-wrap">
+            <span class="gh-year" id="gh-year" aria-hidden="true">2026</span>
+            <img
+              class="gh-chart"
+              src="https://ghchart.rshah.org/40c463/Dappzzz-Dev"
+              alt="Contribution graph of Daffa Farash on GitHub"
+              loading="lazy"
+              width="731" height="116">
+          </div>
+        </article>
+
+      </div>
+
+      <!-- TAG: Animated pixel ghost mascot (verbatim from spec - animations untouched) -->
+      <aside class="about-ghost" aria-hidden="true">
+        <div id="ghost">
+          <div id="red">
+            <div id="pupil"></div><div id="pupil1"></div>
+            <div id="eye"></div><div id="eye1"></div>
+            <div id="top0"></div><div id="top1"></div>
+            <div id="top2"></div><div id="top3"></div>
+            <div id="top4"></div>
+            <div id="st0"></div><div id="st1"></div>
+            <div id="st2"></div><div id="st3"></div>
+            <div id="st4"></div><div id="st5"></div>
+            <div id="an1"></div><div id="an2"></div>
+            <div id="an3"></div><div id="an4"></div>
+            <div id="an5"></div><div id="an6"></div>
+            <div id="an7"></div><div id="an8"></div>
+            <div id="an9"></div><div id="an10"></div>
+            <div id="an11"></div><div id="an12"></div>
+            <div id="an13"></div><div id="an14"></div>
+            <div id="an15"></div><div id="an16"></div>
+            <div id="an17"></div><div id="an18"></div>
+          </div>
+          <div id="shadow"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- TAG: Projects / History section - grainy carousel fed by data/projects.json (managed via admin.html) -->
+  <section class="section" id="projects">
+    <div class="section-inner">
+      <h2 data-i18n="projects.title">Project History</h2>
+      <p class="section-lead" data-i18n="projects.lead">Geser untuk menjelajah — klik gambar untuk detail proyek.</p>
+
+      <div class="carousel-stage" id="projects-carousel" aria-label="Project carousel"></div>
+      <p class="carousel-empty" id="projects-empty" hidden data-i18n="projects.empty">Belum ada proyek. Tambahkan lewat halaman admin.</p>
+    </div>
+  </section>
+
+  <!-- TAG: Project detail modal - opened when a carousel card is clicked -->
+  <div class="modal-backdrop" id="project-modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+      <button class="modal-close" id="pm-close" data-i18n-aria="modal.close" aria-label="Tutup">&times;</button>
+      <img class="modal-img" id="pm-img" alt="">
+      <div class="modal-body">
+        <h3 id="pm-title"></h3>
+        <p class="modal-desc" id="pm-desc"></p>
+        <div class="modal-actions">
+          <a class="cta" id="pm-demo" target="_blank" rel="noopener" hidden>Live Demo</a>
+          <a class="ghost" id="pm-repo" target="_blank" rel="noopener" hidden>GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAG: Contact section -->
+  <section class="section" id="contact">
+    <div class="section-inner">
+      <h2 data-i18n="contact.title">Mari berkolaborasi</h2>
+      <p class="section-lead" data-i18n="contact.lead">Punya ide proyek, butuh bantuan frontend, atau sekadar diskusi soal web &amp; AI? Satu email cukup untuk mulai.</p>
+      <div class="contact-grid">
+        <!-- TAG: direct channels - hairline rows (de-glassed: only the CTA card keeps the glass treatment) -->
+        <div class="contact-list">
+          <a class="contact-row" href="mailto:daffafarash@gmail.com">
+            <span class="contact-label">Email</span>
+            <span class="contact-value contact-value--link">daffafarash@gmail.com</span>
+          </a>
+          <div class="contact-row">
+            <span class="contact-label" data-i18n="contact.location_label">Lokasi</span>
+            <span class="contact-value">Sukoharjo, Jawa Tengah, Indonesia <span class="contact-note">(WIB)</span></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label" data-i18n="contact.focus_label">Fokus saat ini</span>
+            <span class="contact-value" data-i18n="contact.focus_value">Frontend web apps &amp; eksperimen AI</span>
+          </div>
+        </div>
+        <!-- TAG: CTA card - real mailto (no backend needed); the one glass element of this section -->
+        <aside class="contact-panel contact-panel--cta">
+          <h3 data-i18n="cta.title">Ceritakan proyekmu</h3>
+          <p data-i18n="cta.body">Kirim ringkasnya lewat email — biasanya saya balas dalam 1&ndash;2 hari kerja.</p>
+          <a class="cta" href="mailto:daffafarash@gmail.com?subject=Halo%20Daffa%20%E2%80%94%20Diskusi%20Proyek" data-mailto="mailto:daffafarash@gmail.com" data-i18n-mailto="cta.subject">Kirim Email</a>
+          <div class="social-compact">
+            <a href="https://github.com/Dappzzz-Dev" target="_blank" rel="noopener" aria-label="GitHub Daffa">GitHub</a>
+            <a href="https://www.linkedin.com/in/dappdev-dafara" target="_blank" rel="noopener" aria-label="LinkedIn Daffa">LinkedIn</a>
+            <a href="https://www.instagram.com/dafara__/" target="_blank" rel="noopener" aria-label="Instagram Daffa">Instagram</a>
+            <a href="https://www.tiktok.com/@dafaraaaa" target="_blank" rel="noopener" aria-label="TikTok Daffa">TikTok</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAG: Footer - brand, quick links (reuse radio nav via data-goto), copyright -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-mark">Daffa <span class="footer-dot" aria-hidden="true"></span> Frontend</span>
+        <span class="footer-tag">Vanilla JS &middot; Three.js &middot; GSAP</span>
+      </div>
+      <nav class="footer-nav" aria-label="Navigasi footer">
+        <a href="#about" data-goto="about" data-i18n="nav.about">About</a>
+        <a href="#projects" data-goto="projects" data-i18n="nav.projects">Projects</a>
+        <a href="#contact" data-goto="contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Daffa. Semua hak dilindungi.</span></p>
+      <a class="footer-top" href="#home" data-goto="home"><span data-i18n="footer.top">Kembali ke atas</span> <span aria-hidden="true">&uarr;</span></a>
+    </div>
+  </footer>
+
+  <!-- TAG: Scripts - GSAP for click effects, and main scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/click-effects.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/sections.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/projects.js"></script>
+</body>
+</html>

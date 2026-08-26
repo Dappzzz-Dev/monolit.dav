@@ -1,0 +1,249 @@
+/* TAG: Admin theme - same monochrome tokens as css/style.css; layout follows
+   the Pamer.co dashboard pattern (sidebar + page-head + card grid), recolored
+   to this portfolio's dark glass monochrome. Standalone file. */
+:root{
+  --bg:#0b0b0b;
+  --panel:#111214;
+  --muted:#9ca0a4;
+  --accent:#d1d1d1;
+  --text:#f3f4f5;
+  --glass:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+  --danger:#ff6b6b;
+  --mono:'Space Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  background:radial-gradient(1200px 600px at 80% 10%, rgba(255,255,255,.02), transparent), var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* TAG: Shared atoms ------------------------------------------------------- */
+.brand{font-weight:700;font-size:15px}
+.brand .dot{color:var(--muted)}
+.mono-sub{font-family:var(--mono);font-size:11px;color:var(--muted);margin:2px 0 0}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+button{font:inherit;cursor:pointer;border-radius:11px;font-weight:700;transition:transform .15s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+.cta{background:linear-gradient(135deg,#f2f3f3,#bfc2c3);color:#0b0b0b;border:none;padding:10px 16px}
+.cta:hover:not(:disabled){background:linear-gradient(135deg,#fff,#d7d9da)}
+.cta:disabled{opacity:.4;cursor:not-allowed}
+.ghost{background:rgba(255,255,255,.025);border:1px solid var(--border-strong);color:var(--text);padding:10px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.ghost:hover{border-color:rgba(255,255,255,.36);background:rgba(255,255,255,.07)}
+.cta.sm,.ghost.sm{padding:8px 13px;border-radius:10px;font-size:13px}
+.wide{width:100%;justify-content:center;text-align:center}
+.cta:focus-visible,.ghost:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.spacer{flex:1}
+.status-group{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted);
+}
+.chip.on{color:#8ee7b2;border-color:rgba(142,231,178,.35)}
+.chip.warn{color:#ffd479;border-color:rgba(255,212,121,.35)}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:12px}
+label small{color:var(--muted);font-weight:400}
+input[type=text],input[type=password],input[type=url],textarea{
+  width:100%;margin-top:5px;padding:10px 12px;
+  border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.02);color:var(--text);
+  font:inherit;resize:vertical;
+}
+input:focus-visible,textarea:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+.conn-msg{min-height:18px;margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+.conn-msg.err{color:var(--danger)}
+.conn-msg.center{text-align:center}
+.btn-row{display:flex;gap:10px;align-items:center}
+.btn-row.end{justify-content:flex-end;margin-top:6px}
+
+/* TAG: Login gate --------------------------------------------------------- */
+.gate{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(255,255,255,.03), transparent),
+    radial-gradient(700px 400px at 90% 90%, rgba(255,255,255,.02), transparent),
+    var(--bg);
+}
+.gate-card{
+  width:min(430px,100%);
+  border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.025), transparent);
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+  padding:30px 28px 22px;
+}
+.gate-card .brand{font-size:19px;margin-bottom:2px}
+.gate-card .token-label{margin:22px 0 12px}
+.hint-box{margin:14px 0 4px;color:var(--muted);font-size:12.5px}
+.hint-box summary{cursor:pointer;font-weight:600;color:var(--text)}
+.hint-box p{margin:8px 0 0;line-height:1.55}
+.gate-foot{
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--border);
+  display:flex;flex-direction:column;gap:12px;
+}
+.gate-foot .inline-cfg > span:first-child{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cfg-row{display:grid;grid-template-columns:1.1fr 1.4fr .7fr;gap:6px}
+.cfg-row input{margin-top:4px;padding:8px 10px;font-size:12.5px}
+.gate-foot a{justify-content:center}
+
+/* TAG: Shell - sidebar + main --------------------------------------------- */
+.shell{display:flex;min-height:100vh}
+.sidebar{
+  width:232px;flex-shrink:0;display:flex;flex-direction:column;
+  border-right:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+  position:sticky;top:0;height:100vh;
+}
+.side-head{padding:20px 18px 16px;border-bottom:1px solid var(--border)}
+.side-nav{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:4px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;width:100%;
+  padding:10px 12px;border:none;background:none;border-radius:10px;
+  color:var(--muted);text-align:left;font-size:13.5px;font-weight:600;
+}
+.nav-item svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.nav-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.nav-item.active{background:rgba(255,255,255,.08);color:var(--text);box-shadow:inset 2px 0 0 #fff}
+.nav-item.accent{color:var(--text)}
+.nav-item.accent:hover{background:rgba(255,255,255,.09)}
+.side-foot{
+  padding:14px;border-top:1px solid var(--border);
+  display:flex;flex-direction:column;gap:10px;
+}
+.side-user{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.side-user .mono-sub{max-width:110px}
+
+.main{flex:1;min-width:0;padding:30px 34px 80px}
+.view{max-width:1080px;margin:0 auto}
+.page-head{border-bottom:1px solid var(--border);padding-bottom:18px;margin-bottom:22px}
+.page-head h1{margin:0;font-size:26px;letter-spacing:-.01em}
+
+/* TAG: Overview controls + card grid */
+.ov-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;
+  pointer-events:none;
+}
+.search-wrap input{margin-top:0;padding-left:38px}
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.pcard{
+  display:flex;flex-direction:column;
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+  transition:border-color .2s ease,transform .2s ease;
+}
+.pcard:hover{border-color:rgba(255,255,255,.22);transform:translateY(-2px)}
+.pcard-img{height:150px;background:#000 url("") center/cover no-repeat;position:relative}
+.pcard-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pcard-body{padding:14px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pcard-title{margin:0;font-size:15.5px;line-height:1.25}
+.pcard-desc{
+  margin:0;color:var(--muted);font-size:13px;line-height:1.5;flex:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.pcard-links{display:flex;gap:8px;flex-wrap:wrap}
+.pcard-links a{font-size:12px;padding:7px 11px;border-radius:9px}
+.pcard-actions{
+  display:flex;gap:8px;padding-top:11px;margin-top:auto;
+  border-top:1px solid var(--border);
+}
+.pcard-actions button{flex:1;font-size:12.5px;padding:8px 10px;border-radius:9px}
+.pcard-actions .danger{color:var(--danger);border-color:rgba(255,107,107,.35)}
+.pcard-actions .danger:hover{border-color:var(--danger);background:rgba(255,107,107,.08)}
+.stat-bar{
+  margin-top:20px;padding:12px 16px;border:1px solid var(--border);border-radius:12px;
+  background:var(--glass);
+}
+.stat-bar p{margin:0;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.stat-bar b{color:var(--text)}
+
+/* TAG: Projects view (ordered list) ---------------------------------------- */
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:16px;padding:20px 22px;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.proj-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.proj-row{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 12px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.05);
+  background:var(--glass);
+}
+.proj-row img{width:76px;height:48px;object-fit:cover;border-radius:8px;background:#000;flex-shrink:0}
+.proj-info{flex:1;min-width:0}
+.proj-info b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-info span{font-size:11.5px;color:var(--muted)}
+.proj-actions{display:flex;gap:6px}
+.icon-btn{
+  width:32px;height:32px;padding:0;border-radius:9px;
+  border:1px solid var(--border);background:transparent;color:var(--muted);
+  font-size:14px;line-height:1;
+}
+.icon-btn:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.icon-btn.danger:hover{color:var(--danger);border-color:rgba(255,107,107,.5)}
+.icon-btn:disabled{opacity:.25;cursor:not-allowed}
+.empty{color:var(--muted);text-align:center;padding:26px 0;margin:0}
+.foot-note{color:var(--muted);font-size:12.5px;line-height:1.6;margin:14px 0 0}
+
+/* TAG: Editor dialog ------------------------------------------------------- */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:50;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(5,5,6,.66);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.modal-card{
+  position:relative;width:min(640px,100%);max-height:92vh;overflow:auto;
+  border-radius:16px;border:1px solid var(--border);background:var(--panel);
+  box-shadow:0 24px 60px rgba(0,0,0,.5);
+  animation:modal-in .25s cubic-bezier(.2,.9,.2,1);
+}
+@keyframes modal-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){ .modal-card{animation:none} }
+.modal-card h2{margin:0 0 16px;font-size:18px}
+.modal-close{
+  position:absolute;top:12px;right:12px;width:34px;height:34px;padding:0;
+  border-radius:50%;border:1px solid var(--border);
+  background:rgba(11,11,11,.72);color:var(--text);font-size:19px;
+}
+.modal-close:hover{border-color:rgba(255,255,255,.4);transform:rotate(90deg)}
+.img-preview{display:block;width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin:-4px 0 14px;border:1px solid var(--border)}
+.form-error{color:var(--danger);font-size:13px;margin:2px 0 10px}
+
+/* TAG: Toasts --------------------------------------------------------------*/
+.toasts{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:99;display:flex;flex-direction:column;gap:8px;align-items:center}
+.toast{
+  padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;
+  border:1px solid var(--border);background:rgba(17,18,20,.95);box-shadow:0 10px 30px rgba(0,0,0,.45);
+  animation:toast-in .25s ease;
+}
+.toast.ok{border-color:rgba(142,231,178,.4)}
+.toast.err{border-color:rgba(255,107,107,.5)}
+@keyframes toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+
+/* TAG: Responsive - sidebar folds into a top bar ----------------------------*/
+@media (max-width:900px){
+  .shell{flex-direction:column}
+  .sidebar{
+    width:100%;height:auto;position:static;flex-direction:row;align-items:center;
+    gap:6px;padding:10px 14px;border-right:none;border-bottom:1px solid var(--border);
+    overflow-x:auto;
+  }
+  .side-head{padding:0 10px 0 0;border-bottom:none;white-space:nowrap}
+  .side-head .mono-sub{display:none}
+  .side-nav{flex-direction:row;padding:0;flex:initial}
+  .nav-item{padding:8px 11px;white-space:nowrap}
+  .nav-item.active{box-shadow:inset 0 -2px 0 #fff}
+  .side-foot{margin-left:auto;padding:0;border-top:none;flex-direction:row;align-items:center}
+  .side-user .mono-sub{display:none}
+  .main{padding:20px 16px 70px}
+}
