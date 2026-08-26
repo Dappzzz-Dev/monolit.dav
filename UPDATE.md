@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-08-26 — README: hapus tagline intro (user ganti nanti)
+
+Paragraf pembuka "Satu blok solid..." + asal-usul nama Monolit.dav dihapus dari README atas permintaan user. Judul `M O N O L I T . D A V` + badge tetap ada. User akan isi tulisannya sendiri nanti.
+
+**File:** `README.md`
+
+---
+
 ## 2026-08-26 — Bersih-bersih em-dash di seluruh teks situs
 
 Lanjutan kebijakan "jangan pakai — sebagai penyambung kata": seluruh copy user-facing dibersihkan di 4 bahasa sekaligus.

@@ -2,14 +2,6 @@
 
 # M O N O L I T . D A V
 
-**Satu blok solid. Hitam, putih, dan kode.**
-
-Ini rumah digitalnya **Daffa**
-alias **Dappzzz-Dev**. Bukan sekadar portfolio biasa.
-
-Namanya *Monolit* karena satu blok yang utuh.
-Ekstensi *.dav* adalah plesetan namanya.
-
 ![vanilla JS](https://img.shields.io/badge/vanilla-JS-111214?style=flat-square)
 ![Three.js](https://img.shields.io/badge/Three.js-globe-111214?style=flat-square)
 ![GSAP](https://img.shields.io/badge/GSAP-motion-111214?style=flat-square)
