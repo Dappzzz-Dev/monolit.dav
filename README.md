@@ -17,7 +17,6 @@
 ```txt
 > Halo, saya Daffa.
 > Front-end developer dari Sukoharjo, Indonesia.
-> Mulai ngoding 2023 cuma buat iseng. Eh, ternyata nagih.
 ```
 
 Situs ini prinsip saya dijadikan bentuk: **web bisa cepat, ringan,
