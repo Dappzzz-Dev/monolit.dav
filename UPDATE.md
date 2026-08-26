@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-08-26 — README: bersihkan em-dash (gaya tulis manusiawi)
+
+User: tanda "—" sebagai penyambung kata terasa kaku/terlihat AI. Ketujuh kemunculan di README diganti penghubung alami (kalimat pendek, kata sambung "jadi/tapi", titik). Cerita asal-usul nama Monolit.dav dipertahankan tanpa dash. Sisa em-dash: 0.
+
+**File:** `README.md`
+
+---
+
 ## 2026-08-26 — README: hapus struktur folder & jejak admin (keamanan)
 
 Permintaan user: pohon folder di README berisiko keamanan. Dihapus:
