@@ -34,7 +34,6 @@ Karena isinya bukan template pasaran:
 | **Carousel proyek** | Drag pakai physics, gambar dikompres otomatis dari dashboard rahasia |
 | **4 bahasa, deteksi sendiri** | Browser kamu bahasa Indonesia? Situsnya ikut. Jepang? Ikut juga |
 | **Live GitHub stats** | Grafik kontribusi & total commit diambil langsung, bukan screenshot |
-| **Dashboard internal** | Ada, tapi detailnya tidak dipublikasikan. Hanya sang pemilik yang tahu pintunya |
 | **Ghost maskot** | Yang joget di halaman About. Ia tidak pernah berhenti. Jangan ditanya kenapa |
 
 Semua di atas jalan dari file statis. Nol server, nol database, nol bundle.
