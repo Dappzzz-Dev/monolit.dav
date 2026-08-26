@@ -32,7 +32,8 @@
       'cta.button':'Kirim Email',
       'cta.subject':'Halo Daffa · Diskusi Proyek',
       'footer.rights':'Daffa. Semua hak dilindungi.',
-      'footer.top':'Kembali ke atas'
+      'footer.top':'Kembali ke atas',
+      'ghost.speech':'stop!! sini deh liat dulu apa yang ada di sampingku'
     },
     en: {
       'meta.title': 'Daffa · Portfolio',
@@ -58,7 +59,8 @@
       'cta.button':'Send Email',
       'cta.subject':'Hi Daffa · Project Inquiry',
       'footer.rights':'Daffa. All rights reserved.',
-      'footer.top':'Back to top'
+      'footer.top':'Back to top',
+      'ghost.speech':'stop!! look what\'s next to me first'
     },
     ja: {
       'meta.title': 'Daffa · ポートフォリオ',
@@ -84,7 +86,8 @@
       'cta.button':'メールを送る',
       'cta.subject':'はじめまして Daffa · プロジェクトのご相談',
       'footer.rights':'Daffa. All Rights Reserved.',
-      'footer.top':'トップへ戻る'
+      'footer.top':'トップへ戻る',
+      'ghost.speech':'ちょっと！まずこっちを見て！'
     },
     es: {
       'meta.title': 'Daffa · Portafolio',
@@ -110,7 +113,8 @@
       'cta.button':'Enviar email',
       'cta.subject':'Hola Daffa · Consulta de proyecto',
       'footer.rights':'Daffa. Todos los derechos reservados.',
-      'footer.top':'Volver arriba'
+      'footer.top':'Volver arriba',
+      'ghost.speech':'para!! mira lo que tengo a mi lado'
     }
   };
 

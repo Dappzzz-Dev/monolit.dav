@@ -375,7 +375,7 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 .about-ghost{display:flex;justify-content:center;align-items:center}
 
 /* ---- Ghost character - pasted VERBATIM from spec; animations untouched ---- */
-#ghost { position: relative; scale: 0.8; }
+#ghost { position: relative; scale: 0.8; overflow: visible; }
 #red { animation: upNDown infinite 0.5s; position: relative; width: 140px; height: 140px; display: grid; grid-template-columns: repeat(14, 1fr); grid-template-rows: repeat(14, 1fr); grid-column-gap: 0px; grid-row-gap: 0px; grid-template-areas: "a1 a2 a3 a4 a5 top0 top0 top0 top0 a10 a11 a12 a13 a14" "b1 b2 b3 top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14" "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14" "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14" "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14" "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4" "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5" "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18"; }
 @keyframes upNDown { 0%, 49% { transform: translateY(0px); } 50%, 100% { transform: translateY(-10px); } }
 #top0, #top1, #top2, #top3, #top4, #st0, #st1, #st2, #st3, #st4, #st5 { background-color: red; }
@@ -398,6 +398,46 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 @keyframes shadowMovement { 0%, 49% { opacity: 0.5; } 50%, 100% { opacity: 0.2; } }
 #shadow{ box-shadow:0 0 40px 18px rgba(0,0,0,.9) }   /* keep shadow visible on near-black bg */
 
+/* TAG: Ghost speech bubble - playful pop-in, tilt, wobble */
+.ghost-speech {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(255,255,255,.92);
+  color: #111;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .03em;
+  padding: 8px 12px 10px;
+  border-radius: 14px 14px 14px 4px;
+  white-space: nowrap;
+  max-width: 260px;
+  pointer-events: none;
+  z-index: 2;
+  animation: bubblePop .4s cubic-bezier(.34,1.56,.64,1) forwards,
+             bubbleWobble 2.8s ease-in-out 0.4s infinite;
+  opacity: 0;
+}
+.ghost-speech::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 24px;
+  border: 7px solid transparent;
+  border-top-color: rgba(255,255,255,.92);
+}
+@keyframes bubblePop {
+  0%   { opacity: 0; transform: translateX(-50%) rotate(-2deg) scale(.3); }
+  100% { opacity: 1; transform: translateX(-50%) rotate(-2deg) scale(1); }
+}
+@keyframes bubbleWobble {
+  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+  50%      { transform: translateX(-50%) rotate(1deg); }
+}
+
 /* NOTE: no prefers-reduced-motion freeze here - the mascot must always animate
    (owner's explicit requirement). Removing it fixed "ghost looks like a PNG". */
 
@@ -405,6 +445,9 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .about-grid{grid-template-columns:1fr}
   .about-ghost{padding-top:8px}
   #ghost{scale:.65}
+  .ghost-speech{
+    font-size:10px;padding:6px 10px 8px;white-space:normal;width:max-content;max-width:200px;
+  }
 }
 
 @media (max-width:900px){
