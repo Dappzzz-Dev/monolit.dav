@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-08-26 — GitHub: repo monolit.dav + README baru
+
+- Repo lokal di-init, `.gitignore` menyaring semua folder tool + `node_modules` + `package.json` (sisa langchain, tak dipakai situs) — hanya file inti yang ter-track.
+- Repo dibuat via `gh repo create` → push pertama (25 file) → di-rename dua kali sesuai pilihan user: `portfolio` → `monolit.dev` → **monolit.dav** ("dav" = plesetan Daffa). Remote origin otomatis mengikuti.
+- Folder lokal masih bernama `projctt2` (rename tertahan lock proses — panduan manual sudah diberikan; setelah rename, hubungan git tidak terpengaruh).
+- **README.md ditulis ulang total**: gaya terminal (blok `$ whoami`, tree folder), badge shields monokrom, tabel fitur, cara clone + Live Server, hint dashboard admin, kontak. Nada santai-humanis, tanpa emoji, identitas Monolit.dav.
+- README lama diganti karena usang (nama "Dafara", fitur toggle yang tak ada lagi, jejak co-author Copilot).
+
+**File:** `README.md`, `.gitignore`, remote repo
+
+---
+
 ## 2026-08-24 — Admin dashboard baru (gaya Pamer.co, fitur sesuai pesanan)
 
 **Permintaan:** halaman admin meniru struktur dashboard Pamer.co milik user — tapi hanya fitur: tambah gambar project, link Live Demo, link GitHub, deskripsi. Tanpa kategori/tahun/tech-stack.
