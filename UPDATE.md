@@ -5,6 +5,22 @@
 
 ---
 
+## 2026-08-26 — Fix GH heatmap selalu tahun 2026 (render chart custom per tahun)
+
+Masalah: `ghchart.rshah.org` tidak bisa render grafik per tahun, jadi apapun tahun yang dipilih, visual selalu sama (2026).
+
+Fix: ganti `<img>` ghchart dengan **heatmap CSS custom** yang dirender dari data jogruber v4 (`contributions` array harian, field `level` 0-4):
+- Grid 7 baris (hari) × kolom (minggu), warna hijau level 1-4 (pakai palette GitHub: #0e4429/#006d32/#26a641/#39d353).
+- Render ulang penuh tiap ganti tahun → setiap tahun menampilkan pola sel hijau-nya sendiri.
+- Total = sum count per tahun (bukan dari level).
+- Timezone-safe: format tanggal pakai getFullYear/getMonth/getDate lokal (bukan toISOString UTC yang bisa geser 1 hari).
+- Dua popoh cache (level map + count map) 30 menit.
+- Verifikasi via node dengan data asli: 2023=1 sel, 2024=4, 2025=15, 2026=20 sel hijau.
+
+**File:** `index.html`, `css/style.css`, `css/style.min.css`, `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — Fix globe 3D tidak muncul (CSP blokir three.js + geojson)
 
 Root cause: CSP `script-src` & `connect-src` yang ditambah saat security hardening tidak mencantumkan domain yang dipakai globe:
