@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-08-26 — Responsetrap bulan/hari & scroll heatmap
+
+Perbaiki letak & kelapangan chart kontribusi:
+- **Year chip pindah ke header card** (kanan, sejajar badge) → tidak lagi menimpa label Sen/Januari di dalam chart.
+- **Label bulan** diindent sejajar heatmap (ikut gutter hari 30px) dan pakai `grid-auto-columns` yang sama dengan heatmap → posisi JAN..DEC presisi di atas kolom minggu, tidak tertutup.
+- **Desain scrollbar** dirapikan: tipis (6px), track transparan, thumb hijau transparan — scroll tetap ada tapi tidak mengganggu kerapian.
+- **Sel heatmap diperkecil** 13px→12px biar chart lebih ringkas; tetap pakai scroll horizontal di dalam `.gh-timeline` (bukan scroll halaman).
+
+**File:** `index.html`, `css/style.css`, `css/style.min.css`, `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — GH heatmap lengkap: label bulan + label hari + year chip
 
 Kembalikan & lengkapi fitur waktu di chart kontribusi agar ala GitHub penuh:
