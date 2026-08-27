@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-08-27 — SEO audit + fix total statis
+
+Optimasi SEO & perbaikan bug:
+- **SEO head** (`index.html`): tambah meta description, author, theme-color, canonical, Open Graph (`og:type`, `og:title`, `og:description`, `og:url`, `og:locale`), Twitter card, dan **JSON-LD schema Person** (nama, jobTitle, alamat Sukoharjo, sameAs sosial, knowsAbout skill).
+- **Title** diperkaya jadi "Daffa Farash — Frontend Developer | monolit" di HTML + keempat bahasa i18n.
+- **`sitemap.xml`** baru + referensi `Sitemap:` di `robots.txt`.
+- **Fix bug total statis**: hapus fallback `STATIC=1787` di `js/app.js` — total cuma pernah menampilkan data asli (0 jika memang nol / gagal muat), tidak pernah angka karangan. Fallback HTML diganti "Total: —".
+
+**File:** `index.html`, `js/app.js`, `js/app.min.js`, `js/i18n.js`, `js/i18n.min.js`, `sitemap.xml`, `robots.txt`
+
+> **Catatan penting — SSR:** situs ini statis di GitHub Pages (tanpa server runtime), jadi SSR sungguhan tidak mungkin di sana. Lihat pembahasan berikutnya untuk opsi (SSG/ISR lewat Vercel/Netlify, atau tetap statis + prerender).
+
+---
+
 ## 2026-08-26 — Fix total statis + bulan terpotong
 
 - **Bug total**: jalur cache `loadData` return lebih awal & tidak mengisi `counts`, jadi `counts` selalu kosong → total jatuh ke `STATIC (1787)` & tidak sinkron data. Diperbaiki: cache kini menyimpan `mapped` + `counts` sekaligus; key naik ke v4 (muat ulang). Total sekarang akurat per tahun: 2026=66, 2025=34, 2024=12, 2023=1 (sesuai data GitHub asli).

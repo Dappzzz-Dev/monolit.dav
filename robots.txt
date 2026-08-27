@@ -4,3 +4,5 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /data/
 Disallow: /assets/projects/
+
+Sitemap: https://dappzzz-dev.github.io/monolit.dav/sitemap.xml

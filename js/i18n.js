@@ -9,7 +9,7 @@
 
   const DICT = {
     id: {
-      'meta.title': 'Daffa · Portfolio',
+      'meta.title': 'Daffa Farash — Frontend Developer | monolit',
       'nav.home':'Beranda','nav.about':'Tentang','nav.projects':'Proyek','nav.contact':'Kontak',
       'about.title':'Tentang Saya',
       'about.body':"Hello world! Saya <strong>Daffa Farash</strong> dari Sukoharjo. Mulai ngoding tahun 2023 cuma buat iseng. Eh, ternyata nagih. Sekarang fokus ke front-end, memperdalam React & JavaScript, sambil ngulik AI biar webnya makin seru.",
@@ -36,7 +36,7 @@
       'ghost.speech':'stop!! sini deh liat dulu apa yang ada di sampingku'
     },
     en: {
-      'meta.title': 'Daffa · Portfolio',
+      'meta.title': 'Daffa Farash — Frontend Developer | monolit',
       'nav.home':'Home','nav.about':'About','nav.projects':'Projects','nav.contact':'Contact',
       'about.title':'About Me',
       'about.body':"Hello world! I'm <strong>Daffa Farash</strong>, from Sukoharjo, Indonesia. Started coding in 2023 just for fun. Turns out it stuck. Now I'm deep into front-end work, leveling up my React & JavaScript, and seeing how AI can make the web more fun.",
@@ -63,7 +63,7 @@
       'ghost.speech':'stop!! look what\'s next to me first'
     },
     ja: {
-      'meta.title': 'Daffa · ポートフォリオ',
+      'meta.title': 'Daffa Farash — フロントエンド開発者 | monolit',
       'nav.home':'ホーム','nav.about':'自己紹介','nav.projects':'制作実績','nav.contact':'お問い合わせ',
       'about.title':'自己紹介',
       'about.body':'Hello world! スコハルジョ出身の <strong>Daffa Farash</strong> です。2023年、遊び半分で始めたコーディング…気づけばすっかりハマりました。今はフロントエンド中心に React と JavaScript を磨きながら、AI の活用法も模索中です。',
@@ -90,7 +90,7 @@
       'ghost.speech':'ちょっと！まずこっちを見て！'
     },
     es: {
-      'meta.title': 'Daffa · Portafolio',
+      'meta.title': 'Daffa Farash — Desarrollador Frontend | monolit',
       'nav.home':'Inicio','nav.about':'Sobre mí','nav.projects':'Proyectos','nav.contact':'Contacto',
       'about.title':'Sobre mí',
       'about.body':"¡Hello world! Soy <strong>Daffa Farash</strong>, de Sukoharjo (Indonesia). Empecé a programar en 2023 solo por diversión, y al final me enganchó del todo. Ahora voy a tope con el front-end, mejorando mi React y JavaScript, mientras descubro cómo la IA puede hacer la web más divertida.",

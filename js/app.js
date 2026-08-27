@@ -23,8 +23,7 @@
   // its own distinct green cells. Total = sum of counts for the year.
   (function(){
     const USER = 'Dappzzz-Dev';
-    const CURRENT_YEAR = new Date().getFullYear();
-    const MIN_YEAR = 2023;
+    const CURRENT_YEAR = new Date().getFullYear();    const MIN_YEAR = 2023;
     const API = 'https://github-contributions-api.jogruber.de/v4/' + USER;
     let selectedYear = CURRENT_YEAR;
 
@@ -35,7 +34,6 @@
 
     if(!badge || !heatmap || !prevBtn || !nextBtn) return;
 
-    const STATIC = 1787;
     let mapped = {};    // { 'YYYY-MM-DD': level }
     let counts = {};    // { 'YYYY-MM-DD': count }
     let loaded = false;
@@ -148,7 +146,7 @@
       for(const [date, count] of Object.entries(counts)){
         if(date >= first && date <= last) total += count;
       }
-      applyTotal(total > 0 ? total : (year === CURRENT_YEAR ? STATIC : 0));
+      applyTotal(total);
     }
 
     prevBtn.addEventListener('click', ()=>{ if(selectedYear > MIN_YEAR){ selectedYear--; updateButtons(); showYear(selectedYear); } });
