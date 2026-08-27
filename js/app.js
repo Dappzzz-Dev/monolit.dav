@@ -50,11 +50,12 @@
     }
 
     async function loadData(){
-      const CACHE_KEY = 'dafara.gh.raw.v3';
+      const CACHE_KEY = 'dafara.gh.raw.v4';
       const TTL = 30 * 60 * 1000;
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if(cached && Date.now() - cached.t < TTL && cached.user === USER){
         mapped = cached.mapped;
+        counts = cached.counts || {};
         return;
       }
       const res = await fetch(API);
@@ -62,15 +63,14 @@
       const data = await res.json();
       const contrib = data.contributions || [];
       mapped = {};
-      for(const c of contrib){
-        if(c.date) mapped[c.date] = (c.level !== undefined ? c.level : (c.count > 0 ? 1 : 0));
-      }
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ user: USER, mapped, t: Date.now() }));
       counts = {};
       for(const c of contrib){
-        if(c.date) counts[c.date] = c.count || 0;
+        if(c.date){
+          mapped[c.date] = (c.level !== undefined ? c.level : (c.count > 0 ? 1 : 0));
+          counts[c.date] = c.count || 0;
+        }
       }
-      localStorage.setItem('dafara.gh.counts.v3', JSON.stringify({ user: USER, counts, t: Date.now() }));
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ user: USER, mapped, counts, t: Date.now() }));
     }
 
     // Build week columns (Mon..Sun) covering the whole calendar year, Monday on/before Jan 1.
@@ -94,37 +94,32 @@
     }
 
     // Render month labels (JAN..DEC) above the week columns they start in.
-    function renderMonths(year, weeks, start, end){
+    // Positioned absolutely so labels can overflow their column without clipping.
+    function renderMonths(year, weeks){
       const monthsEl = document.getElementById('gh-months');
       if(!monthsEl) return;
       const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const step = 15; // cell width 12 + gap 3
       monthsEl.textContent = '';
-      const frag = document.createDocumentFragment();
-      // Build a full grid of week-column cells (blank + a label at the first week of each month)
+      monthsEl.style.width = (weeks.length * step) + 'px';
       weeks.forEach((col, wi) => {
-        const firstOfMonth = col.find(([y,m,d]) => {
+        const f = col.find(([y,m,d]) => {
           const dt = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
           return dt >= `${year}-01-01` && dt <= `${year}-12-31` && d === 1;
         });
-        if(firstOfMonth){
-          const s = document.createElement('span');
-          s.textContent = MONTHS[firstOfMonth[1]-1];
-          frag.appendChild(s);
-        } else {
-          // blank spacer for this week column
-          const s = document.createElement('span');
-          s.textContent = '';
-          frag.appendChild(s);
-        }
+        if(!f) return;
+        const s = document.createElement('span');
+        s.textContent = MONTHS[f[1]-1];
+        s.style.left = (wi * step) + 'px';
+        monthsEl.appendChild(s);
       });
-      monthsEl.appendChild(frag);
     }
 
     // Render GitHub-style grid: 7 rows (days Mon..Sun), columns = weeks.
     // Each cell colored by level of its date.
     function renderHeatmap(year){
       const { weeks, start, end } = buildWeeks(year);
-      renderMonths(year, weeks, start, end);
+      renderMonths(year, weeks);
       heatmap.textContent = '';
       const frag = document.createDocumentFragment();
       weeks.forEach(col => {
