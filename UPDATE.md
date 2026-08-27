@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-08-26 — Fix heatmap tidak render (bug gate `!mapped` + deklarasi ganda)
+
+Sel hijau tidak pernah muncul. Root cause:
+- `showYear` mengecek `if(!mapped)` untuk memicu `loadData()`, TAPI `mapped` diinisialisasi `{}` (truthy) → `!mapped` selalu false → data tidak pernah di-fetch → `mapped` tetap kosong → tidak ada sel hijau.
+- Terdapat deklarasi ganda `let counts` (duplikat) yang bisa error.
+- Dua fetch terpisah (mapped + counts) padahal satu fetch cukup.
+
+Fix: pakai flag `loaded` (boolean) untuk mengontrol load; hapus deklarasi counts ganda; gabung mapped+counts dalam satu fetch API; cache key naik ke v3 (browser yang sudah simpan cache v2 kosong tidak terpakai). Verifikasi syntax + minify.
+
+**File:** `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — Fix GH heatmap selalu tahun 2026 (render chart custom per tahun)
 
 Masalah: `ghchart.rshah.org` tidak bisa render grafik per tahun, jadi apapun tahun yang dipilih, visual selalu sama (2026).
