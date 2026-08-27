@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-08-26 — Fix total statis + bulan terpotong
+
+- **Bug total**: jalur cache `loadData` return lebih awal & tidak mengisi `counts`, jadi `counts` selalu kosong → total jatuh ke `STATIC (1787)` & tidak sinkron data. Diperbaiki: cache kini menyimpan `mapped` + `counts` sekaligus; key naik ke v4 (muat ulang). Total sekarang akurat per tahun: 2026=66, 2025=34, 2024=12, 2023=1 (sesuai data GitHub asli).
+- **Bug bulan terpotong**: label JAN..DEC tadinya diklip `overflow:hidden` di sel 12px → "JAN" jadi "ja". Diperbaiki: label bulan kini `position:absolute` di atas kolom minggu, tidak dipotong, tampil penuh.
+- Hari: tetap Sen/Rab/Jum (7 baris tersedia, teks label hanya 3 hari ala GitHub — diterima).
+
+**File:** `js/app.js`, `js/app.min.js`, `css/style.css`, `css/style.min.css`
+
+---
+
 ## 2026-08-26 — Responsetrap bulan/hari & scroll heatmap
 
 Perbaiki letak & kelapangan chart kontribusi:
