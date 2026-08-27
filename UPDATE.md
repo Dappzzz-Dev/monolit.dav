@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-08-26 — Fix GH navigator: layout + total live (bug CSP & counting)
+
+Perbaikan 3 bug pada fitur navigator tahun kontribusi:
+- **Layout:** `.gh-nav` diganti dari flex ke grid `auto 1fr auto` → tombol kiri/kanan SELALU di samping chart (bukan numpuk atas/bawah).
+- **Total 0 / stuck (root cause):** CSP `connect-src` hanya mengizinkan `jogruber.github.io`, sedangkan API yang dipakai `github-contributions-api.jogruber.de`. Semua `fetch` diblokir browser → selalu fallback ke 1787 (2026) / 0 (2023/2024). Tambahkan domain API ke CSP.
+- **Total per tahun tidak akurat:** ganti dari `data.total[year]` → hitung langsung menjumlahkan `count` setiap entry `contributions` di tahun tsb. Terverifikasi: 2023=1, 2024=12, 2025=34, 2026=60. Cache 30 menit per seluruh tahun (satu fetch).
+
+**File:** `index.html`, `css/style.css`, `css/style.min.css`, `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — GitHub contribution year navigator
 
 Fitur navigasi tahun untuk bagian kontribusi GitHub:
