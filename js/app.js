@@ -17,23 +17,27 @@
   });
 
   // TAG: GitHub contribution year navigator
-  // Browse contributions by year: chart image + total badge update.
-  // ghchart.rshah.org doesn't support year param, so we show current year chart
-  // always and display the total count for the selected year from jogruber API.
+  // Browse contributions by year. Total per year is computed by summing the
+  // `count` of each contribution entry in that year (accurate, matches the
+  // green cells), fetched once from jogruber v4 and cached 30 min per year.
+  // ghchart.rshah.org can't render a specific year, so the visual chart stays
+  // the current-year tile while the year chip + total follow the selection.
   (function(){
     const USER = 'Dappzzz-Dev';
     const CURRENT_YEAR = new Date().getFullYear();
     const MIN_YEAR = 2023;
+    const API = 'https://github-contributions-api.jogruber.de/v4/' + USER;
     let selectedYear = CURRENT_YEAR;
-    let cache = {};
 
     const badge = document.querySelector('[data-gh-total]');
     const yearChip = document.getElementById('gh-year');
-    const chartImg = document.getElementById('gh-chart');
     const prevBtn = document.getElementById('gh-prev');
     const nextBtn = document.getElementById('gh-next');
 
     if(!badge || !prevBtn || !nextBtn) return;
+
+    // Fallback static total (only visible before first successful fetch)
+    const STATIC = 1787;
 
     function applyTotal(n){
       badge.textContent = `Total: ${n.toLocaleString('en-US')}`;
@@ -44,57 +48,43 @@
       nextBtn.disabled = selectedYear >= CURRENT_YEAR;
     }
 
-    async function loadYear(year){
-      // Update year chip immediately
-      if(yearChip) yearChip.textContent = year;
-
-      // Update badge - check cache first
-      const cacheKey = `dafara.gh.total.v${year}`;
+    // Fetch full contributions once, cache, then aggregate per year on demand.
+    let fullTotal = null; // { year: sum }
+    async function loadAll(){
+      const CACHE_KEY = 'dafara.gh.allyears.v2';
       const TTL = 30 * 60 * 1000;
-
-      if(cache[year]){
-        applyTotal(cache[year]);
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if(cached && Date.now() - cached.t < TTL && cached.user === USER){
+        fullTotal = cached.total;
         return;
       }
-
-      const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-      if(cached && Date.now() - cached.t < TTL){
-        cache[year] = cached.total;
-        applyTotal(cached.total);
-        return;
+      const res = await fetch(API);
+      if(!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      const contrib = data.contributions || [];
+      const sum = {};
+      for(const c of contrib){
+        const y = String((c.date || '').slice(0,4));
+        const n = c.count || 0;
+        if(n > 0) sum[y] = (sum[y] || 0) + n;
       }
-
-      try{
-        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${USER}?y=${year}`);
-        if(!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        const total = data.total && data.total[year];
-        if(typeof total !== 'number') throw new Error('bad payload');
-        cache[year] = total;
-        localStorage.setItem(cacheKey, JSON.stringify({ total, t: Date.now() }));
-        applyTotal(total);
-      }catch(err){
-        // If API fails, show 0 for past years
-        applyTotal(year === CURRENT_YEAR ? 1787 : 0);
-      }
+      fullTotal = sum;
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ user: USER, total: sum, t: Date.now() }));
     }
 
-    prevBtn.addEventListener('click', ()=>{
-      if(selectedYear <= MIN_YEAR) return;
-      selectedYear--;
-      updateButtons();
-      loadYear(selectedYear);
-    });
+    async function showYear(year){
+      if(yearChip) yearChip.textContent = year;
+      if(!fullTotal){
+        try{ await loadAll(); }catch(e){ /* keep badge as-is */ }
+      }
+      const n = fullTotal && fullTotal[String(year)];
+      applyTotal(typeof n === 'number' ? n : (year === CURRENT_YEAR ? STATIC : 0));
+    }
 
-    nextBtn.addEventListener('click', ()=>{
-      if(selectedYear >= CURRENT_YEAR) return;
-      selectedYear++;
-      updateButtons();
-      loadYear(selectedYear);
-    });
+    prevBtn.addEventListener('click', ()=>{ if(selectedYear > MIN_YEAR){ selectedYear--; updateButtons(); showYear(selectedYear); } });
+    nextBtn.addEventListener('click', ()=>{ if(selectedYear < CURRENT_YEAR){ selectedYear++; updateButtons(); showYear(selectedYear); } });
 
-    // Initial load - try to get cached total for current year
     updateButtons();
-    loadYear(CURRENT_YEAR);
+    showYear(CURRENT_YEAR);
   })();
 })();
