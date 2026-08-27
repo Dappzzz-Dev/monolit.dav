@@ -372,6 +372,27 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   border:1px solid rgba(63,185,80,.35);border-radius:6px;
   padding:2px 8px;pointer-events:none;
 }
+/* TAG: Custom GitHub-style contribution heatmap (replaces ghchart img) */
+.gh-heatmap{
+  display:grid;
+  grid-auto-flow:column;
+  grid-template-rows:repeat(7, 1fr);
+  gap:3px;
+  padding:10px;
+  background:#0d1117;
+  border:1px solid rgba(255,255,255,.06);border-radius:10px;
+  overflow-x:auto;
+  width:100%;
+  min-height:110px;
+}
+.gh-cell{
+  width:10px;height:10px;border-radius:2px;
+  background:#161b22;
+}
+.gh-cell.l1{background:#0e4429}
+.gh-cell.l2{background:#006d32}
+.gh-cell.l3{background:#26a641}
+.gh-cell.l4{background:#39d353}
 /* TAG: Year navigation arrows - cool minimal glass buttons */
 .gh-nav{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;width:100%}
 .gh-nav .gh-chart-wrap{min-width:0}
