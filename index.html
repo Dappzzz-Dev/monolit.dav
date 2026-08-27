@@ -163,9 +163,13 @@
         <article class="dev-card">
           <div class="dev-head">
             <h3 class="dev-title" data-i18n="about.github_title">My GitHub Contributions</h3>
-            <!-- TAG: total is LIVE - js/app.js fills [data-gh-total] from a public
-                 contributions API; the static number below is only the no-JS/fallback -->
-            <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: 1,787</span>
+            <div class="gh-head-right">
+              <!-- TAG: current selected year chip (updates on nav) -->
+              <span class="gh-year" id="gh-year">2026</span>
+              <!-- TAG: total is LIVE - js/app.js fills [data-gh-total] from a public
+                   contributions API; the static number below is only the no-JS/fallback -->
+              <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: 1,787</span>
+            </div>
           </div>
           <!-- TAG: Year navigation + chart panel. Full GitHub-style: month labels
                on top, heatmap grid, year chip (JS-rendered per selected year),
@@ -175,7 +179,6 @@
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="gh-chart-wrap">
-              <span class="gh-year" id="gh-year" aria-hidden="true"></span>
               <div class="gh-timeline">
                 <div class="gh-months" id="gh-months" aria-hidden="true"></div>
                 <div class="gh-body">
