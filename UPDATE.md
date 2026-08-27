@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-08-27 — Perf globe: turunkan resolusi mask darat
+
+- Mask pembentuk titik benua di globe diturunkan dari 2048×1024 → **1024×512**. Mask ini cuma dipakai menempatkan titik-titik di atas daratan; pengurangan resolusi mempercepat pembentukan saat load tanpa beda visual berarti. Ditandai komentar `honey:`.
+
+**File:** `js/globe.js`, `js/globe.min.js`
+
+---
+
 ## 2026-08-27 — Security hardening + perf (dead code)
 
 - **Eksternalisasi context-menu**: script + CSS klik-kanan "Inspect Element" dipindah dari inline `<script>`/`<style>` di `<head>` ke file baru `js/context-menu.js` (+ `.min.js`).

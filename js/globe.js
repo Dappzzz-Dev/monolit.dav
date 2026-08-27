@@ -308,8 +308,10 @@ async function mountGlobe() {
     if (CONFIG.showGrid) globe.add(createGrid(radius));
     globe.add(createLandOutlines(features, radius));
 
-    const maskWidth = 2048;
-    const maskHeight = 1024;
+    const maskWidth = 1024;
+    const maskHeight = 512;
+    // honey: mask 1024x512 (was 2048x1024) — cukup untuk menempatkan titik-titik
+    // benua; mempercepat pembentukan mask saat load tanpa beda visual berarti.
     const landMask = createLandMask(features, maskWidth, maskHeight);
     globe.add(createLandDots(landMask, radius, maskWidth, maskHeight));
 
