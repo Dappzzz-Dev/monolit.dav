@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-08-26 — Fix globe 3D tidak muncul (CSP blokir three.js + geojson)
+
+Root cause: CSP `script-src` & `connect-src` yang ditambah saat security hardening tidak mencantumkan domain yang dipakai globe:
+- `js/globe.js` import Three.js dari `https://unpkg.com/three@0.154.0/...` → diblokir `script-src` → canvas kosong/tidak muncul.
+- globe.js juga fetch data landmark geojson dari `https://raw.githubusercontent.com/...` → diblokir `connect-src` → landmark gagal.
+
+Fix: tambahkan `https://unpkg.com` ke `script-src` dan `https://raw.githubusercontent.com` ke `connect-src` di meta CSP index.html. GSAP (cdnjs) & fonts sudah benar sejak awal.
+
+**File:** `index.html`
+
+---
+
 ## 2026-08-26 — Fix GH navigator: layout + total live (bug CSP & counting)
 
 Perbaikan 3 bug pada fitur navigator tahun kontribusi:
