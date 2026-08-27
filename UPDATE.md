@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-08-26 — GH heatmap lengkap: label bulan + label hari + year chip
+
+Kembalikan & lengkapi fitur waktu di chart kontribusi agar ala GitHub penuh:
+- **Year chip** (`#gh-year`) dipulihkan di pojok kiri atas panel — menampilkan tahun yang sedang dipilih, berubah saat navigasi.
+- **Label bulan** (`#gh-months`): JAN..DEC diletakkan di atas kolom minggu tempat tanggal 1 tiap bulan (terverifikasi posisi benar untuk 2023 & 2026).
+- **Label hari** (`#gh-days`): Sen/Rab/Jum di gutter kiri ala GitHub.
+- **Heatmap** 7 baris hari × 53 kolom minggu, warna hijau level 1-4.
+- Layout: `.gh-timeline` panel + `.gh-body` (flex: gutter hari + heatmap). Bulan diindent sejajar heatmap.
+- Semua tetap dikendalikan tombol kiri/kanan; total per tahun akurat.
+
+**File:** `index.html`, `css/style.css`, `css/style.min.css`, `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — Fix heatmap tidak render (bug gate `!mapped` + deklarasi ganda)
 
 Sel hijau tidak pernah muncul. Root cause:
