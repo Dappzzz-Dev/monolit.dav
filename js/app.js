@@ -73,31 +73,74 @@
       localStorage.setItem('dafara.gh.counts.v3', JSON.stringify({ user: USER, counts, t: Date.now() }));
     }
 
+    // Build week columns (Mon..Sun) covering the whole calendar year, Monday on/before Jan 1.
+    function buildWeeks(year){
+      const start = new Date(`${year}-01-01`);
+      const end = new Date(`${year}-12-31`);
+      const firstMonday = new Date(start);
+      while(firstMonday.getDay() !== 1){ firstMonday.setDate(firstMonday.getDate() - 1); }
+      const weeks = [];
+      const cursor = new Date(firstMonday);
+      while(cursor <= end){
+        const col = [];
+        for(let d=0; d<7; d++){
+          col.push([cursor.getFullYear(), cursor.getMonth()+1, cursor.getDate()]);
+          cursor.setDate(cursor.getDate() + 1);
+        }
+        weeks.push(col);
+        while(cursor.getDay() !== 1){ cursor.setDate(cursor.getDate() + 1); }
+      }
+      return { weeks, start, end };
+    }
+
+    // Render month labels (JAN..DEC) above the week columns they start in.
+    function renderMonths(year, weeks, start, end){
+      const monthsEl = document.getElementById('gh-months');
+      if(!monthsEl) return;
+      const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      monthsEl.textContent = '';
+      const frag = document.createDocumentFragment();
+      // Build a full grid of week-column cells (blank + a label at the first week of each month)
+      weeks.forEach((col, wi) => {
+        const firstOfMonth = col.find(([y,m,d]) => {
+          const dt = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+          return dt >= `${year}-01-01` && dt <= `${year}-12-31` && d === 1;
+        });
+        if(firstOfMonth){
+          const s = document.createElement('span');
+          s.textContent = MONTHS[firstOfMonth[1]-1];
+          frag.appendChild(s);
+        } else {
+          // blank spacer for this week column
+          const s = document.createElement('span');
+          s.textContent = '';
+          frag.appendChild(s);
+        }
+      });
+      monthsEl.appendChild(frag);
+    }
+
     // Render GitHub-style grid: 7 rows (days Mon..Sun), columns = weeks.
     // Each cell colored by level of its date.
     function renderHeatmap(year){
-      const start = new Date(`${year}-01-01`);
-      const end = new Date(`${year}-12-31`);
-      // Monday-based columns: Monday on/before Jan 1
-      const firstMonday = new Date(start);
-      while(firstMonday.getDay() !== 1){ firstMonday.setDate(firstMonday.getDate() - 1); }
-      const cursor = new Date(firstMonday);
+      const { weeks, start, end } = buildWeeks(year);
+      renderMonths(year, weeks, start, end);
       heatmap.textContent = '';
       const frag = document.createDocumentFragment();
-      while(cursor <= end){
-        for(let d=0; d<7; d++){
+      weeks.forEach(col => {
+        for(const [y,m,d] of col){
           const cell = document.createElement('span');
           cell.className = 'gh-cell';
-          const iso = `${cursor.getFullYear()}-${String(cursor.getMonth()+1).padStart(2,'0')}-${String(cursor.getDate()).padStart(2,'0')}`;
-          if(cursor >= start && cursor <= end && mapped[iso] > 0){
+          const iso = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+          if(iso >= `${year}-01-01` && iso <= `${year}-12-31` && mapped[iso] > 0){
             cell.classList.add('l' + Math.min(4, mapped[iso]));
           }
           frag.appendChild(cell);
-          cursor.setDate(cursor.getDate() + 1);
         }
-        while(cursor.getDay() !== 1){ cursor.setDate(cursor.getDate() + 1); }
-      }
+      });
       heatmap.appendChild(frag);
+      const chip = document.getElementById('gh-year');
+      if(chip) chip.textContent = year;
     }
 
     async function showYear(year){

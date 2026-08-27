@@ -167,14 +167,24 @@
                  contributions API; the static number below is only the no-JS/fallback -->
             <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: 1,787</span>
           </div>
-          <!-- TAG: Year navigation + chart. Left/right arrows browse past years;
-               heatmap + total updated via js/app.js ghHeatmap module -->
+          <!-- TAG: Year navigation + chart panel. Full GitHub-style: month labels
+               on top, heatmap grid, year chip (JS-rendered per selected year),
+               prev/next arrows. -->
           <div class="gh-nav">
             <button class="gh-nav-btn gh-prev" id="gh-prev" aria-label="Previous year" disabled>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="gh-chart-wrap">
-              <div class="gh-heatmap" id="gh-heatmap" aria-hidden="true"></div>
+              <span class="gh-year" id="gh-year" aria-hidden="true"></span>
+              <div class="gh-timeline">
+                <div class="gh-months" id="gh-months" aria-hidden="true"></div>
+                <div class="gh-body">
+                  <div class="gh-days" id="gh-days" aria-hidden="true">
+                    <span>Sen</span><span></span><span>Rab</span><span></span><span>Jum</span><span></span><span></span>
+                  </div>
+                  <div class="gh-heatmap" id="gh-heatmap" aria-hidden="true"></div>
+                </div>
+              </div>
             </div>
             <button class="gh-nav-btn gh-next" id="gh-next" aria-label="Next year" disabled>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
