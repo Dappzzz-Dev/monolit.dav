@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-08-26 — GitHub contribution year navigator
+
+Fitur navigasi tahun untuk bagian kontribusi GitHub:
+- **Tombol panah kiri/kanan** di samping chart kontribusi
+- **Klik kiri:** lihat tahun sebelumnya (minimal 2023, tahun mulai coding)
+- **Klik kanan:** lihat tahun sesudahnya (maksimal tahun ini, 2026)
+- **Disabled state:** tombol tidak bisa diklik kalau sudah di batas tahun
+- **Total badge update:** jumlah kontribusi berubah sesuai tahun yang dipilih
+- **Year chip update:** tahun di pojok chart berubah sesuai navigasi
+- **Cache:** total kontribusi per tahun di-cache 30 menit di localStorage
+- **Desain:** tombol glass minimalis, hover hijau (#3fb950), active scale
+
+**Catatan:** ghchart.rshah.org tidak support parameter tahun, jadi visual chart selalu menampilkan tahun ini. Total angka sudah akurat per tahun dari jogruber API.
+
+**File:** `index.html`, `css/style.css`, `js/app.js`, `js/app.min.js`
+
+---
+
 ## 2026-08-26 — Security hardening (minify, CSP, 404, robots.txt)
 
 Peningkatan keamanan ringan tanpa menyulitkan debugging:
