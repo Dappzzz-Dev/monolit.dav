@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Daffa Farash",
+  "jobTitle": "Frontend Developer",
+  "url": "https://dappzzz-dev.github.io/monolit.dav/",
+  "email": "mailto:daffafarash@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Sukoharjo", "addressRegion": "Jawa Tengah", "addressCountry": "ID" },
+  "sameAs": [
+    "https://github.com/Dappzzz-Dev",
+    "https://www.linkedin.com/in/dappdev-dafara",
+    "https://www.instagram.com/dafara__/",
+    "https://www.tiktok.com/@dafaraaaa"
+  ],
+  "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Node.js", "PHP", "MySQL"]
+}

@@ -412,18 +412,6 @@
         const endX = centerX + (5 + lineLength) * Math.cos(rad);
         const endY = centerY - (5 + lineLength) * Math.sin(rad);
 
-        gsap.set(line, {
-          onUpdate: function() {
-            const progress = this.progress();
-            const currX = startX + (endX - startX) * progress;
-            const currY = startY + (endY - startY) * progress;
-            line.setAttribute('x1', currX);
-            line.setAttribute('y1', currY);
-            line.setAttribute('x2', endX + (5 + lineLength) * Math.cos(rad) * progress);
-            line.setAttribute('y2', endY - (5 + lineLength) * Math.sin(rad) * progress);
-          }
-        });
-
         gsap.timeline()
           .to(line, {
             onUpdate: function() {

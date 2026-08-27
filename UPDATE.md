@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-08-27 — Security hardening + perf (dead code)
+
+- **Eksternalisasi context-menu**: script + CSS klik-kanan "Inspect Element" dipindah dari inline `<script>`/`<style>` di `<head>` ke file baru `js/context-menu.js` (+ `.min.js`).
+- **CSP diperketat**: `script-src` kini tanpa `'unsafe-inline'` (tidak ada lagi script inline yang bisa jalan). `style-src 'unsafe-inline'` dipertahankan karena GSAP/JS memakai inline style.
+- **JSON-LD eksternal**: blok structured-data Person dipindah dari inline ke `structured-data.jsonld` (di root, bukan `/data/` agar tidak terblokir `robots.txt`).
+- **Perf**: hapus dead code di `createSniperEffect` (duplikat `gsap.set(line,{onUpdate})` yang langsung ditimpa timeline `gsap.to` — percuma tiap klik di mode default sniper).
+
+**File:** `index.html`, `js/context-menu.js` (baru), `js/context-menu.min.js` (baru), `structured-data.jsonld` (baru), `js/click-effects.js`, `js/click-effects.min.js`
+
+---
+
 ## 2026-08-27 — SEO audit + fix total statis
 
 Optimasi SEO & perbaikan bug:
