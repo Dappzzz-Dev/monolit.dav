@@ -167,17 +167,25 @@
                  contributions API; the static number below is only the no-JS/fallback -->
             <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: 1,787</span>
           </div>
-          <!-- TAG: /40c463/ = GitHub green - filled squares stand out from empty ones;
-               the year chip is positioned over the chart's axis corner (left of month
-               labels, above day labels) and kept REALTIME by js/app.js -->
-          <div class="gh-chart-wrap">
-            <span class="gh-year" id="gh-year" aria-hidden="true">2026</span>
-            <img
-              class="gh-chart"
-              src="https://ghchart.rshah.org/40c463/Dappzzz-Dev"
-              alt="Contribution graph of Daffa Farash on GitHub"
-              loading="lazy"
-              width="731" height="116">
+          <!-- TAG: Year navigation + chart. Left/right arrows browse past years;
+               chart + total update via js/app.js ghYearNav module -->
+          <div class="gh-nav">
+            <button class="gh-nav-btn gh-prev" id="gh-prev" aria-label="Previous year" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="gh-chart-wrap">
+              <span class="gh-year" id="gh-year" aria-hidden="true">2026</span>
+              <img
+                class="gh-chart"
+                id="gh-chart"
+                src="https://ghchart.rshah.org/40c463/Dappzzz-Dev"
+                alt="Contribution graph of Daffa Farash on GitHub"
+                loading="lazy"
+                width="731" height="116">
+            </div>
+            <button class="gh-nav-btn gh-next" id="gh-next" aria-label="Next year" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         </article>
 

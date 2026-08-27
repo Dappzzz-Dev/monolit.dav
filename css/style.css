@@ -372,6 +372,23 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   border:1px solid rgba(63,185,80,.35);border-radius:6px;
   padding:2px 8px;pointer-events:none;
 }
+/* TAG: Year navigation arrows - cool minimal glass buttons */
+.gh-nav{display:flex;align-items:center;gap:8px}
+.gh-nav .gh-chart-wrap{flex:1;min-width:0}
+.gh-nav-btn{
+  flex-shrink:0;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);
+  cursor:pointer;transition:all .2s ease;
+}
+.gh-nav-btn:hover:not(:disabled){
+  border-color:rgba(63,185,80,.5);color:#3fb950;
+  background:rgba(63,185,80,.08);
+  box-shadow:0 0 12px rgba(63,185,80,.15);
+}
+.gh-nav-btn:active:not(:disabled){transform:scale(.92)}
+.gh-nav-btn:disabled{opacity:.2;cursor:not-allowed}
 .about-ghost{display:flex;justify-content:center;align-items:center}
 
 /* ---- Ghost character - pasted VERBATIM from spec; animations untouched ---- */
