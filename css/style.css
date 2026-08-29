@@ -581,12 +581,32 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 }
 .footer-bottom p{margin:0;font-size:12.5px;color:var(--muted)}
 .footer-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.footer-clock{font-family:'Space Mono',ui-monospace,monospace;font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
-.footer-clock__time{font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.05em}
+/* TAG: WIB clock - elegant minimal block on the right of the footer bottom.
+   Column: label / HH:MM + live SS / date. Monochrome, tabular numerals,
+   colon blinks via .is-odd (CSS transition, no JS every-second DOM write). */
+.wib-clock{
+  display:flex;flex-direction:column;align-items:flex-end;gap:1px;
+  font-family:'Space Mono',ui-monospace,monospace;
+  padding-left:16px;border-left:1px solid rgba(255,255,255,.08);
+  user-select:none;
+}
+.wib-clock__label{
+  font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);opacity:.8;
+}
+.wib-clock__time{display:inline-flex;align-items:baseline;gap:1px;line-height:1;color:var(--text)}
+.wib-clock__time > span:nth-child(1),
+.wib-clock__time > span:nth-child(3){font-size:20px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.wib-clock__secp{font-size:16px;font-weight:400;color:var(--muted);transition:opacity .3s ease}
+.wib-clock__secp.is-odd{opacity:.25}
+.wib-clock__ss{font-size:11px;font-weight:400;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:2px}
+.wib-clock__date{font-size:10px;letter-spacing:.06em;color:var(--muted);text-transform:capitalize}
 .footer-bottom .footer-top{padding-left:0;padding-right:0;border:none;background:none}
 .footer-bottom .footer-top:hover{transform:translateY(-1px);background:none;border:none}
 @media (max-width:640px){
   .footer-inner,.footer-bottom{flex-direction:column;align-items:flex-start}
+  .wib-clock{align-items:flex-start;padding-left:14px;border-left:none;align-self:stretch}
+  .wib-clock__label{font-size:8px}
+  .wib-clock__time>span:nth-child(1),.wib-clock__time>span:nth-child(3){font-size:17px}
 }
 
 /* --------------------------------------------- */

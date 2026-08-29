@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-08-27 — Redesign jam WIB footer (elegant, tidak monoton)
+
+- Jam footer didesain ulang dari teks kecil jadi **blok jam minimal yang elegan**, di kanan footer-bottom (dipisah garis halus): label `WIB` kecil, **`HH:MM` besar (20px)** + **detik `SS` kecil**, plus **tanggal** (hari, tanggal, bulan WIB) di bawahnya.
+- Titik dua di antara jam & menit **berkedip halus** tiap detik via CSS `.is-odd` (transition opacity, tanpa render-DOM tiap detik — JS cuma re-render saat nilai berubah).
+- Angka pakai `tabular-nums` agar tidak lompat layout; monochrome sesuai tema.
+- Responsif: di layar sempit jam rata kiri, border dibuang.
+- **File:** `index.html`, `js/app.js`, `css/style.css`, (`style.min.css` di-clean-css ulang).
+
+---
+
 ## 2026-08-27 — Hapus fitur PWA (permanen GUI)
 
 - Fitur PWA di-rollback seluruhnya: **dihapus** `sw.js`, `manifest.webmanifest`, `pwa-192x192.png`, `pwa-512x512.png`.

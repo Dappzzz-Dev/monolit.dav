@@ -289,10 +289,18 @@
     <div class="footer-bottom">
       <div class="footer-left">
         <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Daffa. Semua hak dilindungi.</span></p>
-        <!-- TAG: Realtime WIB clock (Asia/Jakarta fixed) - filled by app.js -->
-        <p class="footer-clock" id="wib-clock" aria-live="off" title="Jam lokal (WIB)">WIB <span class="footer-clock__time" id="wib-time">--:--:--</span></p>
+        <a class="footer-top" href="#home" data-goto="home"><span data-i18n="footer.top">Kembali ke atas</span> <span aria-hidden="true">&uarr;</span></a>
       </div>
-      <a class="footer-top" href="#home" data-goto="home"><span data-i18n="footer.top">Kembali ke atas</span> <span aria-hidden="true">&uarr;</span></a>
+      <!-- TAG: WIB clock - elegant minimal: big HH:MM with live seconds + date.
+           Filled by app.js (Asia/Jakarta); "::" blinking ticks via CSS. -->
+      <div class="wib-clock" id="wib-clock" role="timer" aria-live="off" title="Jam lokal (WIB)">
+        <span class="wib-clock__label">WIB</span>
+        <span class="wib-clock__time">
+          <span id="wib-hh">--</span><span class="wib-clock__secp" id="wib-sep">:</span><span id="wib-mm">--</span>
+          <span class="wib-clock__ss" id="wib-ss">--</span>
+        </span>
+        <span class="wib-clock__date" id="wib-date">—</span>
+      </div>
     </div>
   </footer>
 

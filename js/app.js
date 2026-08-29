@@ -168,19 +168,34 @@
     showYear(CURRENT_YEAR);
   })();
 
-  // TAG: Realtime WIB clock (Asia/Jakarta). Full width so each language shows
-  // its own date format via locale. Uses tabular numerals to prevent layout shift.
+  // TAG: WIB clock (Asia/Jakarta). Renders HH:MM (large) + SS (small) + date.
+  // The ":" separator blinks via CSS (.is-odd) - only re-render when a value changes
+  // so we don't write to the DOM every second for nothing.
   (function(){
-    const timeEl = document.getElementById('wib-time');
-    if(!timeEl) return;
-    let last = '';
+    const hh=document.getElementById('wib-hh');
+    const mm=document.getElementById('wib-mm');
+    const ss=document.getElementById('wib-ss');
+    const sep=document.getElementById('wib-sep');
+    const date=document.getElementById('wib-date');
+    if(!hh||!mm||!ss||!sep) return;
+    let last='';
+    function pad(n){ return String(n).padStart(2,'0'); }
     function tick(){
-      const now = new Intl.DateTimeFormat('id-ID', {
-        timeZone:'Asia/Jakarta', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
-      }).format(new Date());
-      if(now !== last){ last = now; timeEl.textContent = now; }
+      const p=new Intl.DateTimeFormat('en-US',{ timeZone:'Asia/Jakarta', hour12:false,
+        hour:'2-digit',minute:'2-digit',second:'2-digit' }).formatToParts(new Date());
+      const o={}; p.forEach(x=>o[x.type]=x.value);
+      const sec = parseInt(o.second,10);
+      sep.classList.toggle('is-odd', sec%2===1);
+      const key = o.hour+':'+o.minute+':'+sec;
+      if(key===last) return;
+      last=key;
+      hh.textContent=o.hour; mm.textContent=o.minute; ss.textContent=pad(sec);
+      if(date){
+        const d=new Intl.DateTimeFormat('id-ID',{ timeZone:'Asia/Jakarta',
+          weekday:'short', day:'2-digit', month:'short' }).format(new Date());
+        date.textContent=d;
+      }
     }
-    tick();
-    setInterval(tick, 1000);
+    tick(); setInterval(tick,1000);
   })();
 })();
