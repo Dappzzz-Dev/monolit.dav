@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-08-27 — Hapus fitur PWA (permanen GUI)
+
+- Fitur PWA di-rollback seluruhnya: **dihapus** `sw.js`, `manifest.webmanifest`, `pwa-192x192.png`, `pwa-512x512.png`.
+- `index.html`: hapus `<link rel="manifest">` + `apple-touch-icon` (icon tetap `favicon.svg`).
+- `js/app.js`: hapus kode register service worker.
+- Alasan: belum penting & menambah kompleksitas cache utk saat ini. Situs kembali jadi halaman web statis murni (tanpa SW).
+- **File:** `index.html`, `js/app.js`, `UPDATE.md` (+ hapus 4 file PWA).
+
+---
+
 ## 2026-08-27 — 5 fitur baru: jam WIB, status GitHub, PWA, analitik privasi, perf
 
 **1. Jam WIB realtime (footer)**

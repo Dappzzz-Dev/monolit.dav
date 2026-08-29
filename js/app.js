@@ -183,12 +183,4 @@
     tick();
     setInterval(tick, 1000);
   })();
-
-  // TAG: PWA - register service worker for offline cache + installability.
-  // Only when served over a secure origin (https or localhost) as required.
-  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-    window.addEventListener('load', ()=>{
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    });
-  }
 })();
