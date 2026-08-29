@@ -43,7 +43,7 @@
       'about.github_title':'My GitHub Contributions',
       'gh.badge_title': 'GitHub contributions this year (live)',
       'hero.role':'Front-end Developer · Sukoharjo, Indonesia',
-      'hero.bio':"I build clean, fast websites & web apps. In my free time, I'm probably tinkering with AI.",
+      'hero.bio':"I build websites & web apps that are tidy, fast, and pleasant to use. Between projects I'm usually poking at AI and seeing what sticks.",
       'hero.cta_projects':'View Projects','hero.cta_contact':'Get in Touch',
       'projects.title':'Projects',
       'projects.lead':'Drag to explore, then click an image for project details.',
