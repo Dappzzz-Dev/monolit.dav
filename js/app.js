@@ -38,6 +38,17 @@
     let counts = {};    // { 'YYYY-MM-DD': count }
     let loaded = false;
 
+    const statusEl = document.getElementById('gh-status');
+
+    // TAG: GitHub online status (green live / gray offline). Live = the API we
+    // already fetch (jogruber v4, proxied from GitHub) responds; if it fails we
+    // show offline but keep the page usable. Dot is language-neutral.
+    function setStatus(live){
+      if(!statusEl) return;
+      statusEl.classList.toggle('is-live', !!live);
+      statusEl.setAttribute('title', live ? 'GitHub: online' : 'GitHub: offline');
+    }
+
     function applyTotal(n){
       badge.textContent = `Total: ${n.toLocaleString('en-US')}`;
     }
@@ -138,7 +149,8 @@
 
     async function showYear(year){
       if(!loaded){
-        try{ await loadData(); loaded = true; }catch(e){ /* keep heatmap empty on failure */ }
+        try{ await loadData(); loaded = true; setStatus(true); }
+        catch(e){ /* keep heatmap empty on failure */ setStatus(false); }
       }
       renderHeatmap(year);
       const first = `${year}-01-01`, last = `${year}-12-31`;
@@ -155,4 +167,28 @@
     updateButtons();
     showYear(CURRENT_YEAR);
   })();
+
+  // TAG: Realtime WIB clock (Asia/Jakarta). Full width so each language shows
+  // its own date format via locale. Uses tabular numerals to prevent layout shift.
+  (function(){
+    const timeEl = document.getElementById('wib-time');
+    if(!timeEl) return;
+    let last = '';
+    function tick(){
+      const now = new Intl.DateTimeFormat('id-ID', {
+        timeZone:'Asia/Jakarta', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
+      }).format(new Date());
+      if(now !== last){ last = now; timeEl.textContent = now; }
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // TAG: PWA - register service worker for offline cache + installability.
+  // Only when served over a secure origin (https or localhost) as required.
+  if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    });
+  }
 })();

@@ -373,6 +373,14 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   border:1px solid rgba(63,185,80,.35);border-radius:6px;
   padding:3px 9px;white-space:nowrap;
 }
+/* TAG: GitHub online status - dot (green live / gray unreachable) + label */
+.gh-status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.04em;
+  color:var(--muted);white-space:nowrap;
+}
+.gh-status__dot{width:8px;height:8px;border-radius:50%;background:#30363d;transition:background .3s ease}
+.gh-status.is-live .gh-status__dot{background:#3fb950;box-shadow:0 0 6px rgba(63,185,80,.6)}
 /* TAG: Custom GitHub-style contribution timeline (months + days + heatmap per year) */
 .gh-timeline{
   background:#0d1117;
@@ -572,6 +580,9 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
 }
 .footer-bottom p{margin:0;font-size:12.5px;color:var(--muted)}
+.footer-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.footer-clock{font-family:'Space Mono',ui-monospace,monospace;font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.footer-clock__time{font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.05em}
 .footer-bottom .footer-top{padding-left:0;padding-right:0;border:none;background:none}
 .footer-bottom .footer-top:hover{transform:translateY(-1px);background:none;border:none}
 @media (max-width:640px){

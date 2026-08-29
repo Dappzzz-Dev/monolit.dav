@@ -5,6 +5,36 @@
 
 ---
 
+## 2026-08-27 — 5 fitur baru: jam WIB, status GitHub, PWA, analitik privasi, perf
+
+**1. Jam WIB realtime (footer)**
+- Footer kini menampilkan jam lokal **Asia/Jakarta (WIB)** yang update tiap detik (`HH:MM:SS`, angka tabular agar tak lompat layout). Diawali `--:--:--` (fallback jika JS mati).
+- **File:** `index.html`, `js/app.js`, `css/style.css`.
+
+**2. Status GitHub online (kartu kontribusi)**
+- Indikator dot di header kartu kontribusi: **hijau ber-glow** = API GitHub tercapai (online), abu-abu = gagal (offline). Dot bahasa-netral (i18n-safe), tooltip `GitHub: online/offline`, `aria-label` dari kunci i18n baru `gh.status` (4 bahasa).
+- **File:** `index.html`, `js/app.js`, `js/i18n.js`, `css/style.css`.
+
+**3. Service Worker / PWA**
+- `sw.js` baru: cache-first utk asset statis `.min`, network-first utk dokumen (update langsung), stale-while-revalidate utk gambar, versi `v1` + cleanup cache lama, `skipWaiting`/`clients.claim`.
+- `manifest.webmanifest` baru (standalone, theme `#0a0a0a`, ikon 192/512), ikon PNG 192 & 512 dibuat pure-Node (rounded dark + "M" putih).
+- Head index.html kini ada `<link rel="manifest">` + `apple-touch-icon`. Register SW di `app.js` (hanya di origin secure).
+- **Catatan:** SW aktif hanya via `https`/`localhost` (by design). Setelah deploy, browser butuh 1x kunjungan utk "install" SW; cache lama dibersihkan otomatis saat versi baru.
+- **File:** `sw.js` (baru), `manifest.webmanifest` (baru), `pwa-192x192.png`/`pwa-512x512.png` (baru), `index.html`, `js/app.js`.
+
+**4. Analitik privasi (GoatCounter)**
+- Snippet `gc.zgo.at/count.js` dipasang (cookieless, tanpa banner consent). Endpoint default `data-goatcounter="https://zgo.at/count"` langsung jalan tanpa akun.
+- **Untuk melihat statistik sendiri:** daftar di goatcounter.com lalu ganti `data-goatcounter` → `https://<kode-anda>.goatcounter.com/count`.
+- CSP diperluas: `script-src` + `connect-src` kini mengizinkan `https://gc.zgo.at`.
+- **File:** `index.html`.
+
+**5. Perf / Lighthouse budget**
+- `preconnect` ditambah untuk `https://unpkg.com` (Three.js globe) & `https://fonts.googleapis.com`.
+- `css/style.min.css` di-render ulang via `clean-css` setelah penambahan CSS jam & status (brace balance OK, 12 media query utuh).
+- **File:** `index.html`, `css/style.min.css`.
+
+---
+
 ## 2026-08-27 — Perf globe: turunkan resolusi mask darat
 
 - Mask pembentuk titik benua di globe diturunkan dari 2048×1024 → **1024×512**. Mask ini cuma dipakai menempatkan titik-titik di atas daratan; pengurangan resolusi mempercepat pembentukan saat load tanpa beda visual berarti. Ditandai komentar `honey:`.

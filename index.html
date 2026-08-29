@@ -5,7 +5,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://ghchart.rshah.org https://*.githubusercontent.com data:; connect-src 'self' https://github-contributions-api.jogruber.de https://api.github.com https://raw.githubusercontent.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://ghchart.rshah.org https://*.githubusercontent.com data:; connect-src 'self' https://github-contributions-api.jogruber.de https://api.github.com https://raw.githubusercontent.com https://gc.zgo.at">
   <!-- TAG: Metadata - basic meta, title, and font -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,6 +16,9 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://dappzzz-dev.github.io/monolit.dav/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- TAG: PWA - web app manifest + touch icon (installable, offline via sw.js) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="pwa-192x192.png">
   <!-- TAG: Open Graph / social share -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Daffa · monolit">
@@ -30,10 +33,18 @@
   <!-- TAG: JSON-LD structured data (Person) for search engines - external file so CSP can drop 'unsafe-inline' -->
   <script type="application/ld+json" src="structured-data.jsonld"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.min.css">
   <!-- TAG: Custom right-click menu (externalized so CSP can drop 'unsafe-inline') -->
   <script src="js/context-menu.min.js" defer></script>
+  <!-- TAG: GoatCounter analytics - cookieless, privacy-friendly (no banner needed).
+       Endpoint zgo.at/count works immediately without an account; to see YOUR own
+       stats, sign up on goatcounter.com and change the data-goatcounter value to
+       https://<your-code>.goatcounter.com/count -->
+  <script data-goatcounter="https://zgo.at/count"
+          async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
   <!-- TAG: Topbar - brand + nav + theme toggle -->
@@ -136,6 +147,11 @@
             <div class="gh-head-right">
               <!-- TAG: current selected year chip (updates on nav) -->
               <span class="gh-year" id="gh-year">2026</span>
+              <!-- TAG: GitHub online status - green live / gray offline; dot is
+                   language-neutral (i18n-safe), tooltip explains in the active lang -->
+              <span class="gh-status" id="gh-status" role="status" aria-live="polite" data-i18n-aria="gh.status" aria-label="Status GitHub">
+                <span class="gh-status__dot" id="gh-status-dot" aria-hidden="true"></span>
+              </span>
               <!-- TAG: total is LIVE - js/app.js fills [data-gh-total] from a public
                    contributions API; the static number below is only the no-JS/fallback -->
               <span class="badge" data-gh-total data-i18n-title="gh.badge_title" title="Kontribusi tahun ini (live)">Total: —</span>
@@ -274,7 +290,11 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Daffa. Semua hak dilindungi.</span></p>
+      <div class="footer-left">
+        <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Daffa. Semua hak dilindungi.</span></p>
+        <!-- TAG: Realtime WIB clock (Asia/Jakarta fixed) - filled by app.js -->
+        <p class="footer-clock" id="wib-clock" aria-live="off" title="Jam lokal (WIB)">WIB <span class="footer-clock__time" id="wib-time">--:--:--</span></p>
+      </div>
       <a class="footer-top" href="#home" data-goto="home"><span data-i18n="footer.top">Kembali ke atas</span> <span aria-hidden="true">&uarr;</span></a>
     </div>
   </footer>
