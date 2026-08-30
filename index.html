@@ -5,7 +5,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://ghchart.rshah.org https://*.githubusercontent.com data:; connect-src 'self' https://github-contributions-api.jogruber.de https://api.github.com https://raw.githubusercontent.com https://gc.zgo.at">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://ghchart.rshah.org https://*.githubusercontent.com data:; connect-src 'self' https://github-contributions-api.jogruber.de https://api.github.com https://raw.githubusercontent.com https://gc.zgo.at; frame-ancestors 'none'; base-uri 'none'">
   <!-- TAG: Metadata - basic meta, title, and font -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -88,7 +88,7 @@
   <main class="container" id="home">
     <section class="hero">
       <div class="hero-inner">
-        <h1 class="name">Daffa</h1>
+        <h1 class="name" fetchpriority="high">Daffa</h1>
         <p class="role" data-i18n="hero.role">Frontend Developer · Sukoharjo, Indonesia</p>
         <p class="bio" data-i18n="hero.bio">Bikin website &amp; web app yang rapi, cepat, dan enak dipakai. Di sela waktunya biasanya lagi ngulik AI.</p>
 
@@ -224,7 +224,7 @@
   <div class="modal-backdrop" id="project-modal" hidden>
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
       <button class="modal-close" id="pm-close" data-i18n-aria="modal.close" aria-label="Tutup">&times;</button>
-      <img class="modal-img" id="pm-img" alt="">
+      <img class="modal-img" id="pm-img" alt="" loading="lazy" fetchpriority="low">
       <div class="modal-body">
         <h3 id="pm-title"></h3>
         <p class="modal-desc" id="pm-desc"></p>

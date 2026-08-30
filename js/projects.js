@@ -19,10 +19,12 @@
   let carousel = null;
   let lastFocus = null;
 
-  function openModal(project){
+function openModal(project){
     if(!project) return;
     el.img.src = project.image || '';
     el.img.alt = project.title || 'Project image';
+    el.img.loading = 'lazy';
+    el.img.fetchpriority = 'low';
     el.title.textContent = project.title || '';
     el.desc.textContent = project.description || '';
     // Buttons only render when the admin filled the link in.
@@ -36,7 +38,7 @@
     document.body.style.overflow = 'hidden';
     if(carousel) carousel.setPaused(true);
     el.close.focus();
-  }
+}
 
   function closeModal(){
     modal.hidden = true;
