@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-08-27 — Tampilan mobile: anti-lag + rapi (satu tema)
+
+Situs kini responsive penuh di semua device; khusus mobile dirapikan & dihemat bobotnya.
+
+**Anti-lag (sumber berat dimatikan di layar sempit):**
+- **Globe 3D tidak di-mount di mobile** (`max-width:900px`). WebGL render loop + ribuan titik partikel adalah beban terberat di HP. `js/globe.js` kini cek `matchMedia('(max-width:900px)')` sebelum `mountGlobe()`; di layar sempit mount dilewati (desktop tetap globe). Stage yang kosong disembunyikan via CSS.
+- **Ghost mascot disembunyikan** di mobile (banyak div beranimasi CSS = lag saat scroll).
+- **DPR carousel dibatasi 1.25 di mobile** (daripada 2) — setengah piksel GPU di HP; desktop tetap 2x.
+
+**Penataan mobile (hero jadi teks penuh, terpusat, jelas):**
+- `.stage` (globe) hilang → hero tampil sebagai blok teks terpusat.
+- Typography di-tune: nama pakai `clamp()`, role/bio dirapikan, max-lebar bio 44ch, CTA & social terpusat & wrap.
+- Layar ≤640px: padding container/section dirapikan, judul & lead tidak terlalu besar.
+
+**File:** `index.html` (tidak berubah), `js/globe.js`, `js/carousel.js`, `css/style.css` (+ `.min`).
+
+---
+
 ## 2026-08-27 — Redesign jam WIB footer (elegant, tidak monoton)
 
 - Jam footer didesain ulang dari teks kecil jadi **blok jam minimal yang elegan**, di kanan footer-bottom (dipisah garis halus): label `WIB` kecil, **`HH:MM` besar (20px)** + **detik `SS` kecil**, plus **tanggal** (hari, tanggal, bulan WIB) di bawahnya.

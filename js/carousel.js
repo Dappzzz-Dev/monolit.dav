@@ -357,7 +357,10 @@ void main() {
     _damping(){ return (Math.max(1, Math.min(100, this.o.damping)) / 100) * DAMP_AT_100; }
 
     _resize(){
-      this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // honey: cap DPR lower on narrow screens - halves GPU pixels on phones
+      // (biggest mobile lag saver) while desktop keeps full 2x.
+      const maxDpr = matchMedia('(max-width:900px)').matches ? 1.25 : 2;
+      this.dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
       this.vw = Math.max(1, this.host.clientWidth);
       this.vh = Math.max(1, this.host.clientHeight);
       // Responsive picture box: fills the stage up to maxWidth, keeps ratio.

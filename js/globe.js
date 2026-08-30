@@ -483,4 +483,9 @@ async function mountGlobe() {
 }
 
 // TAG: Start after the module has loaded.
-mountGlobe();
+// honey: only boot the 3D globe on larger screens. The WebGL render loop + the
+// land-dot particles are the heaviest cost on phones; on narrow (<900px) we
+// skip the mount entirely so mobile stays smooth (hero falls back to CSS).
+if(!matchMedia('(max-width:900px)').matches){
+  mountGlobe();
+}

@@ -885,3 +885,35 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .container{grid-template-columns:1fr; padding:0 20px}
   .stage{height:420px}
 }
+
+/* ============================================================
+   TAG: MOBILE-FIRST REFINEMENT — rapi, anti-lag, satu tema monokrom.
+   Hides the heavy WebGL globe + animated ghost on small screens (the two
+   biggest mobile lag sources) and tightens spacing so content reads clearly.
+   ============================================================ */
+@media (max-width:900px){
+
+  /* Globe (3D render loop) is the heaviest mobile cost. js/globe.js already
+     skips mounting it on narrow screens; we hide its (now empty) stage too. */
+  .stage{display:none}
+
+  /* Animated pixel ghost (many CSS-animated divs) — hidden for smooth scroll. */
+  .about-ghost{display:none}
+
+  /* Hero reads as centered, purposeful text block. */
+  .hero-inner{text-align:center}
+  .hero-inner .name{font-size:clamp(2.4rem, 11vw, 3.4rem)}
+  .hero-inner .role{font-size:13px}
+  .hero-inner .bio{font-size:14px;line-height:1.55;max-width:44ch;margin-inline:auto}
+  .hero-ctas{justify-content:center}
+  .social-links{justify-content:center;flex-wrap:wrap}
+}
+
+/* Extra tightening on very narrow phones so nothing overflows. */
+@media (max-width:640px){
+  .container{padding:0 14px}
+  .section{padding-top:36px;padding-bottom:36px}
+  .section-inner h2,h2{font-size:1.6rem}
+  .section-lead{font-size:14px}
+}
+
