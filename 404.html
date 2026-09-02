@@ -33,7 +33,8 @@
       justify-content: center;
       width: 30em;
       height: 30em;
-      margin: 0 auto;
+      margin: auto;
+      position: relative;
     }
 
     .main {
@@ -53,6 +54,7 @@
       margin-bottom: -6em;
       margin-left: 0em;
       z-index: -1;
+      position: relative;
     }
     .antenna_shadow {
       position: absolute;
@@ -185,6 +187,7 @@
       justify-content: center;
       border: 2px solid #1d0e01;
       box-shadow: inset 0.2em 0.2em #e69635;
+      position: relative;
     }
     .tv::after {
       content: "";
@@ -384,6 +387,7 @@
       border-radius: 50%;
       background-color: #7f5934;
       border: 2px solid black;
+      position: relative;
       box-shadow:
         inset 2px 2px 1px #b49577,
         -2px 0px #513721,
@@ -427,6 +431,7 @@
       border-radius: 50%;
       background-color: #7f5934;
       border: 2px solid black;
+      position: relative;
       box-shadow:
         inset 2px 2px 1px #b49577,
         -2px 0px #513721,
@@ -581,7 +586,8 @@
        ===================================================================== */
 
     /* TAG: Reset body - background gelap + teks putih + font monospace.
-       Centering penuh (horizontal & vertikal) supaya artefak & panel rapi. */
+       Centering horizontal via flex + vertikal via auto-margin (scroll-safe:
+       kalau tinggi layar pendek, konten tetap bisa di-scroll, tidak kepotong). */
     body{
       margin: 0;
       font-family: 'Space Mono', ui-monospace, 'Courier New', monospace;
@@ -589,7 +595,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
     /* TAG: Skala artefak proporsional di layar sempit.
