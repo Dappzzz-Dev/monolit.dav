@@ -33,6 +33,7 @@
       justify-content: center;
       width: 30em;
       height: 30em;
+      margin: 0 auto;
     }
 
     .main {
@@ -579,19 +580,14 @@
        (Layout artefak tetap seperti template; ini hanya caption & tombol.)
        ===================================================================== */
 
+    /* TAG: Reset body - hanya background gelap + teks putih + font monospace */
     body{
-      font-family: 'Space Mono', ui-monospace, 'Courier New', monospace;
       margin: 0;
-      padding: 0 1rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
+      font-family: 'Space Mono', ui-monospace, 'Courier New', monospace;
     }
 
-    /* TAG: Caption status + tombol kembali (diletakkan di bawah artefak) */
+    /* TAG: Caption status + tombol kembali diletakkan di bawah artefak.
+       Biarkan artefak TV memakai layout asli template (tanpa scale) */
     .err-panel{
       margin-top: 2.5em;
       text-align: center;
@@ -630,12 +626,6 @@
     .err-home:focus-visible{
       outline: 2px solid #ffffff;
       outline-offset: 3px;
-    }
-
-    /* TAG: Biar artefak tidak terlalu jauh ke atas di layar kecil */
-    @media (max-width: 495px) {
-      .main_wrapper{ transform: scale(0.55); transform-origin: center bottom; }
-      .err-panel{ margin-top: 0; }
     }
   </style>
 </head>
