@@ -388,10 +388,16 @@ async function mountGlobe() {
     birthLabel.innerHTML = '<span class="birth-marker__pin" aria-hidden="true"></span><span class="birth-marker__text"></span>';
     container.appendChild(birthLabel);
 
-    // TAG: Titik kecil untuk tempat yang ingin dikunjungi (lebih kecil dari
-    // penanda lahir, sesuai permintaan "titik lokasi jangan gede-gede").
-    const visitDotGeometry = new THREE.SphereGeometry(radius * 0.009, 10, 10);
-    const visitDotMaterial = new THREE.MeshBasicMaterial({ color: '#ffffff' });
+    // TAG: Titik kecil untuk tempat yang ingin dikunjungi - tampil di permukaan
+    // bola, lebih kecil dari penanda lahir. Pakai warna kuning-emas biar kontras
+    // dengan daratan/dot putih (tetap "titik lokasi", bukan pin gede-gede).
+    const visitDotGeometry = new THREE.SphereGeometry(radius * 0.014, 16, 16);
+    const visitDotMaterial = new THREE.MeshBasicMaterial({
+      color: '#ffd166',
+      transparent: true,
+      opacity: 1,
+      depthWrite: false,
+    });
     const visitDots = new THREE.InstancedMesh(
       visitDotGeometry,
       visitDotMaterial,
@@ -399,11 +405,17 @@ async function mountGlobe() {
     );
     const visitMatrix = new THREE.Matrix4();
     CONFIG.visitPlaces.forEach((place, index) => {
-      visitMatrix.setPosition(latLngToVector(place.lat, place.lng, radius * 1.02));
+      visitMatrix.setPosition(latLngToVector(place.lat, place.lng, radius * 1.025));
       visitDots.setMatrixAt(index, visitMatrix);
     });
     visitDots.instanceMatrix.needsUpdate = true;
     globe.add(visitDots);
+
+    // TAG: Posisi lokal tiap titik kunjungan (dipakai untuk proyeksi label),
+    // dikunci ke permukaan bola seperti penanda lahir.
+    const visitPositions = CONFIG.visitPlaces.map((place) =>
+      latLngToVector(place.lat, place.lng, radius * 1.025),
+    );
 
     // TAG: Legenda kecil "Places I want to visit" - teksnya ikut bahasa aktif.
     const legend = document.createElement('div');
@@ -416,6 +428,16 @@ async function mountGlobe() {
     const legendTitle = legend.querySelector('.visit-legend__title');
     const legendList = legend.querySelector('.visit-legend__list');
     const birthText = birthLabel.querySelector('.birth-marker__text');
+
+    // TAG: Label nama kota untuk tiap titik kunjungan, mengikuti posisi titik
+    // di bola (muncul hanya saat titik ada di sisi yang menghadap kamera).
+    const visitLabels = CONFIG.visitPlaces.map(() => {
+      const el = document.createElement('div');
+      el.className = 'visit-marker';
+      el.innerHTML = '<span class="visit-marker__text"></span>';
+      container.appendChild(el);
+      return el;
+    });
 
     // TAG: Render ulang seluruh label sesuai bahasa aktif (dipanggil saat
     // mount & setiap ada event `langchange` dari i18n).
@@ -433,6 +455,10 @@ async function mountGlobe() {
           legendList.appendChild(item);
         });
       }
+      visitLabels.forEach((el, index) => {
+        el.querySelector('.visit-marker__text').textContent =
+          label(CONFIG.visitPlaces[index].key);
+      });
     };
     const onLangChange = () => renderLabels();
     window.addEventListener('langchange', onLangChange);
@@ -502,6 +528,8 @@ async function mountGlobe() {
     const markerScreenPosition = new THREE.Vector3();
     const markerViewDirection = new THREE.Vector3();
     const cameraViewDirection = new THREE.Vector3();
+    const visitScreenPosition = new THREE.Vector3();
+    const visitViewDirection = new THREE.Vector3();
     const updateBirthLabel = () => {
       birthMarker.getWorldPosition(markerScreenPosition);
       markerViewDirection.copy(markerScreenPosition).normalize();
@@ -515,6 +543,31 @@ async function mountGlobe() {
       birthLabel.style.top = `${(-markerScreenPosition.y * 0.5 + 0.5) * container.clientHeight}px`;
       const targetOpacity = visible ? 1 : 0;
       birthMarkerMaterial.opacity += (targetOpacity - birthMarkerMaterial.opacity) * 0.18;
+    };
+    // TAG: Proyeksikan label tiap titik kunjungan; label hanya muncul saat
+    // titik ada di sisi bola yang menghadap kamera (persis perilaku marker lahir).
+    const updateVisitLabels = () => {
+      for (let i = 0; i < visitPositions.length; i += 1) {
+        const el = visitLabels[i];
+        if (!el) continue;
+        markerViewDirection
+          .copy(visitPositions[i])
+          .applyQuaternion(globe.quaternion)
+          .normalize();
+        visitViewDirection.copy(camera.position).normalize();
+        const visible = markerViewDirection.dot(visitViewDirection) > 0.55;
+        if (!visible) {
+          el.classList.remove('is-visible');
+          el.setAttribute('aria-hidden', 'true');
+          continue;
+        }
+        visitScreenPosition.copy(visitPositions[i]).applyQuaternion(globe.quaternion);
+        visitScreenPosition.project(camera);
+        el.style.left = `${(visitScreenPosition.x * 0.5 + 0.5) * container.clientWidth}px`;
+        el.style.top = `${(-visitScreenPosition.y * 0.5 + 0.5) * container.clientHeight}px`;
+        el.classList.add('is-visible');
+        el.setAttribute('aria-hidden', 'false');
+      }
     };
 
     renderer.domElement.addEventListener('pointerdown', onPointerDown);
@@ -539,6 +592,7 @@ async function mountGlobe() {
       globe.rotation.x = current.y;
       globe.updateMatrixWorld();
       updateBirthLabel();
+      updateVisitLabels();
       renderer.render(scene, camera);
       animationFrame = requestAnimationFrame(animate);
     };
@@ -558,6 +612,7 @@ async function mountGlobe() {
       renderer.domElement.removeEventListener('wheel', onWheel);
       birthLabel.remove();
       legend.remove();
+      visitLabels.forEach((el) => el.remove());
       window.removeEventListener('langchange', onLangChange);
       scene.traverse((object) => {
         if (!object.isMesh && !object.isLine) return;
