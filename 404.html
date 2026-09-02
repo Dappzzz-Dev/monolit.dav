@@ -580,48 +580,65 @@
        (Layout artefak tetap seperti template; ini hanya caption & tombol.)
        ===================================================================== */
 
-    /* TAG: Reset body - hanya background gelap + teks putih + font monospace */
+    /* TAG: Reset body - background gelap + teks putih + font monospace.
+       Centering penuh (horizontal & vertikal) supaya artefak & panel rapi. */
     body{
       margin: 0;
       font-family: 'Space Mono', ui-monospace, 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* TAG: Caption status + tombol kembali diletakkan di bawah artefak.
-       Biarkan artefak TV memakai layout asli template (tanpa scale) */
+    /* TAG: Skala artefak proporsional di layar sempit.
+       Semua dimensi art memakai satuan `em`, jadi mengecilkan font-size pada
+       body akan mengecilkan seluruh TV/antena secara proporsional TANPA
+       mengubah layout -> javu pinggiran TV tidak terpotong di kiri/kanan. */
+    @media (max-width: 640px){
+      body{
+        font-size: min(15px, calc((100vw - 24px) / 32));
+      }
+    }
+
+    /* TAG: Caption status + tombol kembali (bersih, rapi, di tengah) */
     .err-panel{
-      margin-top: 2.5em;
       text-align: center;
-      width: 100%;
-      max-width: 30em;
+      max-width: min(26rem, 100vw);
+      width: auto;
+      margin: 2.5em auto 0;
     }
     .err-title{
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       color: #ffffff;
       margin: 0 0 0.4em;
     }
     .err-sub{
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.72);
-      margin: 0 0 1.2em;
-      word-break: break-word;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      margin: 0 auto 1.2em;
+      max-width: 34ch;
+      line-height: 1.6;
     }
     .err-home{
       display: inline-block;
-      padding: 0.6em 1.4em;
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 8px;
+      padding: 0.6em 1.5em;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
       color: #ffffff;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.85em;
       letter-spacing: 0.04em;
-      transition: border-color .18s ease, background-color .18s ease;
+      background: transparent;
+      transition: border-color .18s ease, background-color .18s ease, transform .18s ease;
     }
     .err-home:hover,
     .err-home:focus-visible{
-      border-color: rgba(255,255,255,0.5);
-      background-color: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.6);
+      background-color: rgba(255,255,255,0.07);
     }
     .err-home:focus-visible{
       outline: 2px solid #ffffff;
