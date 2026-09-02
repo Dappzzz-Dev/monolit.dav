@@ -142,6 +142,16 @@ body{
 @media (prefers-reduced-motion: reduce){
   .birth-marker{transition-duration:.18s}
 }
+/* TAG: Legenda "Places I want to visit" - panel kecil di kiri-bawah stage */
+.visit-legend{position:absolute;z-index:3;left:28px;bottom:28px;max-width:calc(100% - 56px);padding:10px 12px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(11,11,11,.84);backdrop-filter:blur(6px);color:#f3f4f5;pointer-events:none;text-align:left}
+.visit-legend__title{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;opacity:.9;margin-bottom:6px}
+.visit-legend__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
+.visit-legend__list li{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#d7dade;white-space:nowrap}
+.visit-legend__dot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.8)}
+@media (max-width:430px){
+  .visit-legend{left:16px;bottom:16px;max-width:calc(100% - 32px)}
+  .visit-legend__name{font-size:11px}
+}
 @media (max-width:1000px){ .stage{height:360px} }
 
 /* TAG: Sections general */

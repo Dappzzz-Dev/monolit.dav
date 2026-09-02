@@ -23,7 +23,57 @@ const CONFIG = {
   gridOpacity: 0.22,
   showGrid: true,
   birthPlace: { lat: -7.68, lng: 110.84, label: 'I was born here' },
+  // TAG: Tempat-tempat yang ingin dikunjungi - ditandai titik kecil di peta.
+  // Koordinat pakai nama negara/kota populer (Tōkyō, Zürich, London, ...).
+  visitPlaces: [
+    { key: 'japan',       lat: 35.68, lng: 139.76 },
+    { key: 'switzerland', lat: 47.37, lng: 8.54   },
+    { key: 'london',      lat: 51.51, lng: -0.13  },
+    { key: 'netherlands', lat: 52.37, lng: 4.90   },
+    { key: 'usa',         lat: 40.71, lng: -74.01 },
+  ],
 };
+
+// TAG: Label multi-bahasa untuk penanda di peta (di-sinkronkan via event
+// `langchange` dari sistem i18n; ikut bahasa HTML yang diset i18n.js).
+const LABELS = {
+  id: {
+    born: 'Aku lahir di sini',
+    title: 'Tempat yang ingin kukunjungi',
+    japan: 'Jepang', switzerland: 'Swiss', london: 'London',
+    netherlands: 'Belanda', usa: 'Amerika',
+  },
+  en: {
+    born: 'I was born here',
+    title: 'Places I want to visit',
+    japan: 'Japan', switzerland: 'Switzerland', london: 'London',
+    netherlands: 'Netherlands', usa: 'USA',
+  },
+  ja: {
+    born: 'ここで生まれた',
+    title: '行きたい場所',
+    japan: '日本', switzerland: 'スイス', london: 'ロンドン',
+    netherlands: 'オランダ', usa: 'アメリカ',
+  },
+  es: {
+    born: 'Nací aquí',
+    title: 'Lugares que quiero visitar',
+    japan: 'Japón', switzerland: 'Suiza', london: 'Londres',
+    netherlands: 'Países Bajos', usa: 'EE. UU.',
+  },
+};
+
+// TAG: Baca bahasa aktif dari <html lang> yang di-set i18n.js.
+function getLang() {
+  try { return document.documentElement.lang || 'en'; } catch (e) { return 'en'; }
+}
+
+// TAG: Ambil label sesuai bahasa aktif, fallback ke Inggris.
+function label(key) {
+  const lang = getLang();
+  const pack = LABELS[lang] || LABELS.en;
+  return pack[key] != null ? pack[key] : (LABELS.en[key] || '');
+}
 
 // TAG: Convert UI-style values into the internal values used by the scene.
 function mapRange(value, inMin, inMax, outMin, outMax) {
@@ -336,8 +386,57 @@ async function mountGlobe() {
     birthLabel.className = 'birth-marker';
     birthLabel.setAttribute('role', 'status');
     birthLabel.innerHTML = '<span class="birth-marker__pin" aria-hidden="true"></span><span class="birth-marker__text"></span>';
-    birthLabel.querySelector('.birth-marker__text').textContent = CONFIG.birthPlace.label;
     container.appendChild(birthLabel);
+
+    // TAG: Titik kecil untuk tempat yang ingin dikunjungi (lebih kecil dari
+    // penanda lahir, sesuai permintaan "titik lokasi jangan gede-gede").
+    const visitDotGeometry = new THREE.SphereGeometry(radius * 0.009, 10, 10);
+    const visitDotMaterial = new THREE.MeshBasicMaterial({ color: '#ffffff' });
+    const visitDots = new THREE.InstancedMesh(
+      visitDotGeometry,
+      visitDotMaterial,
+      CONFIG.visitPlaces.length,
+    );
+    const visitMatrix = new THREE.Matrix4();
+    CONFIG.visitPlaces.forEach((place, index) => {
+      visitMatrix.setPosition(latLngToVector(place.lat, place.lng, radius * 1.02));
+      visitDots.setMatrixAt(index, visitMatrix);
+    });
+    visitDots.instanceMatrix.needsUpdate = true;
+    globe.add(visitDots);
+
+    // TAG: Legenda kecil "Places I want to visit" - teksnya ikut bahasa aktif.
+    const legend = document.createElement('div');
+    legend.className = 'visit-legend';
+    legend.setAttribute('role', 'status');
+    legend.innerHTML =
+      '<span class="visit-legend__title"></span>' +
+      '<ul class="visit-legend__list"></ul>';
+    container.appendChild(legend);
+    const legendTitle = legend.querySelector('.visit-legend__title');
+    const legendList = legend.querySelector('.visit-legend__list');
+    const birthText = birthLabel.querySelector('.birth-marker__text');
+
+    // TAG: Render ulang seluruh label sesuai bahasa aktif (dipanggil saat
+    // mount & setiap ada event `langchange` dari i18n).
+    const renderLabels = () => {
+      if (birthText) birthText.textContent = label('born');
+      if (legendTitle) legendTitle.textContent = label('title');
+      if (legendList) {
+        legendList.innerHTML = '';
+        CONFIG.visitPlaces.forEach((place) => {
+          const item = document.createElement('li');
+          item.innerHTML =
+            '<span class="visit-legend__dot" aria-hidden="true"></span>' +
+            '<span class="visit-legend__name"></span>';
+          item.querySelector('.visit-legend__name').textContent = label(place.key);
+          legendList.appendChild(item);
+        });
+      }
+    };
+    const onLangChange = () => renderLabels();
+    window.addEventListener('langchange', onLangChange);
+    renderLabels();
 
     // TAG: Pointer interaction state. Dragging changes the target, not the rendered rotation directly.
     const target = {
@@ -458,6 +557,8 @@ async function mountGlobe() {
       renderer.domElement.removeEventListener('pointercancel', onPointerUp);
       renderer.domElement.removeEventListener('wheel', onWheel);
       birthLabel.remove();
+      legend.remove();
+      window.removeEventListener('langchange', onLangChange);
       scene.traverse((object) => {
         if (!object.isMesh && !object.isLine) return;
         object.geometry?.dispose();
