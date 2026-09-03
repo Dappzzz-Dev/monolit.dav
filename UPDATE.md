@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-09-03 — Audit anti-AI-slop pada surface utama
+
+Beberapa pola visual generik dikurangi tanpa mengubah alur atau fitur:
+- Hero tidak lagi dibungkus kartu glass kosong; konten sekarang memakai bidang editorial dengan satu hairline divider.
+- Topbar tetap floating agar navigasi terbaca, tetapi blur, radius, dan efek glass dikurangi.
+- Social links tidak lagi memakai pill seragam dengan dot dekoratif; sekarang menjadi link teks dengan underline halus.
+- CTA, globe, About cards, carousel, i18n, dan interaksi tidak diubah.
+
+Tujuannya memberi hierarki pada konten personal dan mengurangi kesan template UI yang terlalu banyak memakai glass/pill.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Tambahkan highlight readable pada label tujuan globe
 
 Label `I want go to ...` sekarang lebih mudah dibaca tanpa mengembalikan panel legend:
