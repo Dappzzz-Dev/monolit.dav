@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-09-03 — Mengaktifkan kembali gerakan semut layar TV
+
+- Background layar dikembalikan ke shorthand dua-layer persis pola template: radial noise + conic noise.
+- Keyframe menggunakan nama dan gerakan template (`b`, posisi layer kedua `60% 60%` ke `60% 50%`) supaya semut benar-benar berjalan, bukan hanya tampak sebagai pola statis.
+- `will-change: background-position` ditambahkan hanya pada layar untuk menjaga perpindahan noise tetap halus.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Memperbaiki animasi static TV error
 
 - Lapisan noise layar dikembalikan ke dua `background-image` terpisah seperti template agar parsing browser lebih stabil.
