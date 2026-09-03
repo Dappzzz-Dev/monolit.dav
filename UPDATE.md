@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-09-03 — Scrollbar dark-monochrome polish
+
+Scrollbar halaman diperbarui agar lebih menyatu dengan tema:
+- Track dibuat gelap dan tipis dengan divider halus.
+- Thumb memakai gradient abu-abu, rounded tactile shape, dan highlight internal.
+- Hover menambah kontras serta glow ringan agar posisi scroll mudah terlihat.
+- Firefox memakai `scrollbar-width: thin` dan warna native yang setara.
+- Tidak menambah JavaScript atau mengubah perilaku scroll.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Tambahkan highlight readable pada label tujuan globe
 
 Label `I want go to ...` sekarang lebih mudah dibaca tanpa mengembalikan panel legend:

@@ -22,7 +22,26 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
-html{scroll-padding-top:112px}
+html{
+  scroll-padding-top:112px;
+  scrollbar-width:thin;
+  scrollbar-color:#8d9094 #151617;
+}
+/* TAG: Custom scrollbar - quiet monochrome track with a tactile thumb */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#151617;border-left:1px solid rgba(255,255,255,.04)}
+::-webkit-scrollbar-thumb{
+  min-height:56px;
+  border:3px solid #151617;
+  border-radius:999px;
+  background:linear-gradient(180deg,#bfc2c4,#73777b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 8px rgba(255,255,255,.08);
+}
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#e2e4e5,#92969a);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 0 12px rgba(255,255,255,.16);
+}
+::-webkit-scrollbar-corner{background:#151617}
 body{
   margin:0;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
