@@ -499,45 +499,76 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 @keyframes shadowMovement { 0%, 49% { opacity: 0.5; } 50%, 100% { opacity: 0.2; } }
 #shadow{ box-shadow:0 0 40px 18px rgba(0,0,0,.9) }   /* keep shadow visible on near-black bg */
 
-/* TAG: Ghost speech bubble - playful pop-in, tilt, wobble */
+/* TAG: Ghost speech bubble - pixel-console callout with entrance + idle motion */
 .ghost-speech {
   position: absolute;
-  bottom: calc(100% + 14px);
+  bottom: calc(100% + 18px);
   left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  background: rgba(255,255,255,.92);
-  color: #111;
+  transform:translateX(-50%) rotate(-1.5deg) scale(.94);
+  translate:0 8px;
+  background:linear-gradient(145deg,rgba(38,38,40,.96),rgba(17,17,18,.94));
+  color:#f1f1f1;
   font-family: 'Space Mono', ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: .03em;
-  padding: 8px 12px 10px;
-  border-radius: 14px 14px 14px 4px;
+  line-height:1.55;
+  letter-spacing:.035em;
+  padding:22px 14px 12px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:3px;
   width: max-content;
   max-width: 220px;
   word-break: break-word;
   pointer-events: none;
   z-index: 2;
-  animation: bubblePop .4s cubic-bezier(.34,1.56,.64,1) forwards,
-             bubbleWobble 2.8s ease-in-out 0.4s infinite;
+  box-shadow:0 14px 30px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.12);
+  clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px));
+  animation:bubbleReveal .52s cubic-bezier(.23,1,.32,1) forwards;
   opacity: 0;
+}
+.ghost-speech::before{
+  content:"GHOST // MESSAGE";
+  position:absolute;
+  top:6px;
+  left:10px;
+  color:#aeb2b6;
+  font-size:7px;
+  font-weight:400;
+  letter-spacing:.14em;
+  line-height:1;
 }
 .ghost-speech::after {
   content: '';
   position: absolute;
-  top: 100%;
-  left: 24px;
-  border: 7px solid transparent;
-  border-top-color: rgba(255,255,255,.92);
+  top:100%;
+  left:22px;
+  width:12px;
+  height:8px;
+  background:#19191a;
+  clip-path:polygon(0 0,100% 0,100% 4px,8px 4px,8px 8px,4px 8px,4px 4px,0 4px);
 }
-@keyframes bubblePop {
-  0%   { opacity: 0; transform: translateX(-50%) rotate(-2deg) scale(.3); }
-  100% { opacity: 1; transform: translateX(-50%) rotate(-2deg) scale(1); }
+@keyframes bubbleReveal {
+  0%{opacity:0;transform:translateX(-50%) rotate(-4deg) scale(.94);translate:0 8px}
+  70%{opacity:1;transform:translateX(-50%) rotate(-1deg) scale(1);translate:0 -2px}
+  100%{opacity:1;transform:translateX(-50%) rotate(-1.5deg) scale(1);translate:0 0}
 }
-@keyframes bubbleWobble {
-  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
-  50%      { transform: translateX(-50%) rotate(1deg); }
+@media (hover:hover) and (pointer:fine){
+  .about-ghost:hover .ghost-speech{
+    border-color:rgba(255,255,255,.5);
+    box-shadow:0 16px 34px rgba(0,0,0,.5),0 0 18px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.16);
+  }
+}
+@media (prefers-reduced-motion:no-preference){
+  .ghost-speech{
+    animation:bubbleReveal .52s cubic-bezier(.23,1,.32,1) forwards,bubbleDrift 4.8s ease-in-out .7s infinite;
+  }
+}
+@keyframes bubbleDrift{
+  0%,100%{translate:0 0}
+  50%{translate:0 -4px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ghost-speech{animation:bubbleReveal .2s ease-out forwards}
 }
 
 /* NOTE: no prefers-reduced-motion freeze here - the mascot must always animate
@@ -551,7 +582,7 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .about-ghost{padding-top:8px;min-height:0}
   #ghost{scale:.65}
   .ghost-speech{
-    font-size:10px;padding:6px 10px 8px;max-width:180px;
+    font-size:10px;padding:20px 10px 8px;max-width:180px;
   }
 }
 

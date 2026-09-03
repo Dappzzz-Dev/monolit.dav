@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-09-03 — Remake speech bubble ghost: pixel-console callout
+
+Speech bubble ghost diperbarui tanpa mengubah karakter, copy, atau animasi pixel ghost:
+- Bubble sekarang memakai panel gelap bergaya pixel-console dengan stepped corners.
+- Ditambahkan label kecil `GHOST // MESSAGE`, border hairline, inner sheen, dan shadow/glow monochrome.
+- Pointer bubble dibuat pixel-stepped agar menyatu dengan karakter pixel.
+- Animasi masuk memakai reveal singkat dengan scale/rotate/translate.
+- Setelah masuk, bubble bergerak naik-turun sangat halus secara berkala agar tidak monoton.
+- Hover desktop menambah highlight border dan glow; reduced-motion memakai reveal yang lebih singkat tanpa idle drift.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Penataan ulang About Me: dua baris kiri + ghost kanan
 
 Section About kini mengikuti komposisi referensi yang diminta:
