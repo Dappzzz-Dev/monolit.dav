@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-09-03 — Penataan ulang About Me: dua baris kiri + ghost kanan
+
+Section About kini mengikuti komposisi referensi yang diminta:
+- Kartu **About Me** berada di kiri atas.
+- Kartu kontribusi GitHub berada di kiri bawah dengan jarak yang lebih lega.
+- Ghost mascot berada di kanan atas.
+- Area kanan di bawah ghost tetap kosong agar komposisi memiliki ruang napas dan tidak terasa penuh.
+- Desktop memakai grid dua kolom dengan alignment ke atas; mobile tetap turun menjadi satu kolom dan mengikuti optimasi mobile yang sudah ada.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-08-27 — Tampilan mobile: anti-lag + rapi (satu tema)
 
 Situs kini responsive penuh di semua device; khusus mobile dirapikan & dihemat bobotnya.

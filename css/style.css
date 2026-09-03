@@ -319,12 +319,18 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
    Scoped to #about; the rest of the page keeps the monochrome glass theme. */
 .about-grid{
   display:grid;
-  grid-template-columns:minmax(0, 1fr) auto;
-  gap:clamp(28px, 5vw, 64px);
-  align-items:center;
+  grid-template-columns:minmax(0, 1.35fr) minmax(240px, .85fr);
+  gap:clamp(28px, 5vw, 72px);
+  align-items:start;
   margin-top:22px;
+  min-height:520px;
 }
-.about-cards{display:flex;flex-direction:column;gap:20px}
+.about-cards{
+  display:grid;
+  grid-template-rows:auto auto;
+  gap:28px;
+  min-width:0;
+}
 .dev-card{
   position:relative;
   background:#2d2d2dcc;                 /* spec: #2d2d2d, alpha for glass blend */
@@ -461,7 +467,13 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 }
 .gh-nav-btn:active:not(:disabled){transform:scale(.92)}
 .gh-nav-btn:disabled{opacity:.2;cursor:not-allowed}
-.about-ghost{display:flex;justify-content:center;align-items:center}
+.about-ghost{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  min-height:260px;
+  padding-top:18px;
+}
 
 /* ---- Ghost character - pasted VERBATIM from spec; animations untouched ---- */
 #ghost { position: relative; scale: 0.8; overflow: visible; }
@@ -532,8 +544,11 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
    (owner's explicit requirement). Removing it fixed "ghost looks like a PNG". */
 
 @media (max-width:900px){
-  .about-grid{grid-template-columns:1fr}
-  .about-ghost{padding-top:8px}
+  .about-grid{
+    grid-template-columns:1fr;
+    min-height:0;
+  }
+  .about-ghost{padding-top:8px;min-height:0}
   #ghost{scale:.65}
   .ghost-speech{
     font-size:10px;padding:6px 10px 8px;max-width:180px;
@@ -930,4 +945,3 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .section-inner h2,h2{font-size:1.6rem}
   .section-lead{font-size:14px}
 }
-
