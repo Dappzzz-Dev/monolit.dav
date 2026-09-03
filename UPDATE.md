@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-09-03 — Clear globe destination markers
+
+Area titik tempat tujuan dirapikan:
+- Panel legend/kotak daftar tempat dihapus agar globe lebih clear.
+- Titik tujuan Japan, London, USA, Switzerland, dan Netherland dikembalikan ke warna putih.
+- Label titik sekarang berbentuk teks langsung: `I want go to <place>`.
+- Label tidak lagi memakai box, border, atau warna kuning; hanya text-shadow tipis agar terbaca di atas globe.
+- Data lokasi, koordinat, visibility sisi depan, dan interaksi globe tetap dipertahankan.
+
+**File:** `js/globe.js`, `js/globe.min.js`, `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Kembalikan ukuran ghost, pertahankan jarak bubble
 
 Perubahan sebelumnya yang ikut memperbesar ghost dibatalkan karena gambar hanya dimaksudkan sebagai panduan jarak bubble:

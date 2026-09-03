@@ -45,7 +45,6 @@ const LABELS = {
   },
   en: {
     born: 'I was born here',
-    title: 'Places I want to visit',
     japan: 'Japan', switzerland: 'Switzerland', london: 'London',
     netherlands: 'Netherlands', usa: 'USA',
   },
@@ -388,12 +387,10 @@ async function mountGlobe() {
     birthLabel.innerHTML = '<span class="birth-marker__pin" aria-hidden="true"></span><span class="birth-marker__text"></span>';
     container.appendChild(birthLabel);
 
-    // TAG: Titik kecil untuk tempat yang ingin dikunjungi - tampil di permukaan
-    // bola, lebih kecil dari penanda lahir. Pakai warna kuning-emas biar kontras
-    // dengan daratan/dot putih (tetap "titik lokasi", bukan pin gede-gede).
+    // TAG: Titik tujuan tetap putih agar menyatu dengan dot globe tanpa panel legenda.
     const visitDotGeometry = new THREE.SphereGeometry(radius * 0.014, 16, 16);
     const visitDotMaterial = new THREE.MeshBasicMaterial({
-      color: '#ffd166',
+      color: '#ffffff',
       transparent: true,
       opacity: 1,
       depthWrite: false,
@@ -417,16 +414,6 @@ async function mountGlobe() {
       latLngToVector(place.lat, place.lng, radius * 1.025),
     );
 
-    // TAG: Legenda kecil "Places I want to visit" - teksnya ikut bahasa aktif.
-    const legend = document.createElement('div');
-    legend.className = 'visit-legend';
-    legend.setAttribute('role', 'status');
-    legend.innerHTML =
-      '<span class="visit-legend__title"></span>' +
-      '<ul class="visit-legend__list"></ul>';
-    container.appendChild(legend);
-    const legendTitle = legend.querySelector('.visit-legend__title');
-    const legendList = legend.querySelector('.visit-legend__list');
     const birthText = birthLabel.querySelector('.birth-marker__text');
 
     // TAG: Label nama kota untuk tiap titik kunjungan, mengikuti posisi titik
@@ -439,25 +426,12 @@ async function mountGlobe() {
       return el;
     });
 
-    // TAG: Render ulang seluruh label sesuai bahasa aktif (dipanggil saat
-    // mount & setiap ada event `langchange` dari i18n).
+    // TAG: Render ulang label sesuai bahasa aktif (dipanggil saat mount dan langchange).
     const renderLabels = () => {
       if (birthText) birthText.textContent = label('born');
-      if (legendTitle) legendTitle.textContent = label('title');
-      if (legendList) {
-        legendList.innerHTML = '';
-        CONFIG.visitPlaces.forEach((place) => {
-          const item = document.createElement('li');
-          item.innerHTML =
-            '<span class="visit-legend__dot" aria-hidden="true"></span>' +
-            '<span class="visit-legend__name"></span>';
-          item.querySelector('.visit-legend__name').textContent = label(place.key);
-          legendList.appendChild(item);
-        });
-      }
       visitLabels.forEach((el, index) => {
         el.querySelector('.visit-marker__text').textContent =
-          label(CONFIG.visitPlaces[index].key);
+          `I want go to ${label(CONFIG.visitPlaces[index].key)}`;
       });
     };
     const onLangChange = () => renderLabels();
@@ -611,7 +585,6 @@ async function mountGlobe() {
       renderer.domElement.removeEventListener('pointercancel', onPointerUp);
       renderer.domElement.removeEventListener('wheel', onWheel);
       birthLabel.remove();
-      legend.remove();
       visitLabels.forEach((el) => el.remove());
       window.removeEventListener('langchange', onLangChange);
       scene.traverse((object) => {
