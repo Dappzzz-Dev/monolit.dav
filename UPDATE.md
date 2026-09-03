@@ -5,13 +5,13 @@
 
 ---
 
-## 2026-09-03 — Samakan komposisi ghost dan bubble dengan layout referensi
+## 2026-09-03 — Kembalikan ukuran ghost, pertahankan jarak bubble
 
-Ukuran dan jarak komposisi About Ghost disesuaikan mengikuti gambar penataan terbaru:
-- Ghost desktop diperbesar dari skala `0.8` menjadi `1.6` agar proporsinya tidak terlalu kecil.
-- Bubble mempertahankan rasio asset PNG asli dengan ukuran visual yang setara sekitar `269 × 147px` setelah scaling.
-- Bubble ditempatkan sejajar area atas ghost menggunakan offset sedang: tidak menempel, tetapi buntut tetap mengarah ke karakter.
-- Mobile mempertahankan skala dan offset terpisah agar tidak memenuhi viewport sempit.
+Perubahan sebelumnya yang ikut memperbesar ghost dibatalkan karena gambar hanya dimaksudkan sebagai panduan jarak bubble:
+- Skala ghost desktop dikembalikan ke `0.8`.
+- Ukuran PNG bubble dikembalikan ke `224 × 122px`.
+- Bubble memakai jarak kanan dan atas yang sudah disesuaikan, tanpa mengubah ukuran karakter.
+- Mobile memakai offset tersendiri agar tetap rapi.
 
 **File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
 
