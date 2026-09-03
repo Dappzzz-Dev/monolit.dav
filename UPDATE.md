@@ -5,6 +5,13 @@
 
 ---
 
+## 2026-09-03 — Memperjelas label titik tujuan globe
+
+- Label tujuan yang tidak sedang fokus sebelumnya memakai `opacity: .42`, sehingga teks, border box, dan connector line terlihat hampir hilang di atas globe.
+- Opacity label nonaktif dinaikkan menjadi `.82`; label aktif tetap `100%` agar rotasi fokus tetap terasa tanpa mengorbankan keterbacaan.
+
+---
+
 ## 2026-09-03 — Globe, project metadata, About timeline, dan CTA polish
 
 Update terintegrasi untuk memperkuat cerita portfolio tanpa mengubah tema dark-monochrome:

@@ -168,7 +168,7 @@ body{
 /* TAG: Label nama kota di atas tiap titik kunjungan - muncul di sisi tampak bola */
 .visit-marker{position:absolute;z-index:3;opacity:0;transform:translate(-50%,calc(-100% - 8px));transition:opacity .32s cubic-bezier(.23,1,.32,1);pointer-events:none;white-space:nowrap}
 .visit-marker.is-visible{opacity:1}
-.visit-marker.is-visible:not(.is-current){opacity:.42}
+.visit-marker.is-visible:not(.is-current){opacity:.82}
 .visit-marker::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:8px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.12));transform:translateX(-50%)}
 .visit-marker__text{
   display:inline-block;
