@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-09-03 — Mengembalikan struktur TV error ke template asli
+
+- Menemukan bug markup pada perbaikan sebelumnya: elemen `.bottom`/kaki TV berada di dalam `.tv`, bukan setelah `</div>` TV seperti template asli.
+- Struktur dikembalikan mengikuti urutan template: antenna, TV (curve, screen, lines, controls), lalu bottom di luar TV.
+- Elemen template yang sempat hilang (`curve_svg`, `screen_out`, `a_base`, dan inner control button) dikembalikan.
+- Animasi static screen dikembalikan ke dua-layer radial/conic noise dengan keyframe background-position milik template, tetap dalam warna monochrome.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Memperbaiki halaman error hosting
 
 - Menemukan bahwa screenshot lama berasal dari `404.html` standalone yang langsung disajikan GitHub Pages; overlay error di `index.html` memang tidak pernah dimuat pada route yang tidak ditemukan.
