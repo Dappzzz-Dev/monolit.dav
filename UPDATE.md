@@ -5,6 +5,22 @@
 
 ---
 
+## 2026-09-03 — Universal monochrome error TV
+
+Error surface baru ditambahkan langsung ke `index.html` tanpa membuat file halaman khusus:
+
+- TV dari template yang diberikan dipertahankan, lalu palet orange/colorful diubah menjadi charcoal, silver, dan white agar konsisten dengan tema portfolio.
+- State `offline`, `not-found`, `unreachable`, dan `error` sekarang memakai satu surface yang sama.
+- Error runtime dari `window.onerror` dan `unhandledrejection` menampilkan kode serta detail singkat di layar TV dan detail teknis yang lebih lengkap di bawahnya.
+- Tombol `Try again` melakukan reload; `Back to portfolio` menutup surface dan kembali ke Home.
+- Jika host melakukan rewrite unknown route ke `index.html`, route yang tidak dikenal otomatis menampilkan state 404.
+- State bisa dipanggil dari kode lain melalui `window.showSiteError(type, detail)` tanpa mengubah struktur halaman.
+- Offline otomatis dipulihkan saat browser kembali online. Semua perubahan menghormati `prefers-reduced-motion`.
+
+**File:** `index.html`, `css/style.css`, `css/style.min.css`, `js/app.js`, `js/app.min.js`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Memperjelas label titik tujuan globe
 
 - Label tujuan yang tidak sedang fokus sebelumnya memakai `opacity: .42`, sehingga teks, border box, dan connector line terlihat hampir hilang di atas globe.

@@ -1,5 +1,71 @@
 /* TAG: app.js - small UI helpers */
 (function(){
+  // TAG: Universal error surface - centralizes recoverable browser and
+  // network states so every failure keeps the portfolio shell consistent.
+  const errorView = document.getElementById('site-error');
+  const errorScreen = document.getElementById('site-error-screen');
+  const errorTitle = document.getElementById('site-error-title');
+  const errorMessage = document.getElementById('site-error-message');
+  const errorDetail = document.getElementById('site-error-detail');
+  const errorRetry = document.getElementById('site-error-retry');
+  const errorHome = document.getElementById('site-error-home');
+  const errorStates = {
+    offline: { code: 'OFFLINE', title: 'No internet connection', message: 'The portfolio is still here, but the network is unavailable. Reconnect and try again.' },
+    'not-found': { code: '404', title: 'Page not found', message: 'This address does not point to a page in the portfolio.' },
+    unreachable: { code: 'UNREACHABLE', title: 'Site could not be reached', message: 'The server or network did not respond. Check your connection and try again.' },
+    error: { code: 'ERROR', title: 'Something went wrong', message: 'The page hit an unexpected error. The technical detail is shown below to help fix it.' }
+  };
+  let activeError = '';
+  function showSiteError(type, detail){
+    if(!errorView) return;
+    const state = errorStates[type] || errorStates.error;
+    activeError = type;
+    errorTitle.textContent = state.title;
+    errorMessage.textContent = state.message;
+    const safeDetail = detail ? String(detail).slice(0, 220) : '';
+    errorScreen.textContent = safeDetail ? `${state.code}: ${safeDetail.slice(0, 52)}` : state.code;
+    errorDetail.textContent = safeDetail ? `Detail: ${safeDetail}` : '';
+    errorDetail.hidden = !safeDetail;
+    errorView.hidden = false;
+    document.body.classList.add('has-site-error');
+    if(errorRetry) errorRetry.focus({ preventScroll: true });
+  }
+  function hideSiteError(){
+    if(!errorView) return;
+    errorView.hidden = true;
+    document.body.classList.remove('has-site-error');
+    activeError = '';
+  }
+  window.showSiteError = showSiteError;
+  window.hideSiteError = hideSiteError;
+  if(errorRetry) errorRetry.addEventListener('click', ()=> window.location.reload());
+  if(errorHome) errorHome.addEventListener('click', ()=>{
+    hideSiteError();
+    const home = document.getElementById('home');
+    if(home) home.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+  window.addEventListener('offline', ()=> showSiteError('offline'));
+  window.addEventListener('online', ()=> { if(activeError === 'offline') hideSiteError(); });
+  window.addEventListener('error', (event)=>{
+    const detail = event.error && event.error.message ? event.error.message : event.message;
+    showSiteError('error', detail);
+  });
+  window.addEventListener('unhandledrejection', (event)=>{
+    const reason = event.reason && event.reason.message ? event.reason.message : event.reason;
+    showSiteError('error', reason);
+  });
+  // TAG: Optional route hint for hosts that rewrite unknown paths to index.html.
+  const path = location.pathname;
+  const routeIsHome = path === '/' || path.endsWith('/index.html') || path.endsWith('/monolit.dav') || path.endsWith('/monolit.dav/');
+  const requestedError = new URLSearchParams(location.search).get('error');
+  if(requestedError && errorStates[requestedError]){
+    showSiteError(requestedError);
+  } else if(!routeIsHome){
+    showSiteError('not-found');
+  } else if(!navigator.onLine){
+    showSiteError('offline');
+  }
+
   // Set year in footer
   const YEAR = document.getElementById('year');
   if(YEAR) YEAR.textContent = new Date().getFullYear();
