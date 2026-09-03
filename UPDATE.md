@@ -5,15 +5,14 @@
 
 ---
 
-## 2026-09-03 — Remake speech bubble ghost: pixel-console callout
+## 2026-09-03 — Remake speech bubble ghost: pixel-game callout
 
-Speech bubble ghost diperbarui tanpa mengubah karakter, copy, atau animasi pixel ghost:
-- Bubble sekarang memakai panel gelap bergaya pixel-console dengan stepped corners.
-- Ditambahkan label kecil `GHOST // MESSAGE`, border hairline, inner sheen, dan shadow/glow monochrome.
-- Pointer bubble dibuat pixel-stepped agar menyatu dengan karakter pixel.
-- Animasi masuk memakai reveal singkat dengan scale/rotate/translate.
-- Setelah masuk, bubble bergerak naik-turun sangat halus secara berkala agar tidak monoton.
-- Hover desktop menambah highlight border dan glow; reduced-motion memakai reveal yang lebih singkat tanpa idle drift.
+Speech bubble ghost diperbarui tanpa mengubah karakter atau copy:
+- Bubble sekarang memakai warna cream/parchment seperti speech bubble pixel-game, bukan panel hitam monoton.
+- Outline blok, stepped corners, shadow offset, dan aksen label hijau membuatnya terasa seperti elemen Minecraft/arcade.
+- Bubble dipindahkan ke kanan atas ghost dengan buntut pixel yang mengarah kembali ke karakter.
+- Animasi bubble memakai timing naik-turun yang sama dengan badan ghost (`upNDown`) agar dialog terasa berasal dari ghost.
+- Hover desktop memberi sedikit saturasi dan highlight; reduced-motion menonaktifkan perpindahan posisi.
 
 **File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
 
