@@ -44,11 +44,11 @@ body{
   z-index:40;
   padding:10px 12px 10px 14px;
   border:1px solid rgba(255,255,255,.07);
-  border-radius:12px;
-  background:rgba(11,11,11,.9);
-  box-shadow:0 10px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.04);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  border-radius:18px;
+  background:rgba(11,11,11,.72);
+  box-shadow:0 12px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:blur(16px) saturate(1.08);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
 }
 .topbar .brand{font-family:'Instrument Serif', Georgia, serif;font-size:17.5px;letter-spacing:.01em;opacity:0.95}
 .mainnav{display:flex;gap:12px}
@@ -77,11 +77,37 @@ body{
 
 /* TAG: Hero/left */
 .hero-inner{
-  padding:18px 0 22px;
-  border-radius:0;
-  border-bottom:1px solid rgba(255,255,255,.11);
+  padding:36px;
+  border-radius:14px;
+  /* Liquid glass card general style */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  backdrop-filter: blur(8px) saturate(1.02);
+  -webkit-backdrop-filter: blur(8px) saturate(1.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.45);
   position: relative;
   overflow: visible;
+}
+
+/* Liquid glass highlight bar */
+.hero-inner::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  mix-blend-mode: overlay;
+}
+
+/* Hero inner already styled for dark theme by default; light theme removed */
+.hero-inner{ /* reinforce subtle dark glass */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.6);
 }
 
 /* Ensure text and buttons inside card maintain contrast */
@@ -756,20 +782,31 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   display:inline-flex;
   align-items:center;
   gap:7px;
-  min-height:28px;
-  padding:5px 0;
-  border-bottom:1px solid rgba(255,255,255,.16);
+  min-height:34px;
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:999px;
   color:var(--muted);
   text-decoration:none;
   font-size:13px;
   font-weight:600;
-  transition:color .2s ease, border-color .2s ease, transform .2s ease;
+  transition:color .2s ease, border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.social-links a::before,
+.social-compact a::before{
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#d8dada;
+  box-shadow:0 0 8px rgba(255,255,255,.55);
 }
 .social-links a:hover,
 .social-compact a:hover{
   color:var(--text);
-  border-color:var(--text);
-  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.3);
+  background:rgba(255,255,255,.06);
+  transform:translateY(-1px);
 }
 .social-compact{
   display:flex;
