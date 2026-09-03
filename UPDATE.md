@@ -5,16 +5,17 @@
 
 ---
 
-## 2026-09-03 — Fix speech bubble ghost: supplied pixel bubble + synced motion
+## 2026-09-03 — Use exact supplied PNG speech bubble + repair motion
 
-Speech bubble ghost disesuaikan mengikuti gambar referensi yang diberikan:
-- Bubble putih dengan outline hitam tebal, shadow abu-abu offset, dan garis luar kuning.
-- Bentuk stepped pixel dipertahankan pada sudut serta buntut bubble yang mengarah ke ghost.
-- Posisi tetap di kanan atas ghost agar terbaca sebagai dialog karakter.
-- Bug animasi diperbaiki dengan memakai langsung keyframe `upNDown` yang sama dengan badan ghost; sebelumnya bubble memakai animasi terpisah dan dapat terlihat diam.
-- Mode reduced-motion tetap memakai gerakan yang lebih lambat, bukan mematikan bubble sepenuhnya.
+Bubble sekarang benar-benar memakai file PNG yang diberikan, bukan dibuat ulang dengan CSS:
+- Asset asli disimpan sebagai `assets/ghost-speech.png`.
+- Transparansi canvas PNG dipertahankan; CSS hanya melakukan crop melalui `background-size`/`background-position` agar bentuk asli tampil proporsional.
+- Teks tetap memakai `data-i18n="ghost.speech"` dan ditempatkan di area putih bubble.
+- Posisi bubble tetap di kanan atas ghost, dengan buntut asli mengarah ke karakter.
+- Animasi diterapkan langsung ke `.ghost-speech` menggunakan keyframe `upNDown`, sehingga bubble pasti ikut naik-turun seperti ghost.
+- Reduced-motion memakai tempo lebih lambat, bukan menghilangkan bubble.
 
-**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+**File:** `assets/ghost-speech.png`, `css/style.css`, `css/style.min.css`, `UPDATE.md`.
 
 ---
 
