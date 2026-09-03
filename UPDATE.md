@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-09-03 — Memperbaiki animasi static TV error
+
+- Lapisan noise layar dikembalikan ke dua `background-image` terpisah seperti template agar parsing browser lebih stabil.
+- `background-position` dan `background-size` dibuat eksplisit lalu digerakkan dengan `steps(2)` sehingga efek static/semut TV rusak terlihat jelas.
+- Animasi diterapkan ke layar desktop dan mobile, tetap dihentikan saat `prefers-reduced-motion` aktif.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Mengembalikan struktur TV error ke template asli
 
 - Menemukan bug markup pada perbaikan sebelumnya: elemen `.bottom`/kaki TV berada di dalam `.tv`, bukan setelah `</div>` TV seperti template asli.
