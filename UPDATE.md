@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-09-04 — Memperkuat gerakan semut tanpa mengubah desain TV
+
+- Static layar tetap memakai gradient template, tetapi perpindahan layer conic diperbesar agar butiran terlihat benar-benar berjalan.
+- `steps(2,end)` menjaga karakter gerak seperti TV rusak, bukan animasi blur yang halus.
+- `background-repeat: repeat` ditegaskan agar pola tetap mengisi seluruh layar pada setiap frame.
+- Pada `prefers-reduced-motion`, animasi tidak dihapus total; kecepatannya diperlambat menjadi versi yang lebih lembut.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Mengaktifkan kembali gerakan semut layar TV
 
 - Background layar dikembalikan ke shorthand dua-layer persis pola template: radial noise + conic noise.
