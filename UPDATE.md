@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-03 — Memperbaiki halaman error hosting
+
+- Menemukan bahwa screenshot lama berasal dari `404.html` standalone yang langsung disajikan GitHub Pages; overlay error di `index.html` memang tidak pernah dimuat pada route yang tidak ditemukan.
+- `404.html` sekarang memakai konstruksi TV dari template yang diberikan, dengan palet monochrome/dark dan teks putih agar tetap satu tema dengan portfolio.
+- State standalone mendukung 404, offline, unreachable, dan error melalui `?error=`; detail teknis aman dapat diteruskan melalui `?msg=`.
+- Tombol `Coba lagi` mengulang URL saat ini dan `Kembali ke portfolio` menuju root project.
+- Layout responsif untuk mobile, tetap bekerja tanpa external CSS/JS, dan animasi mematuhi `prefers-reduced-motion`.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Universal monochrome error TV
 
 Error surface baru ditambahkan langsung ke `index.html` tanpa membuat file halaman khusus:
