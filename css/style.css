@@ -145,7 +145,21 @@ body{
 /* TAG: Label nama kota di atas tiap titik kunjungan - muncul di sisi tampak bola */
 .visit-marker{position:absolute;z-index:3;opacity:0;transform:translate(-50%,calc(-100% - 8px));transition:opacity .22s cubic-bezier(.23,1,.32,1);pointer-events:none;white-space:nowrap}
 .visit-marker.is-visible{opacity:1}
-.visit-marker__text{display:inline-block;color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.02em;text-shadow:0 2px 8px rgba(0,0,0,.9);white-space:nowrap}
+.visit-marker__text{
+  display:inline-block;
+  padding:5px 8px;
+  border:1px solid rgba(255,255,255,.42);
+  border-radius:6px;
+  background:rgba(8,8,8,.78);
+  backdrop-filter:blur(5px);
+  color:#fff;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.02em;
+  text-shadow:0 1px 4px rgba(0,0,0,.9);
+  box-shadow:0 3px 12px rgba(0,0,0,.38),0 0 10px rgba(255,255,255,.08);
+  white-space:nowrap;
+}
 @media (max-width:1000px){ .stage{height:360px} }
 
 /* TAG: Sections general */

@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-03 — Tambahkan highlight readable pada label tujuan globe
+
+Label `I want go to ...` sekarang lebih mudah dibaca tanpa mengembalikan panel legend:
+- Ditambahkan background hitam transparan dengan blur ringan.
+- Border putih tipis dan shadow lembut membuat label terpisah dari titik-titik daratan.
+- Teks tetap putih dan tanpa warna kuning agar konsisten dengan titik tujuan.
+- Ukuran label tetap compact supaya globe tetap clear.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Clear globe destination markers
 
 Area titik tempat tujuan dirapikan:
