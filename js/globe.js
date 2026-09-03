@@ -521,6 +521,7 @@ async function mountGlobe() {
     // TAG: Proyeksikan label tiap titik kunjungan; label hanya muncul saat
     // titik ada di sisi bola yang menghadap kamera (persis perilaku marker lahir).
     const updateVisitLabels = () => {
+      const visibleIndexes = [];
       for (let i = 0; i < visitPositions.length; i += 1) {
         const el = visitLabels[i];
         if (!el) continue;
@@ -541,8 +542,20 @@ async function mountGlobe() {
         el.style.top = `${(-visitScreenPosition.y * 0.5 + 0.5) * container.clientHeight}px`;
         el.classList.add('is-visible');
         el.setAttribute('aria-hidden', 'false');
+        visibleIndexes.push(i);
+      }
+      visitLabels.forEach((el) => el.classList.remove('is-current'));
+      if (visibleIndexes.length) {
+        const currentIndex = visibleIndexes[visitFocusIndex % visibleIndexes.length];
+        visitLabels[currentIndex].classList.add('is-current');
       }
     };
+    let visitFocusIndex = 0;
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const visitFocusTimer = prefersReducedMotion ? null : window.setInterval(() => {
+      visitFocusIndex += 1;
+      updateVisitLabels();
+    }, 2800);
 
     renderer.domElement.addEventListener('pointerdown', onPointerDown);
     renderer.domElement.addEventListener('pointermove', onPointerMove);
@@ -586,6 +599,7 @@ async function mountGlobe() {
       renderer.domElement.removeEventListener('wheel', onWheel);
       birthLabel.remove();
       visitLabels.forEach((el) => el.remove());
+      window.clearInterval(visitFocusTimer);
       window.removeEventListener('langchange', onLangChange);
       scene.traverse((object) => {
         if (!object.isMesh && !object.isLine) return;

@@ -12,6 +12,9 @@
     img: document.getElementById('pm-img'),
     title: document.getElementById('pm-title'),
     desc: document.getElementById('pm-desc'),
+    year: document.getElementById('pm-year'),
+    role: document.getElementById('pm-role'),
+    tech: document.getElementById('pm-tech'),
     demo: document.getElementById('pm-demo'),
     repo: document.getElementById('pm-repo'),
     close: document.getElementById('pm-close')
@@ -27,6 +30,9 @@ function openModal(project){
     el.img.fetchpriority = 'low';
     el.title.textContent = project.title || '';
     el.desc.textContent = project.description || '';
+    el.year.textContent = project.year || '';
+    el.role.textContent = project.role || '';
+    el.tech.textContent = Array.isArray(project.tech) ? project.tech.join(' · ') : (project.tech || '');
     // Buttons only render when the admin filled the link in.
     if(project.demoUrl){ el.demo.href = project.demoUrl; el.demo.hidden = false; }
     else { el.demo.removeAttribute('href'); el.demo.hidden = true; }

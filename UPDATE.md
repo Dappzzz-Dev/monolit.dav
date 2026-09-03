@@ -5,6 +5,33 @@
 
 ---
 
+## 2026-09-03 — Globe, project metadata, About timeline, dan CTA polish
+
+Update terintegrasi untuk memperkuat cerita portfolio tanpa mengubah tema dark-monochrome:
+
+**Globe**
+- Label tujuan Japan, London, USA, Switzerland, dan Netherlands mendapat connector line pendek dari titik ke label.
+- Label tujuan bergantian secara lembut: label aktif terbaca penuh, label lain diredupkan agar tidak bertumpuk.
+- Titik kelahiran dibuat lebih jelas dengan pin yang lebih besar dan pulse putih; titik impian tetap berupa dot putih.
+- Timer label dibersihkan saat globe di-unmount agar tidak meninggalkan interval.
+
+**Project section**
+- Metadata `year`, `role`, dan `tech` ditambahkan ke seluruh project aktif.
+- Metadata tampil di modal detail dengan fallback `—` untuk data lama.
+- Admin editor dan import JSON mendukung ketiga field tersebut, sehingga update berikutnya tetap mudah dikelola.
+
+**About dan Contact**
+- Timeline singkat ditambahkan: `2023 — Started coding`, `2024 — Frontend exploration`, `Now — Exploring with AI`.
+- Email dijadikan baris utama yang lebih menonjol dan tombol email CTA dibuat full-width.
+
+**Motion/layout polish**
+- Section reveal tidak lagi menggeser seluruh section dengan translate; hanya fade singkat yang dipertahankan agar gerak halaman lebih premium.
+- Metadata modal memiliki layout dua kolom di mobile supaya tetap ringkas dan tidak overflow.
+
+**File:** `index.html`, `admin.html`, `data/projects.json`, `css/style.css`, `css/style.min.css`, `js/globe.js`, `js/globe.min.js`, `js/projects.js`, `js/projects.min.js`, `js/admin.js`, `js/admin.min.js`, `js/i18n.js`, `js/i18n.min.js`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Scrollbar dark-monochrome polish
 
 Scrollbar halaman diperbarui agar lebih menyatu dengan tema:

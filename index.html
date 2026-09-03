@@ -46,7 +46,7 @@
 <body>
   <!-- TAG: Topbar - brand + nav + theme toggle -->
   <header class="topbar">
-    <div class="brand">Daffa • Frontend</div>
+    <div class="brand">DaffaDev • Frontend</div>
     <!-- TAG: Section navigation - adapted from radio-input template (controls which section is visible) -->
     <div class="radio-input" data-role="section-nav" aria-label="Main sections">
       <label>
@@ -88,7 +88,7 @@
   <main class="container" id="home">
     <section class="hero">
       <div class="hero-inner">
-        <h1 class="name" fetchpriority="high">Daffa</h1>
+        <h1 class="name" fetchpriority="high">Daffa Farash</h1>
         <p class="role" data-i18n="hero.role">Frontend Developer · Sukoharjo, Indonesia</p>
         <p class="bio" data-i18n="hero.bio">Bikin website &amp; web app yang rapi, cepat, dan enak dipakai. Di sela waktunya biasanya lagi ngulik AI.</p>
 
@@ -135,6 +135,20 @@
             <span>$</span> ls skills/
             <em>HTML·CSS</em><em>JavaScript·TypeScript</em><em>React·Vite</em><em>PHP·MySQL</em><em>Node.js</em>
           </p>
+          <div class="about-timeline" aria-label="Coding timeline">
+            <div class="about-timeline__item">
+              <span class="about-timeline__year">2023</span>
+              <span class="about-timeline__text" data-i18n="about.timeline_2023">Started coding</span>
+            </div>
+            <div class="about-timeline__item">
+              <span class="about-timeline__year">2024</span>
+              <span class="about-timeline__text" data-i18n="about.timeline_2024">Frontend exploration</span>
+            </div>
+            <div class="about-timeline__item about-timeline__item--now">
+              <span class="about-timeline__year">Now</span>
+              <span class="about-timeline__text" data-i18n="about.timeline_now">Eksplorasi dengan AI</span>
+            </div>
+          </div>
         </article>
 
         <!-- TAG: GitHub activity card - live contribution chart via ghchart.rshah.org -->
@@ -228,6 +242,11 @@
       <div class="modal-body">
         <h3 id="pm-title"></h3>
         <p class="modal-desc" id="pm-desc"></p>
+        <div class="project-meta" id="pm-meta" aria-label="Project metadata">
+          <div><span data-i18n="projects.year">Year</span><strong id="pm-year"></strong></div>
+          <div><span data-i18n="projects.role">Role</span><strong id="pm-role"></strong></div>
+          <div><span data-i18n="projects.stack">Stack</span><strong id="pm-tech"></strong></div>
+        </div>
         <div class="modal-actions">
           <a class="cta" id="pm-demo" target="_blank" rel="noopener" hidden>Live Demo</a>
           <a class="ghost" id="pm-repo" target="_blank" rel="noopener" hidden>GitHub</a>
@@ -244,7 +263,7 @@
       <div class="contact-grid">
         <!-- TAG: direct channels - hairline rows (de-glassed: only the CTA card keeps the glass treatment) -->
         <div class="contact-list">
-          <a class="contact-row" href="mailto:daffafarash@gmail.com">
+          <a class="contact-row contact-row--primary" href="mailto:daffafarash@gmail.com">
             <span class="contact-label">Email</span>
             <span class="contact-value contact-value--link">daffafarash@gmail.com</span>
           </a>

@@ -158,12 +158,18 @@ body{
 .birth-marker__pin{position:relative;width:14px;height:14px;border:2px solid #fff;border-radius:50% 50% 50% 0;background:#0b0b0b;box-shadow:0 0 12px rgba(255,255,255,.55);transform:rotate(-45deg)}
 .birth-marker__pin::after{content:"";position:absolute;inset:3px;border-radius:50%;background:#fff}
 .birth-marker__text{padding:6px 9px;border:1px solid rgba(255,255,255,.45);border-radius:6px;background:rgba(11,11,11,.88);color:#f3f4f5;font-size:12px;font-weight:700;letter-spacing:.02em;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.birth-marker__pin{width:18px;height:18px;box-shadow:0 0 0 3px rgba(255,255,255,.12),0 0 16px rgba(255,255,255,.7)}
+@keyframes birthPulse{0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,.12),0 0 12px rgba(255,255,255,.5)}50%{box-shadow:0 0 0 6px rgba(255,255,255,.05),0 0 20px rgba(255,255,255,.8)}}
+.birth-marker__pin{animation:birthPulse 2.4s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){
   .birth-marker{transition-duration:.18s}
+  .birth-marker__pin{animation:none}
 }
 /* TAG: Label nama kota di atas tiap titik kunjungan - muncul di sisi tampak bola */
-.visit-marker{position:absolute;z-index:3;opacity:0;transform:translate(-50%,calc(-100% - 8px));transition:opacity .22s cubic-bezier(.23,1,.32,1);pointer-events:none;white-space:nowrap}
+.visit-marker{position:absolute;z-index:3;opacity:0;transform:translate(-50%,calc(-100% - 8px));transition:opacity .32s cubic-bezier(.23,1,.32,1);pointer-events:none;white-space:nowrap}
 .visit-marker.is-visible{opacity:1}
+.visit-marker.is-visible:not(.is-current){opacity:.42}
+.visit-marker::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:8px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.12));transform:translateX(-50%)}
 .visit-marker__text{
   display:inline-block;
   padding:5px 8px;
@@ -179,12 +185,21 @@ body{
   box-shadow:0 3px 12px rgba(0,0,0,.38),0 0 10px rgba(255,255,255,.08);
   white-space:nowrap;
 }
+.project-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 20px;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.project-meta div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.project-meta span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.project-meta strong{font-size:12px;line-height:1.35;color:var(--text);font-weight:600}
+.project-meta strong:empty::after{content:"—";color:var(--muted)}
+@media (max-width:520px){
+  .project-meta{grid-template-columns:1fr 1fr}
+  .project-meta div:last-child{grid-column:1 / -1}
+}
 @media (max-width:1000px){ .stage{height:360px} }
 
 /* TAG: Sections general */
 html{scroll-behavior:smooth}
-.section{padding:48px 18px;opacity:0;transform:translateY(18px);transition:opacity .48s cubic-bezier(.2,.9,.2,1), transform .48s cubic-bezier(.2,.9,.2,1);scroll-margin-top:112px}
-.section.is-visible{opacity:1;transform:translateY(0)}
+.section{padding:48px 18px;opacity:0;transition:opacity .36s cubic-bezier(.23,1,.32,1);scroll-margin-top:112px}
+.section.is-visible{opacity:1}
 .section-inner{max-width:1100px;margin:0 auto}
 .section h2{
   /* TAG: serif display for section titles - pairs with .name hero font */
@@ -315,6 +330,9 @@ html{scroll-behavior:smooth}
 .contact-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:stretch;margin-top:22px}
 .contact-list{border-top:1px solid rgba(255,255,255,.07)}
 .contact-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 2px;text-decoration:none}
+.contact-row--primary{padding:20px 14px;margin:0 0 2px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.035)}
+.contact-row--primary .contact-label{color:var(--text)}
+.contact-row--primary .contact-value--link{color:var(--text);font-size:15px}
 .contact-row + .contact-row{border-top:1px solid rgba(255,255,255,.05)}
 .contact-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex:none}
 .contact-value{display:inline-flex;align-items:center;gap:10px;font-weight:600}
@@ -337,6 +355,7 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 }
 .contact-panel--cta p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
 .contact-panel--cta .cta{margin-top:auto}
+.contact-panel--cta .cta{width:100%;justify-content:center;min-height:48px}
 .contact-panel--cta .social-compact{margin-top:2px}
 /* TAG: About v2 - dark mono "code editor" cards + pixel ghost mascot.
    Scoped to #about; the rest of the page keeps the monochrome glass theme. */
@@ -394,6 +413,14 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   border:1px solid rgba(255,255,255,.12);
   border-radius:999px;padding:3px 10px;color:#c9ced3;
 }
+.about-timeline{position:relative;display:grid;gap:10px;margin-top:22px;padding-left:16px}
+.about-timeline::before{content:"";position:absolute;left:3px;top:5px;bottom:5px;width:1px;background:rgba(255,255,255,.18)}
+.about-timeline__item{position:relative;display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:baseline;font-size:11px}
+.about-timeline__item::before{content:"";position:absolute;left:-16px;top:5px;width:7px;height:7px;border:1px solid #8f9499;background:#2d2d2d;border-radius:50%}
+.about-timeline__item--now::before{background:#3fb950;border-color:#3fb950;box-shadow:0 0 8px rgba(63,185,80,.55)}
+.about-timeline__year{font-family:'Space Mono',ui-monospace,monospace;color:#8f9499}
+.about-timeline__item--now .about-timeline__year{color:#3fb950}
+.about-timeline__text{color:#c7cbd0}
 .dev-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .badge{
   border:1.5px dashed rgba(63,185,80,.55);

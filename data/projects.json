@@ -6,6 +6,9 @@
       "id": "pamer-co",
       "title": "Pamer.co",
       "description": "Project showcase pribadi berisi galeri proyek, profil singkat, dan status ketersediaan kerja.",
+      "year": "2024",
+      "role": "Design & Frontend",
+      "tech": ["HTML", "CSS", "JavaScript"],
       "image": "assets/seed1.svg",
       "demoUrl": "https://pamer-co.vercel.app/",
       "repoUrl": "https://github.com/Dappzzz-Dev/Pamer.co"
@@ -14,6 +17,9 @@
       "id": "personal-portfolio",
       "title": "Personal Portfolio",
       "description": "Landing page minimal dengan animasi halus dan 3D ringan.",
+      "year": "2025",
+      "role": "Frontend Developer",
+      "tech": ["Vanilla JS", "Three.js", "GSAP"],
       "image": "assets/seed2.svg",
       "demoUrl": "",
       "repoUrl": "https://github.com/Dappzzz-Dev"
@@ -22,6 +28,9 @@
       "id": "ui-component-library",
       "title": "UI Component Library",
       "description": "Kumpulan komponen yang konsisten untuk UI bersih dan dapat diakses.",
+      "year": "2025",
+      "role": "UI Engineer",
+      "tech": ["React", "TypeScript", "Vite"],
       "image": "assets/seed3.svg",
       "demoUrl": "",
       "repoUrl": "https://github.com/Dappzzz-Dev"

@@ -20,7 +20,7 @@
     exportBtn: $('btn-export'), importBtn: $('btn-import'), importFile: $('import-file'),
     list: $('proj-list'), listEmpty: $('list-empty'),
     editor: $('editor'), form: $('editor-form'), edTitle: $('editor-title'),
-    fTitle: $('f-title'), fDesc: $('f-desc'), fImage: $('f-image'), fPreview: $('f-preview'),
+    fTitle: $('f-title'), fDesc: $('f-desc'), fYear: $('f-year'), fRole: $('f-role'), fTech: $('f-tech'), fImage: $('f-image'), fPreview: $('f-preview'),
     fDemo: $('f-demo'), fRepo: $('f-repo'), formError: $('form-error'),
     close: $('editor-close'), cancel: $('editor-cancel'),
     // TAG: dashboard shell elements (Pamer.co-style layout)
@@ -368,6 +368,9 @@
     els.edTitle.textContent = p ? 'Edit Project' : 'Tambah Project';
     els.fTitle.value = p ? p.title : '';
     els.fDesc.value = p ? p.description : '';
+    els.fYear.value = p ? (p.year || '') : '';
+    els.fRole.value = p ? (p.role || '') : '';
+    els.fTech.value = p ? (Array.isArray(p.tech) ? p.tech.join(', ') : (p.tech || '')) : '';
     els.fDemo.value = p ? (p.demoUrl || '') : '';
     els.fRepo.value = p ? (p.repoUrl || '') : '';
     els.fImage.value = '';
@@ -400,6 +403,9 @@
     e.preventDefault();
     const title = els.fTitle.value.trim();
     const description = els.fDesc.value.trim();
+    const year = els.fYear.value.trim();
+    const role = els.fRole.value.trim();
+    const tech = els.fTech.value.split(',').map(s => s.trim()).filter(Boolean);
     const demoUrl = els.fDemo.value.trim();
     const repoUrl = els.fRepo.value.trim();
     const problems = [];
@@ -418,13 +424,14 @@
     }
 
     if(existing){
-      Object.assign(existing, { title, description, demoUrl, repoUrl });
+      Object.assign(existing, { title, description, year, role, tech, demoUrl, repoUrl });
       if(pendingImage) existing.image = pendingImage.dataURL;
       toast('', 'Perubahan disimpan ke draf.');
     }else{
       draft.projects.push({
         id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         title, description,
+        year, role, tech,
         image: pendingImage.dataURL,
         demoUrl, repoUrl
       });
@@ -490,6 +497,9 @@
             id: String(p.id || ('p' + Date.now().toString(36))),
             title: String(p.title || ''),
             description: String(p.description || ''),
+            year: String(p.year || ''),
+            role: String(p.role || ''),
+            tech: Array.isArray(p.tech) ? p.tech.map(String) : String(p.tech || '').split(',').map(s => s.trim()).filter(Boolean),
             image: String(p.image || ''),
             demoUrl: String(p.demoUrl || ''),
             repoUrl: String(p.repoUrl || '')
