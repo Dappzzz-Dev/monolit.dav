@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-09-04 — Menghaluskan gerakan static layar TV
+
+- Penyebab patah ditemukan pada animasi `background-position` gradient 2500px dengan `steps(2)`, yang memaksa repaint besar dan menghasilkan lompatan frame.
+- Noise dipindahkan ke pseudo-element layar dan digerakkan memakai `transform: translate3d` dengan timing `linear`, sehingga perpindahan lebih kontinu dan ringan.
+- Bentuk TV, ukuran layar, tekstur monochrome, dan label error tetap dipertahankan.
+- Mode reduced-motion tetap menampilkan static dengan kecepatan lebih lembut, bukan menghilangkannya.
+
+**File:** `404.html`, `UPDATE.md`.
+
+---
+
 ## 2026-09-04 — Memperkuat gerakan semut tanpa mengubah desain TV
 
 - Static layar tetap memakai gradient template, tetapi perpindahan layer conic diperbesar agar butiran terlihat benar-benar berjalan.
