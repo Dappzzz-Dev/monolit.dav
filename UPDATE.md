@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-03 — Fine-tune posisi bubble ghost
+
+Bubble PNG digeser sedikit lebih jauh ke kanan dan ke atas agar tidak menempel pada karakter:
+- Desktop: jarak horizontal dibuat sedang dengan `left: calc(100% + 14px)`.
+- Posisi vertikal dinaikkan secukupnya ke `top: -52px`.
+- Mobile mendapat offset lebih kecil agar tetap proporsional pada layar sempit.
+- Asset PNG, ukuran bubble, teks, dan animasi tidak diubah.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Use exact supplied PNG speech bubble + repair motion
 
 Bubble sekarang benar-benar memakai file PNG yang diberikan, bukan dibuat ulang dengan CSS:

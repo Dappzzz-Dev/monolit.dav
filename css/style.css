@@ -502,8 +502,8 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 /* TAG: Ghost speech bubble - exact supplied PNG, cropped to its transparent canvas */
 .ghost-speech {
   position: absolute;
-  top: -38px;
-  left: calc(100% - 10px);
+  top: -52px;
+  left: calc(100% + 14px);
   width: 224px;
   height: 122px;
   transform:translateY(0);
@@ -540,7 +540,7 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .about-ghost{padding-top:8px;min-height:0}
   #ghost{scale:.65}
   .ghost-speech{
-    top:-25px;left:calc(100% - 4px);width:180px;height:98px;font-size:9px;padding:20px 16px 15px;background-size:148% 153%;
+    top:-34px;left:calc(100% + 8px);width:180px;height:98px;font-size:9px;padding:20px 16px 15px;background-size:148% 153%;
   }
 }
 
