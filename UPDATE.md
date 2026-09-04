@@ -80,6 +80,16 @@
 
 ---
 
+## 2026-09-04 — Menyembunyikan ghost dan bubble di mobile
+
+- Ghost mascot dan speech bubble sekarang disembunyikan hanya pada viewport `max-width: 900px`.
+- Desktop tetap menampilkan ghost dan bubble seperti sebelumnya.
+- Penyembunyian memakai CSS sehingga tidak mengubah markup, animasi desktop, layout section lain, atau alur navigasi.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-04 — Mobile comfort and performance pass
 
 - Hero mobile dipadatkan menjadi satu kolom dengan margin atas, padding, heading, dan deskripsi yang lebih proporsional.

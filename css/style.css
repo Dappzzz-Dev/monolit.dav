@@ -1004,14 +1004,17 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 
 /* ============================================================
    TAG: MOBILE-FIRST REFINEMENT — rapi, anti-lag, satu tema monokrom.
-   Hides the heavy WebGL globe + animated ghost on small screens (the two
-   biggest mobile lag sources) and tightens spacing so content reads clearly.
+   Hides the heavy WebGL globe on small screens and tightens spacing so
+   content reads clearly.
    ============================================================ */
 @media (max-width:900px){
 
   /* Globe (3D render loop) is the heaviest mobile cost. js/globe.js already
      skips mounting it on narrow screens; we hide its (now empty) stage too. */
   .stage{display:none}
+  /* TAG: Ghost and its speech bubble stay desktop-only to keep mobile About
+     focused and avoid running the mascot's many CSS animations. */
+  .about-ghost{display:none}
 
   /* Hero reads as centered, purposeful text block. */
   .hero-inner{text-align:center}
