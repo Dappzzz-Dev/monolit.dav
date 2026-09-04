@@ -1013,9 +1013,6 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
      skips mounting it on narrow screens; we hide its (now empty) stage too. */
   .stage{display:none}
 
-  /* Animated pixel ghost (many CSS-animated divs) — hidden for smooth scroll. */
-  .about-ghost{display:none}
-
   /* Hero reads as centered, purposeful text block. */
   .hero-inner{text-align:center}
   .hero-inner .name{font-size:clamp(2.4rem, 11vw, 3.4rem)}
@@ -1031,4 +1028,47 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .section{padding-top:36px;padding-bottom:36px}
   .section-inner h2,h2{font-size:1.6rem}
   .section-lead{font-size:14px}
+}
+
+/* TAG: Mobile comfort pass - preserve the desktop composition while
+   reducing vertical waste and widening touch targets on narrow screens. */
+@media (max-width:900px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .container{margin:92px auto 28px;gap:0}
+  .hero-inner{padding:26px 20px;border-radius:14px}
+  .hero-inner .name{font-size:clamp(2.15rem,11vw,3rem);line-height:1.02}
+  .hero-inner .bio{max-width:36ch}
+  .hero-ctas{width:100%;margin-top:18px}
+  .hero-ctas .cta,.hero-ctas .ghost{min-height:48px}
+  .social-links{margin-top:16px;gap:7px}
+  .social-links a{min-height:40px;padding:9px 10px}
+  .section{padding-top:38px;padding-bottom:38px}
+  .about-grid{margin-top:16px;min-height:0}
+  .about-cards{gap:18px}
+  .dev-card{padding:20px 18px}
+  .dev-skills{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:14px;line-height:1.5}
+  .dev-skills span{margin-right:0}
+  .dev-skills em{margin:0}
+  .carousel-stage{height:300px;border-radius:14px}
+  .modal-backdrop{align-items:flex-end;padding:0}
+  .modal-card{width:100%;max-height:92svh;border-radius:18px 18px 0 0;border-bottom:0;animation:modal-sheet-in .26s cubic-bezier(.2,.9,.2,1)}
+  .modal-img{aspect-ratio:16/9}
+  .modal-body{padding:20px 18px calc(24px + env(safe-area-inset-bottom))}
+  .modal-close{top:10px;right:10px;width:44px;height:44px}
+  .modal-actions{display:grid;grid-template-columns:1fr;gap:9px}
+  .modal-actions .cta,.modal-actions .ghost{width:100%;justify-content:center;min-height:48px}
+  .contact-grid{gap:18px;margin-top:16px}
+  .contact-panel--cta{padding:20px 18px}
+  .social-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}
+  .social-compact a{justify-content:center;min-height:44px;padding:10px 8px}
+}
+@keyframes modal-sheet-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media (max-width:360px){
+  .topbar{top:7px;left:7px;right:7px;padding:7px}
+  .topbar .brand{font-size:12px}
+  .radio-input label{font-size:11px;padding:8px 2px}
+  .hero-inner{padding:22px 16px}
+  .hero-ctas .cta,.hero-ctas .ghost{padding-inline:8px;font-size:13px}
+  .social-links a{font-size:12px}
+  .carousel-stage{height:270px}
 }

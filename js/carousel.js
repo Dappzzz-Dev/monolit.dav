@@ -273,6 +273,8 @@ void main() {
       this.images = (srcs || []).map(src=>{
         const img = new Image();
         img.crossOrigin = 'anonymous';
+        img.loading = 'lazy';
+        img.decoding = 'async';
         img.src = src;
         return img;
       });

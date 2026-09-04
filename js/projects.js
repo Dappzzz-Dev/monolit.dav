@@ -77,6 +77,16 @@ function openModal(project){
       onOpen: (i)=> openModal(projects[i])
     });
     carousel.setImages(projects.map(p=> p.image));
+
+    // TAG: Pause the canvas loop while the carousel is off-screen to keep
+    // mobile scrolling responsive without changing the desktop interaction.
+    if('IntersectionObserver' in window){
+      const observer = new IntersectionObserver((entries)=>{
+        const entry = entries[0];
+        carousel.setPaused(!entry.isIntersecting);
+      }, { threshold: 0.05 });
+      observer.observe(host);
+    }
   }
 
   init();

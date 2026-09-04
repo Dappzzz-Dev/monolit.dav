@@ -80,6 +80,20 @@
 
 ---
 
+## 2026-09-04 — Mobile comfort and performance pass
+
+- Hero mobile dipadatkan menjadi satu kolom dengan margin atas, padding, heading, dan deskripsi yang lebih proporsional.
+- CTA tetap dua tombol sejajar pada layar kecil, dengan tinggi touch target minimum 48px; topbar diperkecil lagi khusus layar sangat sempit.
+- Globe tetap disembunyikan di mobile sesuai pilihan performa, sementara ghost tetap mengikuti aturan About-only pada mobile.
+- Carousel mobile dipendekkan, gambar diberi `loading="lazy"` dan `decoding="async"`, lalu loop canvas dipause saat keluar viewport melalui `IntersectionObserver`.
+- Modal project berubah menjadi bottom sheet full-width di mobile; tombol aksi menjadi full-width dan tombol close menjadi 44px.
+- Skill tags sekarang wrap secara alami; social links Contact menjadi grid dua kolom dengan touch target minimum 44px.
+- Overflow horizontal dikunci pada mobile agar tidak muncul scroll samping dari canvas, metadata, atau teks panjang.
+
+**File:** `css/style.css`, `css/style.min.css`, `js/carousel.js`, `js/carousel.min.js`, `js/projects.js`, `js/projects.min.js`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Universal monochrome error TV
 
 Error surface baru ditambahkan langsung ke `index.html` tanpa membuat file halaman khusus:
