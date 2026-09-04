@@ -80,6 +80,16 @@
 
 ---
 
+## 2026-09-04 — Merapikan Contact section di mobile
+
+- Baris Email, Lokasi, dan Fokus saat ini diubah menjadi susunan label lalu nilai agar tidak berhimpitan pada layar kecil.
+- Teks panjang memakai wrapping yang aman, dengan line-height dan padding yang lebih lega untuk scan yang nyaman.
+- Card CTA dan tampilan desktop tidak diubah.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-04 — Menyembunyikan ghost dan bubble di mobile
 
 - Ghost mascot dan speech bubble sekarang disembunyikan hanya pada viewport `max-width: 900px`.

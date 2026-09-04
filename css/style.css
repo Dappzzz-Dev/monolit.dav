@@ -1061,6 +1061,14 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .modal-actions{display:grid;grid-template-columns:1fr;gap:9px}
   .modal-actions .cta,.modal-actions .ghost{width:100%;justify-content:center;min-height:48px}
   .contact-grid{gap:18px;margin-top:16px}
+  /* TAG: Mobile contact rhythm - stack labels and values so long copy stays
+     readable instead of competing for the same narrow row. */
+  .contact-list{border-top:0}
+  .contact-row{align-items:flex-start;flex-direction:column;gap:7px;padding:15px 0}
+  .contact-row--primary{gap:8px;padding:16px 14px;margin-bottom:3px}
+  .contact-value{width:100%;display:block;line-height:1.45;overflow-wrap:anywhere}
+  .contact-value--link{font-size:14px}
+  .contact-note{white-space:nowrap}
   .contact-panel--cta{padding:20px 18px}
   .social-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}
   .social-compact a{justify-content:center;min-height:44px;padding:10px 8px}
