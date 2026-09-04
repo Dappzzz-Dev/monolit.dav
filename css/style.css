@@ -1061,17 +1061,28 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .modal-actions{display:grid;grid-template-columns:1fr;gap:9px}
   .modal-actions .cta,.modal-actions .ghost{width:100%;justify-content:center;min-height:48px}
   .contact-grid{gap:18px;margin-top:16px}
-  /* TAG: Mobile contact rhythm - stack labels and values so long copy stays
-     readable instead of competing for the same narrow row. */
+  /* TAG: Mobile contact rhythm - use fluid label/value columns so each phone
+     width gets breathing room without forcing every row into one shape. */
   .contact-list{border-top:0}
-  .contact-row{align-items:flex-start;flex-direction:column;gap:7px;padding:15px 0}
-  .contact-row--primary{gap:8px;padding:16px 14px;margin-bottom:3px}
-  .contact-value{width:100%;display:block;line-height:1.45;overflow-wrap:anywhere}
-  .contact-value--link{font-size:14px}
+  .contact-row{display:grid;grid-template-columns:minmax(84px,28%) minmax(0,1fr);align-items:start;gap:clamp(10px,4vw,22px);padding:15px 0}
+  .contact-row--primary{gap:clamp(10px,4vw,18px);padding:16px 14px;margin-bottom:3px}
+  .contact-value{min-width:0;display:block;line-height:1.45;overflow-wrap:anywhere;text-align:right}
+  .contact-value--link{font-size:clamp(13px,3.8vw,14px)}
   .contact-note{white-space:nowrap}
-  .contact-panel--cta{padding:20px 18px}
+  .contact-panel--cta{padding:clamp(18px,5vw,22px) clamp(15px,5vw,20px);gap:clamp(10px,3vw,12px)}
+  .contact-panel--cta h3{font-size:clamp(20px,6vw,22px)}
+  .contact-panel--cta p{font-size:clamp(13px,3.7vw,14px);line-height:1.55}
   .social-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}
   .social-compact a{justify-content:center;min-height:44px;padding:10px 8px}
+}
+@media (max-width:360px){
+  .contact-row{grid-template-columns:minmax(76px,26%) minmax(0,1fr);gap:9px;padding:13px 0}
+  .contact-row--primary{padding:14px 12px}
+  .contact-label{font-size:10px;letter-spacing:.11em}
+  .contact-value{font-size:13px;line-height:1.4}
+  .contact-note{font-size:11px}
+  .social-compact{gap:6px}
+  .social-compact a{font-size:12px;padding-inline:5px}
 }
 @keyframes modal-sheet-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @media (max-width:360px){

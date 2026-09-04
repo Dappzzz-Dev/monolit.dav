@@ -80,6 +80,16 @@
 
 ---
 
+## 2026-09-04 — Membuat Contact section mobile lebih fluid
+
+- Layout Contact mobile sekarang memakai kolom label/nilai yang responsif terhadap lebar perangkat.
+- Ukuran teks, jarak, padding CTA, dan tombol sosial memakai nilai fluid agar tetap rapi di layar kecil maupun besar.
+- Breakpoint ekstra kecil menurunkan spacing secara ringan tanpa mengubah struktur atau desain desktop.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-04 — Merapikan Contact section di mobile
 
 - Baris Email, Lokasi, dan Fokus saat ini diubah menjadi susunan label lalu nilai agar tidak berhimpitan pada layar kecil.
