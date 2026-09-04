@@ -400,6 +400,10 @@ async function mountGlobe() {
       visitDotMaterial,
       CONFIG.visitPlaces.length,
     );
+    // TAG: Instances are spread across the sphere; the default local bounds
+    // can cull the complete marker mesh even while individual dots are visible.
+    visitDots.frustumCulled = false;
+    visitDots.renderOrder = 2;
     const visitMatrix = new THREE.Matrix4();
     CONFIG.visitPlaces.forEach((place, index) => {
       visitMatrix.setPosition(latLngToVector(place.lat, place.lng, radius * 1.025));

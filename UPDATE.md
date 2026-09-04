@@ -70,6 +70,16 @@
 
 ---
 
+## 2026-09-04 — Memperbaiki titik tujuan globe yang hilang
+
+- Penyebab ditemukan pada `InstancedMesh`: lima titik tersebar di permukaan globe, tetapi bounds lokal instance dapat membuat Three.js melakukan frustum culling terhadap seluruh mesh marker.
+- Frustum culling dimatikan khusus untuk mesh titik tujuan dan `renderOrder` diberi prioritas aman.
+- Tidak mengubah koordinat, label, warna putih, rotasi, atau aturan titik hanya terlihat di sisi depan.
+
+**File:** `js/globe.js`, `js/globe.min.js`, `UPDATE.md`.
+
+---
+
 ## 2026-09-03 — Universal monochrome error TV
 
 Error surface baru ditambahkan langsung ke `index.html` tanpa membuat file halaman khusus:
