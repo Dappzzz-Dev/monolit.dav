@@ -7,18 +7,11 @@
   const emptyNote = document.getElementById('projects-empty');
   if(!host) return;
 
-  const modal = document.getElementById('project-modal');
-  const el = {
-    img: document.getElementById('pm-img'),
-    title: document.getElementById('pm-title'),
-    desc: document.getElementById('pm-desc'),
-    year: document.getElementById('pm-year'),
-    role: document.getElementById('pm-role'),
-    tech: document.getElementById('pm-tech'),
-    demo: document.getElementById('pm-demo'),
-    repo: document.getElementById('pm-repo'),
-    close: document.getElementById('pm-close')
-  };
+  // TAG: Project modal is mounted by its own module before this controller.
+  const modalComponent = window.MonolitComponents && window.MonolitComponents.projectModal;
+  if(!modalComponent) return;
+  const modal = modalComponent.modal;
+  const el = modalComponent.elements;
   let carousel = null;
   let lastFocus = null;
 

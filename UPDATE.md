@@ -80,6 +80,18 @@
 
 ---
 
+## 2026-09-05 — Merapikan modul web dan katalog skill
+
+- Markup project detail modal dipindah dari `index.html` ke module `js/components/project-modal.js`.
+- `js/projects.js` sekarang hanya mengatur data, carousel, dan perilaku modal melalui interface module; markup desktop/mobile tetap satu sumber dan responsif lewat CSS.
+- Bundle minified modal ditambahkan agar production tetap memakai jalur yang sama.
+- `.skills_ai/` ditambahkan sebagai katalog terpusat untuk skill lokal, tanpa memindahkan implementasi vendor yang dibutuhkan oleh loader masing-masing tool.
+- Audit struktur menemukan tidak ada test runner khusus; validasi utama dilakukan pada referensi script, syntax JavaScript, JSON data, dan sinkronisasi bundle yang disentuh.
+
+**File:** `index.html`, `js/projects.js`, `js/projects.min.js`, `js/components/project-modal.js`, `js/components/project-modal.min.js`, `js/components/README.md`, `.skills_ai/README.md`, `.skills_ai/manifest.json`, `.gitignore`, `CONTEXT.md`, `UPDATE.md`.
+
+---
+
 ## 2026-09-04 — Membuat Contact section mobile lebih fluid
 
 - Layout Contact mobile sekarang memakai kolom label/nilai yang responsif terhadap lebar perangkat.

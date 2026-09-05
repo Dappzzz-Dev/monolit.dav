@@ -1,5 +1,8 @@
 # ===== Tool & skill folders (bukan bagian situs) =====
 .*/
+# Central skill catalog is intentionally tracked; vendor folders stay local.
+!/.skills_ai/
+!/.skills_ai/**
 # Kalau nanti pakai GitHub Actions, batalkan penyembunyiannya dengan:
 # !/.github/workflows/
 

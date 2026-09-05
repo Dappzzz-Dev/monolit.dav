@@ -45,7 +45,11 @@
 - README.md co-authored Copilot; klik-effects & nav radio berasal dari template eksternal yang diadaptasi
 - Admin tidak ditautkan dari halaman publik; akses langsung via `/admin.html`
 
-## Skills lokal yang relevan (folder `.agents/skills` & `.opencode/skills`)
+## Skills lokal yang relevan
+
+Index terpusat ada di `.skills_ai/README.md` dan `.skills_ai/manifest.json`.
+Implementasi tetap berada di folder vendor (`.agents/skills`, `.github/skills`,
+dan `.opencode/skills`) agar loader masing-masing tool tidak putus.
 - **threejs-*** (fundamentals/interaction/shaders/postprocessing) → globe
 - **gsap-*** (core/scrolltrigger/timeline) → animasi
 - **impeccable / frontend-design / redesign-existing-projects / ui-ux-pro-max** → polish visual

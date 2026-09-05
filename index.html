@@ -234,26 +234,8 @@
     </div>
   </section>
 
-  <!-- TAG: Project detail modal - opened when a carousel card is clicked -->
-  <div class="modal-backdrop" id="project-modal" hidden>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
-      <button class="modal-close" id="pm-close" data-i18n-aria="modal.close" aria-label="Tutup">&times;</button>
-      <img class="modal-img" id="pm-img" alt="" loading="lazy" decoding="async" fetchpriority="low">
-      <div class="modal-body">
-        <h3 id="pm-title"></h3>
-        <p class="modal-desc" id="pm-desc"></p>
-        <div class="project-meta" id="pm-meta" aria-label="Project metadata">
-          <div><span data-i18n="projects.year">Year</span><strong id="pm-year"></strong></div>
-          <div><span data-i18n="projects.role">Role</span><strong id="pm-role"></strong></div>
-          <div><span data-i18n="projects.stack">Stack</span><strong id="pm-tech"></strong></div>
-        </div>
-        <div class="modal-actions">
-          <a class="cta" id="pm-demo" target="_blank" rel="noopener" hidden>Live Demo</a>
-          <a class="ghost" id="pm-repo" target="_blank" rel="noopener" hidden>GitHub</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- TAG: Project detail modal - mounted by the responsive modal module -->
+  <div id="project-modal-root"></div>
 
   <!-- TAG: Contact section -->
   <section class="section" id="contact">
@@ -373,6 +355,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/click-effects.min.js"></script>
   <script src="js/app.min.js"></script>
+  <script src="js/components/project-modal.min.js"></script>
   <script src="js/i18n.min.js"></script>
   <script src="js/sections.min.js"></script>
   <script src="js/carousel.min.js"></script>

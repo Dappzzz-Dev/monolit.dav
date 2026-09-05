@@ -1,0 +1,676 @@
+{
+  "version": 1,
+  "purpose": "Central index for local AI skills; implementations remain in vendor folders.",
+  "sources": [
+    {
+      "root": ".agents/skills",
+      "skills": [
+        {
+          "name": "animate",
+          "path": ".agents/skills/animate",
+          "hasSkillFile": true
+        },
+        {
+          "name": "animate-expo",
+          "path": ".agents/skills/animate-expo",
+          "hasSkillFile": true
+        },
+        {
+          "name": "animation-vocabulary",
+          "path": ".agents/skills/animation-vocabulary",
+          "hasSkillFile": true
+        },
+        {
+          "name": "anti-ui-slop",
+          "path": ".agents/skills/anti-ui-slop",
+          "hasSkillFile": true
+        },
+        {
+          "name": "apple-design",
+          "path": ".agents/skills/apple-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ask-matt",
+          "path": ".agents/skills/ask-matt",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ask-sonner",
+          "path": ".agents/skills/ask-sonner",
+          "hasSkillFile": true
+        },
+        {
+          "name": "banner-design",
+          "path": ".agents/skills/banner-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "brand",
+          "path": ".agents/skills/brand",
+          "hasSkillFile": true
+        },
+        {
+          "name": "brandkit",
+          "path": ".agents/skills/brandkit",
+          "hasSkillFile": true
+        },
+        {
+          "name": "claude-handoff",
+          "path": ".agents/skills/claude-handoff",
+          "hasSkillFile": true
+        },
+        {
+          "name": "code-review",
+          "path": ".agents/skills/code-review",
+          "hasSkillFile": true
+        },
+        {
+          "name": "codebase-design",
+          "path": ".agents/skills/codebase-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design",
+          "path": ".agents/skills/design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design-dna",
+          "path": ".agents/skills/design-dna",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design-system",
+          "path": ".agents/skills/design-system",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design-taste-frontend",
+          "path": ".agents/skills/design-taste-frontend",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design-taste-frontend-v1",
+          "path": ".agents/skills/design-taste-frontend-v1",
+          "hasSkillFile": true
+        },
+        {
+          "name": "diagnosing-bugs",
+          "path": ".agents/skills/diagnosing-bugs",
+          "hasSkillFile": true
+        },
+        {
+          "name": "diagram-maker",
+          "path": ".agents/skills/diagram-maker",
+          "hasSkillFile": true
+        },
+        {
+          "name": "documentation-lookup",
+          "path": ".agents/skills/documentation-lookup",
+          "hasSkillFile": true
+        },
+        {
+          "name": "domain-modeling",
+          "path": ".agents/skills/domain-modeling",
+          "hasSkillFile": true
+        },
+        {
+          "name": "emil-design-eng",
+          "path": ".agents/skills/emil-design-eng",
+          "hasSkillFile": true
+        },
+        {
+          "name": "find-animation-opportunities",
+          "path": ".agents/skills/find-animation-opportunities",
+          "hasSkillFile": true
+        },
+        {
+          "name": "frontend-design",
+          "path": ".agents/skills/frontend-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "frontend-slides",
+          "path": ".agents/skills/frontend-slides",
+          "hasSkillFile": true
+        },
+        {
+          "name": "full-output-enforcement",
+          "path": ".agents/skills/full-output-enforcement",
+          "hasSkillFile": true
+        },
+        {
+          "name": "git-guardrails-claude-code",
+          "path": ".agents/skills/git-guardrails-claude-code",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gpt-taste",
+          "path": ".agents/skills/gpt-taste",
+          "hasSkillFile": true
+        },
+        {
+          "name": "grill-me",
+          "path": ".agents/skills/grill-me",
+          "hasSkillFile": true
+        },
+        {
+          "name": "grill-with-docs",
+          "path": ".agents/skills/grill-with-docs",
+          "hasSkillFile": true
+        },
+        {
+          "name": "grilling",
+          "path": ".agents/skills/grilling",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-core",
+          "path": ".agents/skills/gsap-core",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-frameworks",
+          "path": ".agents/skills/gsap-frameworks",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-performance",
+          "path": ".agents/skills/gsap-performance",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-plugins",
+          "path": ".agents/skills/gsap-plugins",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-react",
+          "path": ".agents/skills/gsap-react",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-scrolltrigger",
+          "path": ".agents/skills/gsap-scrolltrigger",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-timeline",
+          "path": ".agents/skills/gsap-timeline",
+          "hasSkillFile": true
+        },
+        {
+          "name": "gsap-utils",
+          "path": ".agents/skills/gsap-utils",
+          "hasSkillFile": true
+        },
+        {
+          "name": "handoff",
+          "path": ".agents/skills/handoff",
+          "hasSkillFile": true
+        },
+        {
+          "name": "high-end-visual-design",
+          "path": ".agents/skills/high-end-visual-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "hyperframes-animation",
+          "path": ".agents/skills/hyperframes-animation",
+          "hasSkillFile": true
+        },
+        {
+          "name": "image-to-code",
+          "path": ".agents/skills/image-to-code",
+          "hasSkillFile": true
+        },
+        {
+          "name": "imagegen-frontend-mobile",
+          "path": ".agents/skills/imagegen-frontend-mobile",
+          "hasSkillFile": true
+        },
+        {
+          "name": "imagegen-frontend-web",
+          "path": ".agents/skills/imagegen-frontend-web",
+          "hasSkillFile": true
+        },
+        {
+          "name": "impeccable",
+          "path": ".agents/skills/impeccable",
+          "hasSkillFile": true
+        },
+        {
+          "name": "implement",
+          "path": ".agents/skills/implement",
+          "hasSkillFile": true
+        },
+        {
+          "name": "implement-spec",
+          "path": ".agents/skills/implement-spec",
+          "hasSkillFile": true
+        },
+        {
+          "name": "improve-animations",
+          "path": ".agents/skills/improve-animations",
+          "hasSkillFile": true
+        },
+        {
+          "name": "improve-codebase-architecture",
+          "path": ".agents/skills/improve-codebase-architecture",
+          "hasSkillFile": true
+        },
+        {
+          "name": "industrial-brutalist-ui",
+          "path": ".agents/skills/industrial-brutalist-ui",
+          "hasSkillFile": true
+        },
+        {
+          "name": "loop-me",
+          "path": ".agents/skills/loop-me",
+          "hasSkillFile": true
+        },
+        {
+          "name": "migrate-to-shoehorn",
+          "path": ".agents/skills/migrate-to-shoehorn",
+          "hasSkillFile": true
+        },
+        {
+          "name": "minimalist-ui",
+          "path": ".agents/skills/minimalist-ui",
+          "hasSkillFile": true
+        },
+        {
+          "name": "motion-design",
+          "path": ".agents/skills/motion-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "motion-doctrine",
+          "path": ".agents/skills/motion-doctrine",
+          "hasSkillFile": true
+        },
+        {
+          "name": "motion-graphics",
+          "path": ".agents/skills/motion-graphics",
+          "hasSkillFile": true
+        },
+        {
+          "name": "no-ai-slop",
+          "path": ".agents/skills/no-ai-slop",
+          "hasSkillFile": true
+        },
+        {
+          "name": "pick-ui-library",
+          "path": ".agents/skills/pick-ui-library",
+          "hasSkillFile": true
+        },
+        {
+          "name": "prototype",
+          "path": ".agents/skills/prototype",
+          "hasSkillFile": true
+        },
+        {
+          "name": "quality-nonconformance",
+          "path": ".agents/skills/quality-nonconformance",
+          "hasSkillFile": true
+        },
+        {
+          "name": "redesign-existing-projects",
+          "path": ".agents/skills/redesign-existing-projects",
+          "hasSkillFile": true
+        },
+        {
+          "name": "remotion-best-practices",
+          "path": ".agents/skills/remotion-best-practices",
+          "hasSkillFile": true
+        },
+        {
+          "name": "remotion-render",
+          "path": ".agents/skills/remotion-render",
+          "hasSkillFile": true
+        },
+        {
+          "name": "research",
+          "path": ".agents/skills/research",
+          "hasSkillFile": true
+        },
+        {
+          "name": "resolving-merge-conflicts",
+          "path": ".agents/skills/resolving-merge-conflicts",
+          "hasSkillFile": true
+        },
+        {
+          "name": "rest-api-design",
+          "path": ".agents/skills/rest-api-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "review-animations",
+          "path": ".agents/skills/review-animations",
+          "hasSkillFile": true
+        },
+        {
+          "name": "scaffold-exercises",
+          "path": ".agents/skills/scaffold-exercises",
+          "hasSkillFile": true
+        },
+        {
+          "name": "security-review",
+          "path": ".agents/skills/security-review",
+          "hasSkillFile": true
+        },
+        {
+          "name": "senior-backend",
+          "path": ".agents/skills/senior-backend",
+          "hasSkillFile": true
+        },
+        {
+          "name": "setup-matt-pocock-skills",
+          "path": ".agents/skills/setup-matt-pocock-skills",
+          "hasSkillFile": true
+        },
+        {
+          "name": "setup-pre-commit",
+          "path": ".agents/skills/setup-pre-commit",
+          "hasSkillFile": true
+        },
+        {
+          "name": "setup-ts-deep-modules",
+          "path": ".agents/skills/setup-ts-deep-modules",
+          "hasSkillFile": true
+        },
+        {
+          "name": "slides",
+          "path": ".agents/skills/slides",
+          "hasSkillFile": true
+        },
+        {
+          "name": "stitch-design-taste",
+          "path": ".agents/skills/stitch-design-taste",
+          "hasSkillFile": true
+        },
+        {
+          "name": "tdd",
+          "path": ".agents/skills/tdd",
+          "hasSkillFile": true
+        },
+        {
+          "name": "teach",
+          "path": ".agents/skills/teach",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-animation",
+          "path": ".agents/skills/threejs-animation",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-fundamentals",
+          "path": ".agents/skills/threejs-fundamentals",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-geometry",
+          "path": ".agents/skills/threejs-geometry",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-interaction",
+          "path": ".agents/skills/threejs-interaction",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-lighting",
+          "path": ".agents/skills/threejs-lighting",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-loaders",
+          "path": ".agents/skills/threejs-loaders",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-materials",
+          "path": ".agents/skills/threejs-materials",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-postprocessing",
+          "path": ".agents/skills/threejs-postprocessing",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-shaders",
+          "path": ".agents/skills/threejs-shaders",
+          "hasSkillFile": true
+        },
+        {
+          "name": "threejs-textures",
+          "path": ".agents/skills/threejs-textures",
+          "hasSkillFile": true
+        },
+        {
+          "name": "tinystruct-patterns",
+          "path": ".agents/skills/tinystruct-patterns",
+          "hasSkillFile": true
+        },
+        {
+          "name": "to-questionnaire",
+          "path": ".agents/skills/to-questionnaire",
+          "hasSkillFile": true
+        },
+        {
+          "name": "to-spec",
+          "path": ".agents/skills/to-spec",
+          "hasSkillFile": true
+        },
+        {
+          "name": "to-tickets",
+          "path": ".agents/skills/to-tickets",
+          "hasSkillFile": true
+        },
+        {
+          "name": "triage",
+          "path": ".agents/skills/triage",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-design",
+          "path": ".agents/skills/ui-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-radar",
+          "path": ".agents/skills/ui-radar",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-slop-score",
+          "path": ".agents/skills/ui-slop-score",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-styling",
+          "path": ".agents/skills/ui-styling",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-ux-pro-max",
+          "path": ".agents/skills/ui-ux-pro-max",
+          "hasSkillFile": true
+        },
+        {
+          "name": "wait-what",
+          "path": ".agents/skills/wait-what",
+          "hasSkillFile": true
+        },
+        {
+          "name": "wayfinder",
+          "path": ".agents/skills/wayfinder",
+          "hasSkillFile": true
+        },
+        {
+          "name": "web-design-guidelines",
+          "path": ".agents/skills/web-design-guidelines",
+          "hasSkillFile": true
+        },
+        {
+          "name": "wizard",
+          "path": ".agents/skills/wizard",
+          "hasSkillFile": true
+        },
+        {
+          "name": "write-swift",
+          "path": ".agents/skills/write-swift",
+          "hasSkillFile": true
+        },
+        {
+          "name": "writing-beats",
+          "path": ".agents/skills/writing-beats",
+          "hasSkillFile": true
+        },
+        {
+          "name": "writing-for-agents",
+          "path": ".agents/skills/writing-for-agents",
+          "hasSkillFile": true
+        },
+        {
+          "name": "writing-fragments",
+          "path": ".agents/skills/writing-fragments",
+          "hasSkillFile": true
+        },
+        {
+          "name": "writing-shape",
+          "path": ".agents/skills/writing-shape",
+          "hasSkillFile": true
+        }
+      ]
+    },
+    {
+      "root": ".github/skills",
+      "skills": [
+        {
+          "name": "diagram-maker",
+          "path": ".github/skills/diagram-maker",
+          "hasSkillFile": true
+        },
+        {
+          "name": "documentation-lookup",
+          "path": ".github/skills/documentation-lookup",
+          "hasSkillFile": true
+        },
+        {
+          "name": "frontend-slides",
+          "path": ".github/skills/frontend-slides",
+          "hasSkillFile": true
+        },
+        {
+          "name": "impeccable",
+          "path": ".github/skills/impeccable",
+          "hasSkillFile": true
+        },
+        {
+          "name": "quality-nonconformance",
+          "path": ".github/skills/quality-nonconformance",
+          "hasSkillFile": true
+        },
+        {
+          "name": "rest-api-design",
+          "path": ".github/skills/rest-api-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "security-review",
+          "path": ".github/skills/security-review",
+          "hasSkillFile": true
+        },
+        {
+          "name": "tinystruct-patterns",
+          "path": ".github/skills/tinystruct-patterns",
+          "hasSkillFile": true
+        }
+      ]
+    },
+    {
+      "root": ".opencode/skills",
+      "skills": [
+        {
+          "name": "banner-design",
+          "path": ".opencode/skills/banner-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "brand",
+          "path": ".opencode/skills/brand",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design",
+          "path": ".opencode/skills/design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "design-system",
+          "path": ".opencode/skills/design-system",
+          "hasSkillFile": true
+        },
+        {
+          "name": "diagram-maker",
+          "path": ".opencode/skills/diagram-maker",
+          "hasSkillFile": true
+        },
+        {
+          "name": "documentation-lookup",
+          "path": ".opencode/skills/documentation-lookup",
+          "hasSkillFile": true
+        },
+        {
+          "name": "frontend-slides",
+          "path": ".opencode/skills/frontend-slides",
+          "hasSkillFile": true
+        },
+        {
+          "name": "impeccable",
+          "path": ".opencode/skills/impeccable",
+          "hasSkillFile": true
+        },
+        {
+          "name": "quality-nonconformance",
+          "path": ".opencode/skills/quality-nonconformance",
+          "hasSkillFile": true
+        },
+        {
+          "name": "rest-api-design",
+          "path": ".opencode/skills/rest-api-design",
+          "hasSkillFile": true
+        },
+        {
+          "name": "security-review",
+          "path": ".opencode/skills/security-review",
+          "hasSkillFile": true
+        },
+        {
+          "name": "slides",
+          "path": ".opencode/skills/slides",
+          "hasSkillFile": true
+        },
+        {
+          "name": "tinystruct-patterns",
+          "path": ".opencode/skills/tinystruct-patterns",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-styling",
+          "path": ".opencode/skills/ui-styling",
+          "hasSkillFile": true
+        },
+        {
+          "name": "ui-ux-pro-max",
+          "path": ".opencode/skills/ui-ux-pro-max",
+          "hasSkillFile": true
+        }
+      ]
+    }
+  ]
+}
