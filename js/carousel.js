@@ -273,7 +273,11 @@ void main() {
       this.images = (srcs || []).map(src=>{
         const img = new Image();
         img.crossOrigin = 'anonymous';
-        img.loading = 'lazy';
+        // TAG: Canvas sources are detached from the document, so native lazy
+        // loading can wait forever because the browser cannot assess viewport
+        // distance. Preload them explicitly; the carousel must paint its first
+        // frame even when WebGL is unavailable.
+        img.loading = 'eager';
         img.decoding = 'async';
         img.src = src;
         return img;

@@ -80,6 +80,17 @@
 
 ---
 
+## 2026-09-05 — Memperbaiki carousel project yang kosong
+
+- Penyebab ditemukan pada `loading="lazy"` untuk `Image()` yang dipakai canvas dan tidak berada di DOM.
+- Browser dapat menunda gambar detached tersebut tanpa batas, sehingga canvas terus menggambar frame kosong.
+- Sumber gambar carousel sekarang memakai eager loading; lazy loading tetap dipakai untuk gambar modal yang benar-benar berada di DOM.
+- Fallback 2D tetap dipertahankan untuk perangkat tanpa WebGL.
+
+**File:** `js/carousel.js`, `js/carousel.min.js`, `UPDATE.md`.
+
+---
+
 ## 2026-09-05 — Desktop quality pass
 
 - Proporsi hero dan globe dibuat fluid untuk desktop besar serta laptop `901–1200px`, tanpa memaksa komposisi mobile.
