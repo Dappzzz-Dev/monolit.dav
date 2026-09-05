@@ -1085,6 +1085,105 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .social-compact a{font-size:12px;padding-inline:5px}
 }
 @keyframes modal-sheet-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   TAG: DESKTOP QUALITY PASS — proportion, hierarchy, and calm motion.
+   Keeps the established monochrome world; only the desktop composition
+   changes here so the mobile rules above remain intentionally lightweight.
+   ============================================================ */
+@media (min-width:901px){
+  .topbar{
+    max-width:1440px;
+    margin-inline:auto;
+  }
+  .container{
+    width:min(1320px,calc(100% - 48px));
+    max-width:none;
+    grid-template-columns:minmax(0,1fr) minmax(480px,560px);
+    gap:clamp(28px,4vw,68px);
+    margin-top:clamp(118px,11vh,148px);
+    margin-bottom:clamp(48px,7vh,84px);
+  }
+  .hero-inner{
+    padding:clamp(30px,3.2vw,48px);
+  }
+  .name{
+    font-size:clamp(52px,4.3vw,68px);
+    letter-spacing:-.025em;
+  }
+  .bio{
+    max-width:48ch;
+    line-height:1.65;
+  }
+  .stage{
+    height:clamp(430px,38vw,560px);
+    padding:8px;
+  }
+  .globe-wrap{padding:4px}
+  .section{padding-top:clamp(58px,6vw,88px);padding-bottom:clamp(58px,6vw,88px)}
+  .section-inner{max-width:1180px}
+  .section h2{font-size:clamp(32px,2.6vw,40px);margin-bottom:12px}
+  .section-lead{max-width:68ch;line-height:1.65}
+  .about-grid{
+    grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+    gap:clamp(36px,6vw,92px);
+    min-height:560px;
+  }
+  .dev-card{padding:clamp(22px,2.2vw,32px)}
+  .carousel-stage{
+    height:clamp(390px,34vw,500px);
+    border-radius:20px;
+  }
+  .modal-card{
+    width:min(760px,100%);
+    max-height:min(88vh,820px);
+  }
+  .modal-body{padding:26px 32px 32px}
+  .modal-body h3{font-size:24px;margin-bottom:10px}
+  .modal-desc{max-width:68ch;line-height:1.65}
+  .contact-grid{
+    grid-template-columns:minmax(0,1fr) minmax(320px,380px);
+    gap:clamp(28px,4vw,56px);
+  }
+  .contact-row{padding-block:20px}
+  .contact-panel--cta{padding:28px}
+  .contact-panel--cta h3{font-size:24px}
+  .footer-inner,.footer-bottom{max-width:1180px}
+  .topbar a:focus-visible,
+  .topbar button:focus-visible,
+  .hero-ctas a:focus-visible,
+  .social-links a:focus-visible,
+  .contact-row:focus-visible,
+  .contact-panel a:focus-visible,
+  .footer a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+}
+
+/* TAG: Laptop bridge — use the available width before the full desktop
+   composition becomes comfortable, without shrinking the hero into a column. */
+@media (min-width:901px) and (max-width:1200px){
+  .topbar{left:12px;right:12px}
+  .container{
+    width:calc(100% - 36px);
+    grid-template-columns:minmax(0,1fr) minmax(400px,48vw);
+    gap:28px;
+  }
+  .name{font-size:clamp(48px,5.2vw,60px)}
+  .stage{height:430px}
+  .about-grid{gap:32px;min-height:520px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-ctas .cta,
+  .hero-ctas .ghost,
+  .social-links a,
+  .social-compact a,
+  .footer-nav a,
+  .footer-top,
+  .modal-close{transition:none}
+}
 @media (max-width:360px){
   .topbar{top:7px;left:7px;right:7px;padding:7px}
   .topbar .brand{font-size:12px}

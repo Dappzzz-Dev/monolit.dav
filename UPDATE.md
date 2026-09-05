@@ -80,6 +80,18 @@
 
 ---
 
+## 2026-09-05 — Desktop quality pass
+
+- Proporsi hero dan globe dibuat fluid untuk desktop besar serta laptop `901–1200px`, tanpa memaksa komposisi mobile.
+- Spacing section, About cards, project carousel, modal, Contact, dan footer disamakan dalam rhythm yang lebih tenang.
+- Modal desktop diberi reading width yang lebih nyaman; deskripsi dan metadata tidak lagi terlalu sempit.
+- Focus state keyboard diperkuat pada navigasi dan link utama desktop.
+- Motion hover tetap ringan dan menghormati `prefers-reduced-motion`; tidak menambah dekorasi atau card baru.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-05 — Merapikan modul web dan katalog skill
 
 - Markup project detail modal dipindah dari `index.html` ke module `js/components/project-modal.js`.
