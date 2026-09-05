@@ -1127,6 +1127,31 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
    changes here so the mobile rules above remain intentionally lightweight.
    ============================================================ */
 @media (min-width:901px){
+  /* TAG: Desktop scroll reveal - section entry is occasional, purposeful
+     motion; transform and opacity stay compositor-friendly. */
+  .section{
+    transform:translateY(18px);
+    transition:opacity 420ms var(--ease-out, cubic-bezier(.23,1,.32,1)),transform 420ms var(--ease-out, cubic-bezier(.23,1,.32,1));
+    will-change:opacity,transform;
+  }
+  .section.is-visible{
+    transform:none;
+    will-change:auto;
+  }
+  .section.is-visible .about-cards,
+  .section.is-visible .about-ghost,
+  .section.is-visible .carousel-stage,
+  .section.is-visible .section-lead,
+  .section.is-visible .contact-grid{
+    animation:desktop-content-in 360ms var(--ease-out, cubic-bezier(.23,1,.32,1)) both;
+  }
+  .section.is-visible .about-ghost{animation-delay:70ms}
+  .section.is-visible .carousel-stage{animation-delay:55ms}
+  .section.is-visible .contact-grid{animation-delay:55ms}
+  @keyframes desktop-content-in{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:none}
+  }
   .topbar{
     max-width:1440px;
     margin-inline:auto;
@@ -1211,6 +1236,18 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 }
 
 @media (prefers-reduced-motion:reduce){
+  .section{
+    transform:none;
+    transition:opacity 200ms ease;
+    will-change:auto;
+  }
+  .section.is-visible .about-cards,
+  .section.is-visible .about-ghost,
+  .section.is-visible .carousel-stage,
+  .section.is-visible .section-lead,
+  .section.is-visible .contact-grid{
+    animation:none;
+  }
   .hero-ctas .cta,
   .hero-ctas .ghost,
   .social-links a,

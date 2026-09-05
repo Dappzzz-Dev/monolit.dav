@@ -80,6 +80,17 @@
 
 ---
 
+## 2026-09-05 — Menambahkan desktop scroll reveal yang ringan
+
+- Setiap section desktop kini muncul satu kali saat masuk viewport dengan kombinasi opacity dan translate kecil.
+- Konten utama About, Projects, dan Contact menyusul singkat agar hierarki terasa hidup tanpa efek berlebihan.
+- Animasi hanya memakai `transform` dan `opacity`, tanpa loop JavaScript atau perubahan layout.
+- Mobile tidak diubah; `prefers-reduced-motion` mendapat versi tanpa perpindahan posisi.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-05 — Memperjelas CTA Email di Contact
 
 - Tombol `Kirim Email` kini memiliki kontras teks yang lebih kuat dan ukuran tap yang tetap nyaman.
