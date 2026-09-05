@@ -355,7 +355,42 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
 }
 .contact-panel--cta p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
 .contact-panel--cta .cta{margin-top:auto}
-.contact-panel--cta .cta{width:100%;justify-content:center;min-height:48px}
+.contact-panel--cta .cta{
+  position:relative;
+  width:100%;
+  min-height:50px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:13px 16px 13px 18px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:12px;
+  background:linear-gradient(135deg,#f0f1f1,#c5c8ca);
+  color:#17191b;
+  font-size:14px;
+  letter-spacing:-.01em;
+  box-shadow:0 10px 22px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.72);
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.contact-panel--cta .cta::after{
+  content:"";
+  width:8px;
+  height:8px;
+  flex:none;
+  border-top:1.5px solid currentColor;
+  border-right:1.5px solid currentColor;
+  transform:rotate(45deg);
+  transition:transform .2s ease;
+}
+.contact-panel--cta .cta:hover{
+  background:linear-gradient(135deg,#fff,#d9dcdd);
+  border-color:rgba(255,255,255,.58);
+  box-shadow:0 14px 28px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.9);
+  transform:translateY(-2px);
+}
+.contact-panel--cta .cta:hover::after{transform:translateX(2px) rotate(45deg)}
+.contact-panel--cta .cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .contact-panel--cta .social-compact{margin-top:2px}
 /* TAG: About v2 - dark mono "code editor" cards + pixel ghost mascot.
    Scoped to #about; the rest of the page keeps the monochrome glass theme. */
@@ -1182,7 +1217,9 @@ a.contact-row:focus-visible{outline:2px solid var(--accent-2);outline-offset:-2p
   .social-compact a,
   .footer-nav a,
   .footer-top,
-  .modal-close{transition:none}
+  .modal-close,
+  .contact-panel--cta .cta,
+  .contact-panel--cta .cta::after{transition:none}
 }
 @media (max-width:360px){
   .topbar{top:7px;left:7px;right:7px;padding:7px}

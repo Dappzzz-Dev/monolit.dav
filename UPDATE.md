@@ -80,6 +80,16 @@
 
 ---
 
+## 2026-09-05 — Memperjelas CTA Email di Contact
+
+- Tombol `Kirim Email` kini memiliki kontras teks yang lebih kuat dan ukuran tap yang tetap nyaman.
+- Arah panah kecil membantu memberi affordance tanpa menambah dekorasi berlebihan.
+- Hover dan focus state dibuat halus, scoped hanya ke CTA Contact; tombol hero dan modal tidak berubah.
+
+**File:** `css/style.css`, `css/style.min.css`, `UPDATE.md`.
+
+---
+
 ## 2026-09-05 — Memperbaiki carousel project yang kosong
 
 - Penyebab ditemukan pada `loading="lazy"` untuk `Image()` yang dipakai canvas dan tidak berada di DOM.
